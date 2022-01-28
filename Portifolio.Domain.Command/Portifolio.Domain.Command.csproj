@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Portifolio.Domain.Query\Portifolio.Domain.Query.csproj" />
     <ProjectReference Include="..\Portifolio.Domain\Portifolio.Domain.csproj" />
     <ProjectReference Include="..\Portifolio.Infrastructure.Database\Portifolio.Infrastructure.Database.csproj" />
   </ItemGroup>
