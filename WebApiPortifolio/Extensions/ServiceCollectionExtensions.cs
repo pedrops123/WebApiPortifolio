@@ -1,11 +1,8 @@
 ﻿using AutoMapper;
 using MediatR;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
 using Portifolio.Domain.Command.Commands.Request.Works.Create;
 using Portifolio.Domain.Command.Profiles.Works;
-using System.IO;
 using System.Linq;
 using WebApiPortifolio.Controllers;
 
@@ -23,11 +20,14 @@ namespace WebApiPortifolio.Extensions
         public static IServiceCollection ConfigureAutoMapper(this IServiceCollection services)
         {
             var profiles = typeof(WorkProfile).Assembly.GetTypes().Where(x => typeof(Profile).IsAssignableFrom(x));
+
             var mapperConfig = new MapperConfiguration(r =>
             {
                 profiles.ToList().ForEach(p => r.AddProfile(p));
             });
+
             IMapper mapper = mapperConfig.CreateMapper();
+
             services.AddSingleton(mapper);
 
             return services;

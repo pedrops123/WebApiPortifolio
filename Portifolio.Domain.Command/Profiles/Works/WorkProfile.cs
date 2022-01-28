@@ -2,6 +2,7 @@
 using Portifolio.Domain.Command.Commands.Request.Works.Create;
 using Portifolio.Domain.Command.Commands.Response.Works.Create;
 using Portifolio.Domain.Command.Commands.Response.Works.GetList;
+using System.Collections.Generic;
 
 namespace Portifolio.Domain.Command.Profiles.Works
 {
@@ -14,7 +15,7 @@ namespace Portifolio.Domain.Command.Profiles.Works
             CreateMap<Entities.Works, CreateWorkResponse>();
 
             // List Mapper Work 
-            CreateMap<Entities.Works, FilterWorksResponse>();
+            //CreateMap<List<Entities.Works>, List<FilterWorksResponse>>();
         }
     }
 }

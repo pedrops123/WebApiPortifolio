@@ -4,6 +4,7 @@ using Portifolio.Domain.Command.Commands.Request.Works.Create;
 using Portifolio.Domain.Command.Commands.Request.Works.GetList;
 using Portifolio.Domain.Command.Commands.Response.Works.Create;
 using Portifolio.Domain.Command.Commands.Response.Works.GetList;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace WebApiPortifolio.Controllers
@@ -18,7 +19,7 @@ namespace WebApiPortifolio.Controllers
 
 
         [HttpGet]
-        public async Task<FilterWorksResponse> GetList([FromQuery] FilterWorksRequest request, [FromServices] IMediator mediator)
+        public async Task<List<FilterWorksResponse>> GetList([FromQuery] FilterWorksRequest request, [FromServices] IMediator mediator)
             => await mediator.Send(request);
         
     }

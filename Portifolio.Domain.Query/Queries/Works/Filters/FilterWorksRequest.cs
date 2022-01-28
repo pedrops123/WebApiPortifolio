@@ -2,7 +2,10 @@
 {
     public class FilterWorksRequest
     {
-        public string ProjectName { get; set; }
-        public string ProjectText { get; set; }
+        public string nome_projeto { get; set; }
+
+        public string descritivo_capa { get; set; }
+
+        public string texto_projeto { get; set; }
     }
 }
