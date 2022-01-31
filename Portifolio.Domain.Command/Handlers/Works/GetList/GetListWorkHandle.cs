@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace Portifolio.Domain.Command.Handlers.Works.GetList
 {
-    public sealed class GetListWorkHandler : IRequestHandler<FilterWorksRequest, List<FilterWorksResponse>>
+    public sealed class GetListWorkHandle : IRequestHandler<FilterWorksRequest, List<FilterWorksResponse>>
     {
         private IMapper _mapper;
 
-        public GetListWorkHandler(IMapper mapper)
+        public GetListWorkHandle(IMapper mapper)
         {
             _mapper = mapper;
         }

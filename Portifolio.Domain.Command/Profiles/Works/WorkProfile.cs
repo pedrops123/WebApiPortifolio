@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using Portifolio.Domain.Command.Commands.Request.Works.Create;
 using Portifolio.Domain.Command.Commands.Response.Works.Create;
+using Portifolio.Domain.Command.Commands.Response.Works.GetById;
 using Portifolio.Domain.Command.Commands.Response.Works.GetList;
-using System.Collections.Generic;
 
 namespace Portifolio.Domain.Command.Profiles.Works
 {
@@ -14,8 +14,11 @@ namespace Portifolio.Domain.Command.Profiles.Works
             CreateMap<CreateWorkRequest, Entities.Works>();
             CreateMap<Entities.Works, CreateWorkResponse>();
 
-            // List Mapper Work 
-            //CreateMap<List<Entities.Works>, List<FilterWorksResponse>>();
+            // Get List Mapper work
+            CreateMap<Entities.Works, FilterWorksResponse>();
+
+            // Get By Id mapper work
+            CreateMap<Entities.Works, GetByIdWorksResponse>();
         }
     }
 }

@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="11.0.0" />
+    <PackageReference Include="FluentValidation" Version="10.3.6" />
     <PackageReference Include="MediatR" Version="10.0.1" />
   </ItemGroup>
 
@@ -20,6 +21,7 @@
     <ProjectReference Include="..\Portifolio.Domain.Query\Portifolio.Domain.Query.csproj" />
     <ProjectReference Include="..\Portifolio.Domain\Portifolio.Domain.csproj" />
     <ProjectReference Include="..\Portifolio.Infrastructure.Database\Portifolio.Infrastructure.Database.csproj" />
+    <ProjectReference Include="..\Portifolio.Utils\Portifolio.Utils.csproj" />
   </ItemGroup>
 
 </Project>
