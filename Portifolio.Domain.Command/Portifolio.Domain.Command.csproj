@@ -5,8 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Commands\Request\Works\Delete\" />
-    <Folder Include="Commands\Request\Works\Update\" />
+    <Folder Include="Commands\Response\Works\Create\" />
     <Folder Include="Commands\Response\Works\Delete\" />
     <Folder Include="Commands\Response\Works\Update\" />
   </ItemGroup>

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Portifolio.Domain.Command.Commands.Request.Works.Create;
-using Portifolio.Domain.Command.Commands.Response.Works.Create;
+using Portifolio.Domain.Command.Commands.Request.Works.Update;
 using Portifolio.Domain.Command.Commands.Response.Works.GetById;
 using Portifolio.Domain.Command.Commands.Response.Works.GetList;
 
@@ -12,7 +12,9 @@ namespace Portifolio.Domain.Command.Profiles.Works
         {
             // Create Mapper Work
             CreateMap<CreateWorkRequest, Entities.Works>();
-            CreateMap<Entities.Works, CreateWorkResponse>();
+
+            // Update mapper work
+            CreateMap<UpdateWorkRequest, Entities.Works>();
 
             // Get List Mapper work
             CreateMap<Entities.Works, FilterWorksResponse>();

@@ -1,11 +1,10 @@
 ﻿using MediatR;
-using Portifolio.Domain.Command.Commands.Response.Works.Create;
 using System;
 using System.Text.Json.Serialization;
 
 namespace Portifolio.Domain.Command.Commands.Request.Works.Create
 {
-    public sealed class CreateWorkRequest : IRequest<CreateWorkResponse>
+    public sealed class CreateWorkRequest : IRequest<Unit>
     {
         public string nome_projeto { get; set; }
 

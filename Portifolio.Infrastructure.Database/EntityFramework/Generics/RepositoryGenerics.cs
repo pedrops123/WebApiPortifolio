@@ -26,7 +26,7 @@ namespace Portifolio.Infrastructure.Database.EntityFramework.Generics
         {
             using (var data = new AppDbContext(_OptionsBuilder))
             {
-                Objeto.GetType().GetProperty("InsertDate").SetValue(Objeto , DateTime.Now);
+                Objeto.GetType().GetProperty("InsertDate").SetValue(Objeto, DateTime.Now);
                 await data.Set<T>().AddAsync(Objeto);
                 await data.SaveChangesAsync();
             }
@@ -62,7 +62,7 @@ namespace Portifolio.Infrastructure.Database.EntityFramework.Generics
         {
             using (var data = new AppDbContext(_OptionsBuilder))
             {
-                Objeto.GetType().GetProperty("UdpatetDate").SetValue(Objeto, DateTime.Now);
+                Objeto.GetType().GetProperty("UpdateDate").SetValue(Objeto, DateTime.Now);
                 data.Set<T>().Update(Objeto);
                 await data.SaveChangesAsync();
             }

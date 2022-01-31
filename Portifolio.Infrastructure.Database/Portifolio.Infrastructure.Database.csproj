@@ -19,10 +19,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Dapper\Querys\Works\GetById\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Portifolio.Domain\Portifolio.Domain.csproj" />
   </ItemGroup>
 
