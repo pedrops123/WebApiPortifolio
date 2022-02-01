@@ -12,14 +12,14 @@ namespace WebApiPortifolio.Extensions
     {
         public static IServiceCollection AddMediator(this IServiceCollection services)
         {
-            services.AddMediatR(typeof(CreateWorkRequest), typeof(WorksController));
+            services.AddMediatR(typeof(CreateWorksRequest), typeof(WorksController));
 
             return services;
         }
 
         public static IServiceCollection ConfigureAutoMapper(this IServiceCollection services)
         {
-            var profiles = typeof(WorkProfile).Assembly.GetTypes().Where(x => typeof(Profile).IsAssignableFrom(x));
+            var profiles = typeof(WorksProfile).Assembly.GetTypes().Where(x => typeof(Profile).IsAssignableFrom(x));
 
             var mapperConfig = new MapperConfiguration(r =>
             {

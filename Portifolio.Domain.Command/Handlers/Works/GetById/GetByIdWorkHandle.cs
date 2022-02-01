@@ -24,8 +24,8 @@ namespace Portifolio.Domain.Command.Handlers.Works.GetById
             var response = await QueryDapper.GetById(request.Id);
             if (response == null)
                 throw new System.Exception("Registro não encontrado !");
-           
-            _mapper.Map<Entities.Works, GetByIdWorksResponse>(response,handleResponse);
+
+            _mapper.Map<Entities.Works, GetByIdWorksResponse>(response, handleResponse);
 
             return handleResponse;
         }

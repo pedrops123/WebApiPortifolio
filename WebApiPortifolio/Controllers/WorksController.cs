@@ -23,7 +23,7 @@ namespace WebApiPortifolio.Controllers
         }
 
         [HttpPost]
-        public async Task<Unit> Post([FromBody] CreateWorkRequest request)
+        public async Task<Unit> Post([FromBody] CreateWorksRequest request)
             => await _mediator.Send(request);
 
         [HttpGet]
@@ -35,7 +35,7 @@ namespace WebApiPortifolio.Controllers
             await _mediator.Send(request);
 
         [HttpPut("{Id}")]
-        public async Task<Unit> Put([FromRoute] int Id, [FromBody] UpdateWorkRequest request)
+        public async Task<Unit> Put([FromRoute] int Id, [FromBody] UpdateWorksRequest request)
         {
             request.Id = Id;
             return await _mediator.Send(request);

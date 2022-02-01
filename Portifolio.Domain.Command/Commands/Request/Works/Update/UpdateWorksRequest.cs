@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Portifolio.Domain.Command.Commands.Request.Works.Update
 {
-    public class UpdateWorkRequest : IRequest<Unit>
+    public class UpdateWorksRequest : IRequest<Unit>
     {
         [JsonIgnore]
         public int Id { get; set; }

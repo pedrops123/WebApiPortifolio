@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Portifolio.Domain.Command.Handlers.Works.Update
 {
-    public class UpdateWorkHandle : IRequestHandler<UpdateWorkRequest, Unit>
+    public class UpdateWorkHandle : IRequestHandler<UpdateWorksRequest, Unit>
     {
         private readonly WorksRepository _worksRepository;
         private IMapper _mapper;
@@ -17,7 +17,7 @@ namespace Portifolio.Domain.Command.Handlers.Works.Update
             _mapper = mapper;
         }
 
-        public async Task<Unit> Handle(UpdateWorkRequest request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(UpdateWorksRequest request, CancellationToken cancellationToken)
         {
             var register = await _worksRepository.GetEntityById(request.Id);
 

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Portifolio.Domain.Command.Handlers.Works.Create
 {
-    public sealed class CreateWorkHandle : IRequestHandler<CreateWorkRequest, Unit>
+    public sealed class CreateWorkHandle : IRequestHandler<CreateWorksRequest, Unit>
     {
         private readonly WorksRepository _worksRepository;
         private IMapper _mapper;
@@ -22,7 +22,7 @@ namespace Portifolio.Domain.Command.Handlers.Works.Create
 
         }
 
-        public async Task<Unit> Handle(CreateWorkRequest request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(CreateWorksRequest request, CancellationToken cancellationToken)
         {
             CreateWorkValidator _validator = new CreateWorkValidator();
             var validator = _validator.Validate(request);
@@ -34,7 +34,7 @@ namespace Portifolio.Domain.Command.Handlers.Works.Create
                 throw new ValidatorException(Errors);
             }
 
-            var Work = _mapper.Map<CreateWorkRequest, Entities.Works>(request);
+            var Work = _mapper.Map<CreateWorksRequest, Entities.Works>(request);
             await _worksRepository.Add(Work);
             return Unit.Value;
         }

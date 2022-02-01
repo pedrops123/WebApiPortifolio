@@ -20,6 +20,6 @@ namespace Portifolio.Domain.Command.Commands.Response.Works.GetById
 
         public int? UserUpdate { get; set; }
 
-        public DateTime? UdpatetDate { get; set; }
+        public DateTime? UpdateDate { get; set; }
     }
 }

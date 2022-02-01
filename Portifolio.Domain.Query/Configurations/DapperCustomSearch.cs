@@ -72,7 +72,7 @@ namespace Portifolio.Domain.Query.Configurations
                     switch (value.Name.ToLower())
                     {
                         case "string":
-                            builder.Where($"{ KeyValue.Key } = '{ KeyValue.Value }'");
+                            builder.OrWhere($"{ KeyValue.Key } = '{ KeyValue.Value }'");
                         break;
                     }
                 }

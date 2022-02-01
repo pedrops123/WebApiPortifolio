@@ -6,15 +6,15 @@ using Portifolio.Domain.Command.Commands.Response.Works.GetList;
 
 namespace Portifolio.Domain.Command.Profiles.Works
 {
-    public sealed class WorkProfile : Profile
+    public sealed class WorksProfile : Profile
     {
-        public WorkProfile()
+        public WorksProfile()
         {
             // Create Mapper Work
-            CreateMap<CreateWorkRequest, Entities.Works>();
+            CreateMap<CreateWorksRequest, Entities.Works>();
 
             // Update mapper work
-            CreateMap<UpdateWorkRequest, Entities.Works>();
+            CreateMap<UpdateWorksRequest, Entities.Works>();
 
             // Get List Mapper work
             CreateMap<Entities.Works, FilterWorksResponse>();

@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace Portifolio.Domain.Command.Commands.Request.Works.Create
 {
-    public sealed class CreateWorkRequest : IRequest<Unit>
+    public sealed class CreateWorksRequest : IRequest<Unit>
     {
         public string nome_projeto { get; set; }
 
