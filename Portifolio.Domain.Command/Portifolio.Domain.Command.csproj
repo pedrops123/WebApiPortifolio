@@ -5,6 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Commands\Request\GalleryWorks\Delete\" />
+    <Folder Include="Commands\Response\GalleryWorks\Create\" />
+    <Folder Include="Commands\Response\GalleryWorks\Delete\" />
     <Folder Include="Commands\Response\Works\Create\" />
     <Folder Include="Commands\Response\Works\Delete\" />
     <Folder Include="Commands\Response\Works\Update\" />
@@ -14,6 +17,7 @@
     <PackageReference Include="AutoMapper" Version="11.0.0" />
     <PackageReference Include="FluentValidation" Version="10.3.6" />
     <PackageReference Include="MediatR" Version="10.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
   </ItemGroup>
 
   <ItemGroup>

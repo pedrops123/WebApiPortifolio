@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using Portifolio.Domain.Command.Commands.Request.Works.Delete;
-using Portifolio.Infrastructure.Database.EntityFramework.Repositories;
+using Portifolio.Infrastructure.Database.EntityFramework.Repositories.Works;
 using System.Threading;
 using System.Threading.Tasks;
 

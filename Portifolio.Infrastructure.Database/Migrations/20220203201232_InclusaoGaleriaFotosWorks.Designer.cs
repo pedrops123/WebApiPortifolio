@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Portifolio.Infrastructure.Database.EntityFramework;
 
 namespace Portifolio.Infrastructure.Database.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220203201232_InclusaoGaleriaFotosWorks")]
+    partial class InclusaoGaleriaFotosWorks
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -44,9 +46,12 @@ namespace Portifolio.Infrastructure.Database.Migrations
                     b.Property<int?>("UserUpdate")
                         .HasColumnType("INT");
 
+                    b.Property<int?>("WorkId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("IdProjeto");
+                    b.HasIndex("WorkId");
 
                     b.ToTable("GalleryWorks");
                 });
@@ -91,9 +96,7 @@ namespace Portifolio.Infrastructure.Database.Migrations
                 {
                     b.HasOne("Portifolio.Domain.Entities.Works", "Work")
                         .WithMany("Fotos")
-                        .HasForeignKey("IdProjeto")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("WorkId");
 
                     b.Navigation("Work");
                 });
