@@ -5,9 +5,6 @@ using Portifolio.Domain.Command.Commands.Request.Works.Delete;
 using Portifolio.Domain.Command.Commands.Request.Works.GetById;
 using Portifolio.Domain.Command.Commands.Request.Works.GetList;
 using Portifolio.Domain.Command.Commands.Request.Works.Update;
-using Portifolio.Domain.Command.Commands.Response.Works.GetById;
-using Portifolio.Domain.Command.Commands.Response.Works.GetList;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace WebApiPortifolio.Controllers
@@ -23,26 +20,45 @@ namespace WebApiPortifolio.Controllers
         }
 
         [HttpPost]
-        public async Task<Unit> Post([FromBody] CreateWorksRequest request)
-            => await _mediator.Send(request);
+        public async Task<IActionResult> Post([FromBody] CreateWorksRequest request)
+        {
+            var response = await _mediator.Send(request);
+
+            return Ok(response);
+        }
 
         [HttpGet]
-        public async Task<List<FilterWorksResponse>> GetList([FromQuery] FilterWorksRequest request)
-            => await _mediator.Send(request);
+        public async Task<IActionResult> GetList([FromQuery] FilterWorksRequest request)
+        {
+            var response = await _mediator.Send(request);
+
+            return Ok(response);
+        }
+
 
         [HttpGet("GetById")]
-        public async Task<GetByIdWorksResponse> GetById([FromQuery] GetByIdWorksRequest request) =>
-            await _mediator.Send(request);
+        public async Task<IActionResult> GetById([FromQuery] GetByIdWorksRequest request)
+        {
+            var response = await _mediator.Send(request);
+
+            return Ok(response);
+        }
 
         [HttpPut("{Id}")]
-        public async Task<Unit> Put([FromRoute] int Id, [FromBody] UpdateWorksRequest request)
+        public async Task<IActionResult> Put([FromRoute] int Id, [FromBody] UpdateWorksRequest request)
         {
             request.Id = Id;
-            return await _mediator.Send(request);
+            var response = await _mediator.Send(request);
+
+            return Ok(response);
         }
 
         [HttpDelete]
-        public async Task<Unit> Delete([FromQuery] DeleteWorksRequest request) 
-            => await _mediator.Send(request);
+        public async Task<IActionResult> Delete([FromQuery] DeleteWorksRequest request)
+        {
+            var response = await _mediator.Send(request);
+
+            return Ok(response);
+        }
     }
 }

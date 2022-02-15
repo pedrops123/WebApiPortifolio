@@ -1,6 +1,8 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Portifolio.Domain.Command.Commands.Request.GalleryWorks.Create;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace WebApiPortifolio.Controllers
@@ -17,9 +19,11 @@ namespace WebApiPortifolio.Controllers
         }
 
         [HttpPost]
-        public async Task<Unit> Post([FromQuery] CreateGalleryWorksRequest request)
-            => await _mediator.Send(request);
+        public async Task<IActionResult> Post([FromQuery] int id, [FromForm] IEnumerable<IFormFile> files)
+        {
+            var response = await _mediator.Send(new CreateGalleryWorksRequest(id, files));
 
-
+            return Ok(response);
+        }
     }
 }

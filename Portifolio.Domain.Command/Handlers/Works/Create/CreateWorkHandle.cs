@@ -3,7 +3,6 @@ using MediatR;
 using Portifolio.Domain.Command.Commands.Request.Works.Create;
 using Portifolio.Infrastructure.Database.EntityFramework.Repositories.Works;
 using Portifolio.Utils.CustomExceptions;
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -27,12 +26,10 @@ namespace Portifolio.Domain.Command.Handlers.Works.Create
         public async Task<Unit> Handle(CreateWorksRequest request, CancellationToken cancellationToken)
         {
             var validator = _validator.Validate(request);
+
             if (!validator.IsValid)
             {
-                List<string> Errors = new List<string>();
-                validator.Errors.ForEach(r => Errors.Add(r.ErrorMessage));
-
-                throw new ValidatorException(Errors);
+                throw new ValidatorException(validator.Errors);
             }
 
             var Work = _mapper.Map<CreateWorksRequest, Entities.Works>(request);

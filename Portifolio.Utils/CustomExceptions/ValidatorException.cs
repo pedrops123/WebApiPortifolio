@@ -5,19 +5,29 @@ namespace Portifolio.Utils.CustomExceptions
 {
     public class ValidatorException : Exception
     {
+        private string _messageFromList { get; set; }
+
+        public override string Message
+        {
+            get
+            {
+                return _messageFromList;
+            }
+        }
+
         public ValidatorException()
         { }
 
-        private static string message { get; set; }
-
-        public ValidatorException(List<string> errors):base()
+        public ValidatorException(List<FluentValidation.Results.ValidationFailure> ListMessage)
         {
-            errors.ForEach(r => message += message + String.Format("{0}", r));
+            ListMessage.ForEach(r => _messageFromList += String.Format("* {0}. <br/>", r.ErrorMessage));
         }
 
-        public override string Message => message;
+        public ValidatorException(string message, Exception exception) : base(message, exception)
+        { }
 
-        public override string StackTrace => null;
+        public ValidatorException(string message) : base(message)
+        { }
 
     }
 }
