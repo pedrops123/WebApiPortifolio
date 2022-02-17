@@ -1,11 +1,6 @@
 ﻿using FluentValidation;
 using Microsoft.AspNetCore.Http;
 using Portifolio.Domain.Command.Commands.Request.GalleryWorks.Create;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Portifolio.Domain.Command.Handlers.GalleryWorks.Create
 {
@@ -21,19 +16,27 @@ namespace Portifolio.Domain.Command.Handlers.GalleryWorks.Create
         }
     }
 
-
     public sealed class FormFileValidator : AbstractValidator<IFormFile>
     {
+        private const string _contentTypePng = "image/png";
+        private const string _contentTypejpeg = "image/jpeg";
+
         public FormFileValidator()
         {
-            RuleFor(r => r.FileName).Empty()
+            RuleFor(r => r.FileName).NotEmpty()
                 .WithMessage("Nome do arquivo nao pode ser vazio !");
 
-            RuleFor(r => r.ContentType).Empty()
+            RuleFor(r => r.ContentType).NotEmpty()
               .WithMessage("Content Type nao pode ser vazio !");
 
-            RuleFor(r => r.ContentType).NotEqual("image/jpg")
-              .WithMessage("Arquivo precise ser uma imagem !");
+            RuleFor(r => r.ContentType).Custom((content, context) =>
+            {
+                if (content.Trim() != _contentTypePng &&
+                    content.Trim() != _contentTypejpeg)
+                {
+                    context.AddFailure("Somente arquivos nos formatos .png ou .jpeg.");
+                }
+            });
         }
     }
 }

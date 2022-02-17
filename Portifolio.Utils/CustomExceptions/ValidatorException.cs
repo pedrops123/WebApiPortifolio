@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace Portifolio.Utils.CustomExceptions
 {
@@ -15,6 +16,13 @@ namespace Portifolio.Utils.CustomExceptions
             }
         }
 
+        public override string StackTrace
+        {
+            get
+            {
+                return Assembly.GetExecutingAssembly().Location;
+            }
+        }
         public ValidatorException()
         { }
 

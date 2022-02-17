@@ -35,7 +35,6 @@ namespace WebApiPortifolio.Controllers
             return Ok(response);
         }
 
-
         [HttpGet("GetById")]
         public async Task<IActionResult> GetById([FromQuery] GetByIdWorksRequest request)
         {

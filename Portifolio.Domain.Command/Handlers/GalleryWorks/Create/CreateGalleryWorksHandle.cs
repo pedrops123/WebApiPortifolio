@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using Portifolio.Domain.Command.Commands.Request.GalleryWorks.Create;
+using Portifolio.Utils.CustomExceptions;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -23,8 +24,7 @@ namespace Portifolio.Domain.Command.Handlers.GalleryWorks.Create
 
             if (!validator.IsValid)
             {
-                List<string> Errors = new List<string>();
-                validator.Errors.ForEach(r => Errors.Add(r.ErrorMessage));
+                throw new ValidatorException(validator.Errors);
             }
 
             return Unit.Value;
