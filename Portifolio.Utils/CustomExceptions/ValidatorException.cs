@@ -23,6 +23,7 @@ namespace Portifolio.Utils.CustomExceptions
                 return Assembly.GetExecutingAssembly().Location;
             }
         }
+
         public ValidatorException()
         { }
 
