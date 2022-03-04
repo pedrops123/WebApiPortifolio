@@ -5,7 +5,7 @@ using System.IO;
 
 namespace Portifolio.Infrastructure.Database.EntityFramework
 {
-    public sealed class AppDbContextFactory : IDesignTimeDbContextFactory<AppDbContext>
+    internal sealed class AppDbContextFactory : IDesignTimeDbContextFactory<AppDbContext>
     {
         public AppDbContext CreateDbContext(string[] args)
         {

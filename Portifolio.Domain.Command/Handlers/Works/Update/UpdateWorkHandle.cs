@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using Portifolio.Domain.Command.Commands.Request.Works.Update;
-using Portifolio.Infrastructure.Database.EntityFramework.Repositories.Works;
+using Portifolio.Domain.Generics;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -9,21 +9,24 @@ namespace Portifolio.Domain.Command.Handlers.Works.Update
 {
     public class UpdateWorkHandle : IRequestHandler<UpdateWorksRequest, Unit>
     {
-        private readonly WorksRepository _worksRepository;
+        private readonly IGeneric<Entities.Works> _repository;
         private IMapper _mapper;
-        public UpdateWorkHandle(IMapper mapper)
+
+        public UpdateWorkHandle(
+            IMapper mapper,
+            IGeneric<Entities.Works> repository)
         {
-            _worksRepository = new WorksRepository();
+            _repository = repository;
             _mapper = mapper;
         }
 
         public async Task<Unit> Handle(UpdateWorksRequest request, CancellationToken cancellationToken)
         {
-            var register = await _worksRepository.GetEntityById(request.Id);
+            var register = await _repository.GetEntityById(request.Id);
 
             _mapper.Map(request, register);
 
-            await _worksRepository.Update(register);
+            await _repository.Update(register);
 
             return Unit.Value;
         }

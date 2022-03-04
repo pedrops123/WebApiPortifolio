@@ -1,9 +1,9 @@
 ﻿using Microsoft.Extensions.Configuration;
 using System.IO;
 
-namespace Portifolio.Domain.Query.Configurations
+namespace Portifolio.Utils.Configurations
 {
-    internal static class ConfigurationRootFactory
+    public static class ConfigurationRootFactory
     {
         internal static IConfigurationRoot SetConfigurationRootBuilder()
         {
