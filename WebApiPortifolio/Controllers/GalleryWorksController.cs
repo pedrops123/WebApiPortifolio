@@ -18,8 +18,8 @@ namespace WebApiPortifolio.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Post([FromQuery] int id, [FromForm] IEnumerable<IFormFile> files)
+        [HttpPost("{id}")]
+        public async Task<IActionResult> Post([FromRoute] int id, [FromForm] IEnumerable<IFormFile> files)
         {
             var response = await _mediator.Send(new CreateGalleryWorksRequest(id, files));
 

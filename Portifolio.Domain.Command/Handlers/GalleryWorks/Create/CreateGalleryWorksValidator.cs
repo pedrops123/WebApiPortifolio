@@ -8,7 +8,7 @@ namespace Portifolio.Domain.Command.Handlers.GalleryWorks.Create
     {
         public CreateGalleryWorksValidator()
         {
-            RuleFor(r => r.IdProjeto).LessThanOrEqualTo(0)
+            RuleFor(r => r.IdProjeto).GreaterThan(0)
                 .WithMessage("Id do projeto nao pode ser 0 ou negativo.");
 
             RuleForEach(r => r.Files)

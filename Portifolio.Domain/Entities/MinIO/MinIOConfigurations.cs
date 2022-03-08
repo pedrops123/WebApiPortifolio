@@ -5,5 +5,6 @@
         public Connection Connection { get; set; }
         public Credentials Credentials { get; set; }
         public Buckets Buckets { get; set; }
+        public string TempFile { get; set; }
     }
 }
