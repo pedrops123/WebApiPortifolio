@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Portifolio.Infrastructure.Database.EntityFramework.Generics
 {
-    public class RepositoryGenerics<T> : IGeneric<T>, IDisposable where T : class
+    public class RepositoryGenerics<T> : IGenericRepository<T>, IDisposable where T : class
     {
         private readonly DbContextOptions<AppDbContext> _OptionsBuilder;
 

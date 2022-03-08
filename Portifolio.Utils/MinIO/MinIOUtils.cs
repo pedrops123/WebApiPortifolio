@@ -10,12 +10,12 @@ namespace Portifolio.Utils.MinIO
     {
         private IConfigurationRoot _conf;
 
-        private MinIOConfigurations configuration { get; set; }
+        private MinIOConfigurations configuration;
 
         public MinIOUtils()
         {
             _conf = ConfigurationRootFactory.SetConfigurationRootBuilder();
-            configuration = _conf.GetSection("MinIO") as MinIOConfigurations;
+            configuration = _conf.GetSection("MinIO").Get<MinIOConfigurations>();
         }
 
         public bool UploadFiles(IFormFile file)

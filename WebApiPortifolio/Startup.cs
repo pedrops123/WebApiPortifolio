@@ -23,7 +23,9 @@ namespace WebApiPortifolio
             services.AddControllers();
             services.AddMediator();
             services.ConfigureAutoMapper();
-            services.AddServices();
+            services.AddQueryServices();
+            services.AddInfrastructureServices();
+            services.AddGeneralServices();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebApiPortifolio", Version = "v1" });

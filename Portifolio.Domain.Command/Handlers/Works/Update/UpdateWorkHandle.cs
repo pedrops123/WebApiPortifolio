@@ -9,12 +9,12 @@ namespace Portifolio.Domain.Command.Handlers.Works.Update
 {
     public class UpdateWorkHandle : IRequestHandler<UpdateWorksRequest, Unit>
     {
-        private readonly IGeneric<Entities.Works> _repository;
+        private readonly IGenericRepository<Entities.Works> _repository;
         private IMapper _mapper;
 
         public UpdateWorkHandle(
             IMapper mapper,
-            IGeneric<Entities.Works> repository)
+            IGenericRepository<Entities.Works> repository)
         {
             _repository = repository;
             _mapper = mapper;

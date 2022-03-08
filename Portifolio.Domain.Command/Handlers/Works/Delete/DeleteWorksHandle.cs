@@ -9,11 +9,11 @@ namespace Portifolio.Domain.Command.Handlers.Works.Delete
 {
     public class DeleteWorksHandle : IRequestHandler<DeleteWorksRequest, Unit>
     {
-        private readonly IGeneric<Entities.Works> _repository;
+        private readonly IGenericRepository<Entities.Works> _repository;
         private IMapper _mapper;
         public DeleteWorksHandle(
             IMapper mapper,
-            IGeneric<Entities.Works> repository)
+            IGenericRepository<Entities.Works> repository)
         {
             _repository = repository;
             _mapper = mapper;

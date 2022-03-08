@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Portifolio.Domain.Generics
 {
-    public interface IGeneric<T> where T : class
+    public interface IGenericRepository<T> where T : class
     {
         public Task<T> Add(T objeto);
         public Task Delete(T objeto);

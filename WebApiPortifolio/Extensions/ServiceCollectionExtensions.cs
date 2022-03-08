@@ -2,10 +2,12 @@
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Portifolio.Domain.Command.Commands.Request.Works.Create;
+using Portifolio.Domain.Command.Commands.Request.Works.GetList;
 using Portifolio.Domain.Command.Profiles.Works;
 using Portifolio.Domain.Entities;
 using Portifolio.Domain.Generics;
 using Portifolio.Domain.MinIO;
+using Portifolio.Domain.Query.Configurations;
 using Portifolio.Infrastructure.Database.EntityFramework.Generics;
 using Portifolio.Utils.MinIO;
 using System.Linq;
@@ -38,10 +40,23 @@ namespace WebApiPortifolio.Extensions
             return services;
         }
 
-        public static IServiceCollection AddServices(this IServiceCollection services)
+        public static IServiceCollection AddGeneralServices(this IServiceCollection services)
         {
             services.AddTransient<IMinIO, MinIOUtils>();
-            services.AddTransient<IGeneric<Works>, RepositoryGenerics<Works>>();
+
+            return services;
+        }
+
+        public static IServiceCollection AddQueryServices(this IServiceCollection services)
+        {
+            services.AddTransient<IGenericQuery<Works,FilterWorksRequest>, DapperCustomSearch<Works,FilterWorksRequest>>();
+
+            return services;
+        }
+
+        public static IServiceCollection AddInfrastructureServices(this IServiceCollection services)
+        {
+            services.AddTransient<IGenericRepository<Works>, RepositoryGenerics<Works>>();
 
             return services;
         }

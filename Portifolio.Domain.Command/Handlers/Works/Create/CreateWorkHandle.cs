@@ -11,11 +11,11 @@ namespace Portifolio.Domain.Command.Handlers.Works.Create
     public sealed class CreateWorkHandle : IRequestHandler<CreateWorksRequest, Unit>
     {
         private IMapper _mapper;
-        private IGeneric<Entities.Works> _repository;
+        private IGenericRepository<Entities.Works> _repository;
         private CreateWorkValidator _validator;
 
         public CreateWorkHandle(
-            IGeneric<Entities.Works> repository,
+            IGenericRepository<Entities.Works> repository,
             IMapper mapper)
         {
             _repository = repository;

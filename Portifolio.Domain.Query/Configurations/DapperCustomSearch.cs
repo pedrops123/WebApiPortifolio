@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using Microsoft.Extensions.Configuration;
+using Portifolio.Domain.Generics;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Portifolio.Domain.Query.Configurations
 {
-    public abstract class DapperCustomSearch<T, F> where T : class
+    public class DapperCustomSearch<T,F>: IGenericQuery<T, F>
     {
         private IConfigurationRoot _conf;
         protected string _connectionStrings
