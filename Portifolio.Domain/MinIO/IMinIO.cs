@@ -5,8 +5,8 @@ namespace Portifolio.Domain.MinIO
 {
     public interface IMinIO
     {
-        public Task<bool> UploadFiles(IFormFile file);
-
+        public Task<string> GetFile(string name);
+        public Task<string> UploadFiles(IFormFile file);
         public bool DeleteFile();
     }
 }

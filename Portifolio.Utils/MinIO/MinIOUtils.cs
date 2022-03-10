@@ -19,6 +19,8 @@ namespace Portifolio.Utils.MinIO
 
         private MinioClient _MinIOClient;
 
+        private FileStream stream;
+
         private string DirectoryFile;
         public MinIOUtils()
         {
@@ -29,16 +31,16 @@ namespace Portifolio.Utils.MinIO
             DirectoryFile = Path.Combine(Assembly.GetAssembly(typeof(MinIOUtils)).Location.Substring(0, 31), _configuration.TempFile);
         }
 
-        public async Task<bool> UploadFiles(IFormFile file)
+        public async Task<string> UploadFiles(IFormFile file)
         {
-            bool result = false;
+            string nomeArquivoUpload = "";
             try
             {
                 string PathLocalFile = GetNameLocalFile(file);
 
                 await _MinIOClient.PutObjectAsync(_configuration.Buckets.gallery, file.FileName, PathLocalFile, file.ContentType);
 
-                result = true;
+                nomeArquivoUpload = await GetFile(file.FileName);
             }
             catch (Exception e)
             {
@@ -48,12 +50,25 @@ namespace Portifolio.Utils.MinIO
             {
                 DeleteFolderLocalFile();
             }
-            return result;
+
+            return nomeArquivoUpload;
         }
 
         public bool DeleteFile()
         {
             throw new System.NotImplementedException();
+        }
+
+        public async Task<string> GetFile(string name)
+        {
+            GetObjectArgs args = new GetObjectArgs()
+                                              .WithBucket(_configuration.Buckets.gallery)
+                                              .WithObject(name)
+                                              .WithFile(name);
+
+            var obj = await _MinIOClient.GetObjectAsync(args);
+
+            return obj.ObjectName;
         }
 
         private MinioClient ConfigureMinIO()
@@ -100,12 +115,10 @@ namespace Portifolio.Utils.MinIO
                 Directory.CreateDirectory(DirectoryFile);
             }
 
-            using (Stream stream = new FileStream(Path.Combine(DirectoryFile, file.FileName), FileMode.OpenOrCreate, FileAccess.ReadWrite))
+            using (stream = new FileStream(Path.Combine(DirectoryFile, file.FileName), FileMode.CreateNew, FileAccess.ReadWrite, FileShare.Delete))
             {
                 file.CopyTo(stream);
-                stream.Flush();
                 stream.Close();
-                stream.Dispose();
             }
 
             var files = Directory.GetFiles(DirectoryFile);
@@ -123,7 +136,11 @@ namespace Portifolio.Utils.MinIO
             {
                 foreach (string file in files)
                 {
-                    File.Delete(file);
+                    if (File.Exists(file))
+                    {
+                        GC.Collect();
+                        File.Delete(file);
+                    }
                 }
 
                 Directory.Delete(DirectoryFile);
