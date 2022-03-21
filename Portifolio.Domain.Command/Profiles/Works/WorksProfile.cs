@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Portifolio.Domain.Command.Commands.Request.Works.Create;
-using Portifolio.Domain.Command.Commands.Request.Works.GetList;
 using Portifolio.Domain.Command.Commands.Request.Works.Update;
 using Portifolio.Domain.Command.Commands.Response.Works.GetById;
 using Portifolio.Domain.Command.Commands.Response.Works.GetList;

@@ -28,8 +28,6 @@ namespace Portifolio.Domain.Command.Handlers.GalleryWorks.Create
         {
             var validator = _validator.Validate(request);
 
-            List<string> ListFiles = new List<string>();
-
             if (!validator.IsValid)
             {
                 throw new ValidatorException(validator.Errors);
@@ -37,8 +35,10 @@ namespace Portifolio.Domain.Command.Handlers.GalleryWorks.Create
 
             foreach (IFormFile file in request.Files)
             {
-                ListFiles.Add(await _minIOService.UploadFiles(file));
+                request.ListFiles.Add(await _minIOService.UploadFiles(file));
             }
+
+            var Photos = _mapper.Map<CreateGalleryWorksRequest, Entities.GalleryWorks>(request);
 
             return Unit.Value;
         }

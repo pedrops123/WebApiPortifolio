@@ -36,19 +36,15 @@ namespace Portifolio.Utils.MinIO
             string nomeArquivoUpload = "";
             try
             {
-                string PathLocalFile = GetNameLocalFile(file);
+                byte[] FileBytes = GetFileBytes(file);
 
-                await _MinIOClient.PutObjectAsync(_configuration.Buckets.gallery, file.FileName, PathLocalFile, file.ContentType);
+                await _MinIOClient.PutObjectAsync(_configuration.Buckets.gallery, file.FileName, new MemoryStream(FileBytes), file.Length, file.ContentType);
 
-                nomeArquivoUpload = await GetFile(file.FileName);
+                nomeArquivoUpload = file.FileName;
             }
             catch (Exception e)
             {
                 throw;
-            }
-            finally
-            {
-                DeleteFolderLocalFile();
             }
 
             return nomeArquivoUpload;
@@ -61,14 +57,9 @@ namespace Portifolio.Utils.MinIO
 
         public async Task<string> GetFile(string name)
         {
-            GetObjectArgs args = new GetObjectArgs()
-                                              .WithBucket(_configuration.Buckets.gallery)
-                                              .WithObject(name)
-                                              .WithFile(name);
+            var UrlFile = await _MinIOClient.PresignedGetObjectAsync(_configuration.Buckets.gallery, name, 6000);
 
-            var obj = await _MinIOClient.GetObjectAsync(args);
-
-            return obj.ObjectName;
+            return UrlFile;
         }
 
         private MinioClient ConfigureMinIO()
@@ -106,7 +97,7 @@ namespace Portifolio.Utils.MinIO
             return found;
         }
 
-        private string GetNameLocalFile(IFormFile file)
+        private byte[] GetFileBytes(IFormFile file)
         {
             string FileName;
 
@@ -121,34 +112,23 @@ namespace Portifolio.Utils.MinIO
                 stream.Close();
             }
 
+
             var files = Directory.GetFiles(DirectoryFile);
 
-            FileName = files[0];
+            var fileBytes = System.IO.File.ReadAllBytes(files[0]);
 
-            return FileName;
-        }
-
-        private void DeleteFolderLocalFile()
-        {
-            var files = Directory.GetFiles(DirectoryFile);
-
-            try
+            foreach (string pathFiles in files)
             {
-                foreach (string file in files)
+                if (File.Exists(pathFiles))
                 {
-                    if (File.Exists(file))
-                    {
-                        GC.Collect();
-                        File.Delete(file);
-                    }
+                    GC.Collect(0, GCCollectionMode.Forced, false);
+                    File.Delete(pathFiles);
                 }
+            }
 
-                Directory.Delete(DirectoryFile);
-            }
-            catch (Exception e)
-            {
-                throw;
-            }
+            Directory.Delete(DirectoryFile);
+
+            return fileBytes;
         }
     }
 }

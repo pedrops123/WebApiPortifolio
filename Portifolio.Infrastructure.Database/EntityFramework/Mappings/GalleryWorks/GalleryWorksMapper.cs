@@ -30,7 +30,7 @@ namespace Portifolio.Infrastructure.Database.EntityFramework.Mappings.GalleryWor
 
             builder.HasOne(f => f.Work)
                 .WithMany(f => f.Fotos)
-                .HasForeignKey(f=>f.IdProjeto);
+                .HasForeignKey(f => f.IdProjeto);
         }
     }
 }
