@@ -33,6 +33,22 @@ namespace Portifolio.Infrastructure.Database.EntityFramework.Generics
             return Objeto;
         }
 
+        public virtual async Task<List<T>> AddRange(List<T> ListObject)
+        {
+            using (var data = new AppDbContext(_OptionsBuilder))
+            {
+                foreach (var item in ListObject)
+                {
+                    item.GetType().GetProperty("InsertDate").SetValue(item, DateTime.Now);
+                }
+
+                await data.Set<T>().AddRangeAsync(ListObject);
+                await data.SaveChangesAsync();
+            }
+
+            return ListObject;
+        }
+
         public virtual async Task Delete(T Objeto)
         {
             using (var data = new AppDbContext(_OptionsBuilder))

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
+using Portifolio.Domain.Command.Commands.Request.GalleryWorks.GetList;
 using Portifolio.Domain.Command.Commands.Request.Works.Create;
 using Portifolio.Domain.Command.Commands.Request.Works.GetList;
 using Portifolio.Domain.Command.Profiles.Works;
@@ -49,14 +50,18 @@ namespace WebApiPortifolio.Extensions
 
         public static IServiceCollection AddQueryServices(this IServiceCollection services)
         {
-            services.AddTransient<IGenericQuery<Works,FilterWorksRequest>, DapperCustomSearch<Works,FilterWorksRequest>>();
+            services
+                  .AddTransient<IGenericQuery<GalleryWorks, FilterGalleryWorksRequest>, DapperCustomSearch<GalleryWorks, FilterGalleryWorksRequest>>()
+                  .AddTransient<IGenericQuery<Works, FilterWorksRequest>, DapperCustomSearch<Works, FilterWorksRequest>>();
 
             return services;
         }
 
         public static IServiceCollection AddInfrastructureServices(this IServiceCollection services)
         {
-            services.AddTransient<IGenericRepository<Works>, RepositoryGenerics<Works>>();
+            services
+                .AddTransient<IGenericRepository<Works>, RepositoryGenerics<Works>>()
+                .AddTransient<IGenericRepository<GalleryWorks>, RepositoryGenerics<GalleryWorks>>();
 
             return services;
         }

@@ -10,5 +10,6 @@ namespace Portifolio.Domain.Generics
         public Task Update(T objeto);
         public Task<T> GetEntityById(int id);
         public Task<List<T>> List();
+        public Task<List<T>> AddRange(List<T> ListObject);
     }
 }

@@ -2,6 +2,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Portifolio.Domain.Command.Commands.Request.GalleryWorks.Create;
+using Portifolio.Domain.Generics;
 using Portifolio.Domain.MinIO;
 using Portifolio.Utils.CustomExceptions;
 using System.Collections.Generic;
@@ -14,12 +15,15 @@ namespace Portifolio.Domain.Command.Handlers.GalleryWorks.Create
     {
         private IMapper _mapper;
         private IMinIO _minIOService;
+        IGenericRepository<Entities.GalleryWorks> _repository;
 
         private CreateGalleryWorksValidator _validator;
         public CreateGalleryWorksHandle(IMapper mapper,
+            IGenericRepository<Entities.GalleryWorks> repository,
             IMinIO minIOService)
         {
             _mapper = mapper;
+            _repository = repository;
             _minIOService = minIOService;
             _validator = new CreateGalleryWorksValidator();
         }
@@ -38,9 +42,22 @@ namespace Portifolio.Domain.Command.Handlers.GalleryWorks.Create
                 request.ListFiles.Add(await _minIOService.UploadFiles(file));
             }
 
-            var Photos = _mapper.Map<CreateGalleryWorksRequest, Entities.GalleryWorks>(request);
+            var registers = CreateListRegisters(request);
+
+            await _repository.AddRange(registers);
 
             return Unit.Value;
         }
+
+        private List<Entities.GalleryWorks> CreateListRegisters(CreateGalleryWorksRequest request)
+        {
+            List<Entities.GalleryWorks> listGallery = new List<Entities.GalleryWorks>();
+
+            request.ListFiles.ForEach(r => listGallery.Add(new Entities.GalleryWorks(
+                request.IdProjeto, r)));
+
+            return listGallery;
+        }
+
     }
 }

@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Portifolio.Domain.Command.Commands.Response.GalleryWorks.GetList;
+using Portifolio.Domain.Entities;
+using System;
+using System.Collections.Generic;
 
 namespace Portifolio.Domain.Command.Commands.Response.Works.GetById
 {
@@ -21,5 +24,7 @@ namespace Portifolio.Domain.Command.Commands.Response.Works.GetById
         public int? UserUpdate { get; set; }
 
         public DateTime? UpdateDate { get; set; }
+
+        public virtual List<FilterGalleryWorksResponse> Fotos { get; set; }
     }
 }

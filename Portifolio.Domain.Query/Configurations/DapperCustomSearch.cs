@@ -56,7 +56,14 @@ namespace Portifolio.Domain.Query.Configurations
                             {
                                 Params.Add(new KeyValuePair<string, string>(property.Name, (string)value));
                             }
-                            break;
+                        break;
+
+                        default:
+                            if((int) value != 0)
+                            {
+                                Params.Add(new KeyValuePair<string, string>(property.Name,  value.ToString()));
+                            }
+                        break;
                     }
                 }
             }
