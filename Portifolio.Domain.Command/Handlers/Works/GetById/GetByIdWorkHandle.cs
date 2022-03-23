@@ -2,12 +2,12 @@
 using MediatR;
 using Portifolio.Domain.Command.Commands.Request.GalleryWorks.GetList;
 using Portifolio.Domain.Command.Commands.Request.Works.GetById;
-using Portifolio.Domain.Command.Commands.Request.Works.GetList;
 using Portifolio.Domain.Command.Commands.Response.GalleryWorks.GetList;
 using Portifolio.Domain.Command.Commands.Response.Works.GetById;
 using Portifolio.Domain.Generics;
 using Portifolio.Domain.MinIO;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -18,14 +18,14 @@ namespace Portifolio.Domain.Command.Handlers.Works.GetById
         private readonly IMapper _mapper;
         private readonly IMinIO _minIOService;
         private readonly IGenericQuery<Entities.GalleryWorks, FilterGalleryWorksRequest> _dapperGalleryWorks;
-        private readonly IGenericQuery<Entities.Works, FilterWorksRequest> _dapper;
+        private readonly IGenericQuery<Entities.Works, Portifolio.Domain.Query.Repositories.Works.Filters.FilterWorksRequest> _dapper;
 
 
         public GetByIdWorkHandle(
             IMapper mapper,
             IMinIO minIOService,
             IGenericQuery<Entities.GalleryWorks, FilterGalleryWorksRequest> dapperGalleryWorks,
-            IGenericQuery<Entities.Works, FilterWorksRequest> dapper)
+            IGenericQuery<Entities.Works, Portifolio.Domain.Query.Repositories.Works.Filters.FilterWorksRequest> dapper)
         {
             _mapper = mapper;
             _dapper = dapper;
@@ -53,7 +53,14 @@ namespace Portifolio.Domain.Command.Handlers.Works.GetById
                 foto.UrlFile = await _minIOService.GetFile(foto.PathFile);
             }
 
+            if (handleResponse.img_thumbnail_id != 0)
+            {
+                handleResponse.img_thumbnail.UrlFile = handleResponse.Fotos.Where(r => r.Id == handleResponse.img_thumbnail_id).FirstOrDefault().UrlFile;
+            }
+
             return handleResponse;
         }
+
+
     }
 }

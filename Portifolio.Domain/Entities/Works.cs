@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Portifolio.Domain.Entities
 {
@@ -7,12 +6,14 @@ namespace Portifolio.Domain.Entities
     {
         public string nome_projeto { get; private set; }
 
-        public string img_thumbnail { get; private set; }
+        public int? img_thumbnail_id { get; private set; }
 
         public string descritivo_capa { get; private set; }
 
         public string texto_projeto { get; private set; }
 
         public virtual IEnumerable<GalleryWorks> Fotos { get; private set; }
+
+        public void setThumbnail(GalleryWorks thumbnail) => img_thumbnail = thumbnail;
     }
 }

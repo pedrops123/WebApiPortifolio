@@ -22,13 +22,16 @@ namespace Portifolio.Utils.MinIO
         private FileStream stream;
 
         private string DirectoryFile;
+
+        private string AssemblyPath = Assembly.GetAssembly(typeof(MinIOUtils)).Location;
+
         public MinIOUtils()
         {
             _conf = ConfigurationRootFactory.SetConfigurationRootBuilder();
             _configuration = _conf.GetSection("MinIO").Get<MinIOConfigurations>();
             _MinIOClient = ConfigureMinIO();
             CreateBucket();
-            DirectoryFile = Path.Combine(Assembly.GetAssembly(typeof(MinIOUtils)).Location.Substring(0, 31), _configuration.TempFile);
+            DirectoryFile = Path.Combine(AssemblyPath.Substring(0, AssemblyPath.IndexOf("bin")), _configuration.TempFile);
         }
 
         public async Task<string> UploadFiles(IFormFile file)
@@ -99,7 +102,6 @@ namespace Portifolio.Utils.MinIO
 
         private byte[] GetFileBytes(IFormFile file)
         {
-            string FileName;
 
             if (!Directory.Exists(DirectoryFile))
             {

@@ -1,5 +1,4 @@
 ﻿using Portifolio.Domain.Command.Commands.Response.GalleryWorks.GetList;
-using Portifolio.Domain.Entities;
 using System;
 using System.Collections.Generic;
 
@@ -11,7 +10,7 @@ namespace Portifolio.Domain.Command.Commands.Response.Works.GetById
 
         public string nome_projeto { get; set; }
 
-        public string img_thumbnail { get; set; }
+        public int img_thumbnail_id { get; set; }
 
         public string descritivo_capa { get; set; }
 
@@ -26,5 +25,7 @@ namespace Portifolio.Domain.Command.Commands.Response.Works.GetById
         public DateTime? UpdateDate { get; set; }
 
         public virtual List<FilterGalleryWorksResponse> Fotos { get; set; }
+
+        public FilterGalleryWorksResponse img_thumbnail { get; private set; }
     }
 }

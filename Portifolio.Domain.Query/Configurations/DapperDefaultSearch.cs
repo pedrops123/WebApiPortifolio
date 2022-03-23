@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Portifolio.Domain.Query.Configurations
 {
-    public class DapperCustomSearch<T,F>: IGenericQuery<T, F>
+    public class DapperDefaultSearch<T,F> : IGenericQuery<T, F>
     {
         private IConfigurationRoot _conf;
         protected string _connectionStrings
@@ -18,7 +18,7 @@ namespace Portifolio.Domain.Query.Configurations
             get => _conf.GetConnectionString("DefaultConnection");
         }
 
-        public DapperCustomSearch() => _conf = ConfigurationRootFactory.SetConfigurationRootBuilder();
+        public DapperDefaultSearch() => _conf = ConfigurationRootFactory.SetConfigurationRootBuilder();
         
         public virtual async Task<T> GetById(int id)
         {

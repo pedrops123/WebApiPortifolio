@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Portifolio.Infrastructure.Database.EntityFramework;
 
 namespace Portifolio.Infrastructure.Database.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220323171127_TrocaTipoColunaImhThumbWorks")]
+    partial class TrocaTipoColunaImhThumbWorks
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -73,9 +75,6 @@ namespace Portifolio.Infrastructure.Database.Migrations
                     b.Property<string>("descritivo_capa")
                         .HasColumnType("VARCHAR(500)");
 
-                    b.Property<int?>("img_thumbnailId")
-                        .HasColumnType("int");
-
                     b.Property<int?>("img_thumbnail_id")
                         .HasColumnType("INT");
 
@@ -86,8 +85,6 @@ namespace Portifolio.Infrastructure.Database.Migrations
                         .HasColumnType("VARCHAR(500)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("img_thumbnailId");
 
                     b.ToTable("Works");
                 });
@@ -101,15 +98,6 @@ namespace Portifolio.Infrastructure.Database.Migrations
                         .IsRequired();
 
                     b.Navigation("Work");
-                });
-
-            modelBuilder.Entity("Portifolio.Domain.Entities.Works", b =>
-                {
-                    b.HasOne("Portifolio.Domain.Entities.GalleryWorks", "img_thumbnail")
-                        .WithMany()
-                        .HasForeignKey("img_thumbnailId");
-
-                    b.Navigation("img_thumbnail");
                 });
 
             modelBuilder.Entity("Portifolio.Domain.Entities.Works", b =>

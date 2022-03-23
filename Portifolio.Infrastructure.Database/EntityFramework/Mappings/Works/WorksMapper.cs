@@ -8,10 +8,11 @@ namespace Portifolio.Infrastructure.Database.EntityFramework.Mappings.Works
         public void Configure(EntityTypeBuilder<Domain.Entities.Works> builder)
         {
             builder.ToTable(nameof(Domain.Entities.Works));
+
             builder.HasKey(r => r.Id);
 
-            builder.Property(r => r.img_thumbnail)
-                    .HasColumnType("VARCHAR(100)");
+            builder.Property(r => r.img_thumbnail_id)
+                    .HasColumnType("INT");
 
             builder.Property(r => r.nome_projeto)
                     .HasColumnType("VARCHAR(500)");
@@ -35,7 +36,10 @@ namespace Portifolio.Infrastructure.Database.EntityFramework.Mappings.Works
                 .HasColumnType("INT");
 
             builder.HasMany(r => r.Fotos)
-                .WithOne(f => f.Work);
+                .WithOne(r => r.Work);
+
+            builder.HasOne(r=>r.img_thumbnail)
+                .WithOne(r=>r.Work).ii
         }
     }
 }

@@ -15,7 +15,8 @@ namespace Portifolio.Domain.Command.Commands.Request.Works.Update
 
         public string nome_projeto { get; set; }
 
-        public string img_thumbnail { get; set; }
+        [JsonIgnore]
+        public int? img_thumbnail_id { get; set; }
 
         public string descritivo_capa { get; set; }
 

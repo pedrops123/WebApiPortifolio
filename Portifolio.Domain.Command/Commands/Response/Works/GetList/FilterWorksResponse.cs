@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Portifolio.Domain.Command.Commands.Response.GalleryWorks.GetList;
+using System;
 
 namespace Portifolio.Domain.Command.Commands.Response.Works.GetList
 {
@@ -8,7 +9,7 @@ namespace Portifolio.Domain.Command.Commands.Response.Works.GetList
 
         public string nome_projeto { get;  set; }
 
-        public string img_thumbnail { get;  set; }
+        public int img_thumbnail_id { get; set; }
 
         public string descritivo_capa { get;  set; }
 
@@ -21,5 +22,7 @@ namespace Portifolio.Domain.Command.Commands.Response.Works.GetList
         public int? UserUpdate { get;  set; }
 
         public DateTime? UpdateDate { get;  set; }
+
+        public FilterGalleryWorksResponse img_thumbnail { get; private set; }
     }
 }

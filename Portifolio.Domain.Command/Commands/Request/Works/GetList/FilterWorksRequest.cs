@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Portifolio.Domain.Command.Commands.Request.Works.GetList
 {
-    public sealed class FilterWorksRequest : IRequest<List<FilterWorksResponse>>
+    public sealed class FilterWorksRequest : IRequest<IEnumerable<FilterWorksResponse>>
     {
         public string nome_projeto { get; set; }
 
