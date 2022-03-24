@@ -5,7 +5,7 @@ using System.IO;
 
 namespace Portifolio.Infrastructure.Database.EntityFramework
 {
-    public static class OptionsBuilderConfiguration
+    internal static class OptionsBuilderConfiguration
     {
         public static void ConfigureDbContext(this DbContextOptionsBuilder builder)
         {
@@ -13,7 +13,7 @@ namespace Portifolio.Infrastructure.Database.EntityFramework
               .SetBasePath(Directory.GetCurrentDirectory())
               .AddJsonFile("appsettings.json")
               .Build();
-            
+
             var connectionStrings = configuration.GetConnectionString("DefaultConnection");
             builder.UseSqlServer(connectionStrings);
         }

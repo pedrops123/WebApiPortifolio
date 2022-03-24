@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Portifolio.Infrastructure.Database.EntityFramework.Generics
 {
-    public class RepositoryGenerics<T> : IGeneric<T>, IDisposable where T : class
+    public class RepositoryGenerics<T> : IGenericRepository<T>, IDisposable where T : class
     {
         private readonly DbContextOptions<AppDbContext> _OptionsBuilder;
 
@@ -22,15 +22,47 @@ namespace Portifolio.Infrastructure.Database.EntityFramework.Generics
         // Instantiate a SafeHandle instance.
         SafeHandle handle = new SafeFileHandle(IntPtr.Zero, true);
 
-        public virtual async Task<T> Add(T Objeto)
+        public virtual async Task Add(T Objeto)
         {
             using (var data = new AppDbContext(_OptionsBuilder))
             {
-                Objeto.GetType().GetProperty("InsertDate").SetValue(Objeto , DateTime.Now);
+                Objeto.GetType().GetProperty("InsertDate").SetValue(Objeto, DateTime.Now);
                 await data.Set<T>().AddAsync(Objeto);
                 await data.SaveChangesAsync();
             }
-            return Objeto;
+        }
+
+        public virtual async Task Update(T Objeto)
+        {
+            using (var data = new AppDbContext(_OptionsBuilder))
+            {
+                Objeto.GetType().GetProperty("UpdateDate").SetValue(Objeto, DateTime.Now);
+                data.Set<T>().Update(Objeto);
+                await data.SaveChangesAsync();
+            }
+        }
+
+        public virtual async Task AddRange(List<T> ListObject)
+        {
+            using (var data = new AppDbContext(_OptionsBuilder))
+            {
+                foreach (var item in ListObject)
+                {
+                    item.GetType().GetProperty("InsertDate").SetValue(item, DateTime.Now);
+                }
+
+                await data.Set<T>().AddRangeAsync(ListObject);
+                await data.SaveChangesAsync();
+            }
+        }
+
+        public virtual async Task RemoveRange(List<T> ListObject)
+        {
+            using (var data = new AppDbContext(_OptionsBuilder))
+            {
+                data.Set<T>().RemoveRange(ListObject);
+                await data.SaveChangesAsync();
+            }
         }
 
         public virtual async Task Delete(T Objeto)
@@ -55,16 +87,6 @@ namespace Portifolio.Infrastructure.Database.EntityFramework.Generics
             using (var data = new AppDbContext(_OptionsBuilder))
             {
                 return await data.Set<T>().AsNoTracking().ToListAsync();
-            }
-        }
-
-        public virtual async Task Update(T Objeto)
-        {
-            using (var data = new AppDbContext(_OptionsBuilder))
-            {
-                Objeto.GetType().GetProperty("UdpatetDate").SetValue(Objeto, DateTime.Now);
-                data.Set<T>().Update(Objeto);
-                await data.SaveChangesAsync();
             }
         }
 

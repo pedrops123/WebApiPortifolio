@@ -19,6 +19,38 @@ namespace Portifolio.Infrastructure.Database.Migrations
                 .HasAnnotation("ProductVersion", "5.0.13")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("Portifolio.Domain.Entities.GalleryWorks", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("IdProjeto")
+                        .HasColumnType("INT");
+
+                    b.Property<DateTime>("InsertDate")
+                        .HasColumnType("DATETIME2");
+
+                    b.Property<string>("PathFile")
+                        .HasColumnType("VARCHAR(500)");
+
+                    b.Property<DateTime?>("UpdateDate")
+                        .HasColumnType("DATETIME2");
+
+                    b.Property<int>("UserInsert")
+                        .HasColumnType("INT");
+
+                    b.Property<int?>("UserUpdate")
+                        .HasColumnType("INT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdProjeto");
+
+                    b.ToTable("GalleryWorks");
+                });
+
             modelBuilder.Entity("Portifolio.Domain.Entities.Works", b =>
                 {
                     b.Property<int>("Id")
@@ -27,32 +59,48 @@ namespace Portifolio.Infrastructure.Database.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("InsertDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("DATETIME2");
 
-                    b.Property<DateTime?>("UdpatetDate")
-                        .HasColumnType("datetime2");
+                    b.Property<DateTime?>("UpdateDate")
+                        .HasColumnType("DATETIME2");
 
                     b.Property<int>("UserInsert")
-                        .HasColumnType("int");
+                        .HasColumnType("INT");
 
                     b.Property<int?>("UserUpdate")
-                        .HasColumnType("int");
+                        .HasColumnType("INT");
 
                     b.Property<string>("descritivo_capa")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("VARCHAR(500)");
 
-                    b.Property<string>("img_thumbnail")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("img_thumbnail_id")
+                        .HasColumnType("INT");
 
                     b.Property<string>("nome_projeto")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("VARCHAR(500)");
 
                     b.Property<string>("texto_projeto")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("VARCHAR(500)");
 
                     b.HasKey("Id");
 
                     b.ToTable("Works");
+                });
+
+            modelBuilder.Entity("Portifolio.Domain.Entities.GalleryWorks", b =>
+                {
+                    b.HasOne("Portifolio.Domain.Entities.Works", "Work")
+                        .WithMany("Fotos")
+                        .HasForeignKey("IdProjeto")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Work");
+                });
+
+            modelBuilder.Entity("Portifolio.Domain.Entities.Works", b =>
+                {
+                    b.Navigation("Fotos");
                 });
 #pragma warning restore 612, 618
         }
