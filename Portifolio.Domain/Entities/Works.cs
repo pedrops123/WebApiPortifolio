@@ -13,7 +13,5 @@ namespace Portifolio.Domain.Entities
         public string texto_projeto { get; private set; }
 
         public virtual IEnumerable<GalleryWorks> Fotos { get; private set; }
-
-        public void setThumbnail(GalleryWorks thumbnail) => img_thumbnail = thumbnail;
     }
 }

@@ -9,7 +9,6 @@ using Portifolio.Domain.Entities;
 using Portifolio.Domain.Generics;
 using Portifolio.Domain.MinIO;
 using Portifolio.Domain.Query.Configurations;
-using Portifolio.Domain.Query.Repositories.Works;
 using Portifolio.Infrastructure.Database.EntityFramework.Generics;
 using Portifolio.Utils.MinIO;
 using System.Linq;
@@ -53,7 +52,7 @@ namespace WebApiPortifolio.Extensions
         {
             services
                   .AddTransient<IGenericQuery<GalleryWorks, FilterGalleryWorksRequest>, DapperDefaultSearch<GalleryWorks, FilterGalleryWorksRequest>>()
-                  .AddTransient<IGenericQuery<Works, Portifolio.Domain.Query.Repositories.Works.Filters.FilterWorksRequest>, WorksQueryRepository>();
+                  .AddTransient<IGenericQuery<Works, FilterWorksRequest>, DapperDefaultSearch<Works, FilterWorksRequest>>();
 
             return services;
         }

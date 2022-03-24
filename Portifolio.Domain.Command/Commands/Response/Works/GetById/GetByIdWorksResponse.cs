@@ -10,7 +10,7 @@ namespace Portifolio.Domain.Command.Commands.Response.Works.GetById
 
         public string nome_projeto { get; set; }
 
-        public int img_thumbnail_id { get; set; }
+        public int? img_thumbnail_id { get; set; }
 
         public string descritivo_capa { get; set; }
 
@@ -26,6 +26,8 @@ namespace Portifolio.Domain.Command.Commands.Response.Works.GetById
 
         public virtual List<FilterGalleryWorksResponse> Fotos { get; set; }
 
-        public FilterGalleryWorksResponse img_thumbnail { get; private set; }
+        public FilterGalleryWorksResponse img_thumbnail { get; set; }
+
+        public GetByIdWorksResponse() => this.img_thumbnail = new FilterGalleryWorksResponse();
     }
 }

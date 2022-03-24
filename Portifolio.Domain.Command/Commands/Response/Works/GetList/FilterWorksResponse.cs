@@ -9,7 +9,7 @@ namespace Portifolio.Domain.Command.Commands.Response.Works.GetList
 
         public string nome_projeto { get;  set; }
 
-        public int img_thumbnail_id { get; set; }
+        public int? img_thumbnail_id { get; set; }
 
         public string descritivo_capa { get;  set; }
 
@@ -23,6 +23,11 @@ namespace Portifolio.Domain.Command.Commands.Response.Works.GetList
 
         public DateTime? UpdateDate { get;  set; }
 
-        public FilterGalleryWorksResponse img_thumbnail { get; private set; }
+        public FilterGalleryWorksResponse img_thumbnail { get; set; }
+
+        public FilterWorksResponse()
+        {
+            this.img_thumbnail = new FilterGalleryWorksResponse();
+        }
     }
 }

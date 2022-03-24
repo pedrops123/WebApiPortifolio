@@ -7,6 +7,6 @@ namespace Portifolio.Domain.MinIO
     {
         public Task<string> GetFile(string name);
         public Task<string> UploadFiles(IFormFile file);
-        public bool DeleteFile();
+        public Task<bool> DeleteFile(string name);
     }
 }

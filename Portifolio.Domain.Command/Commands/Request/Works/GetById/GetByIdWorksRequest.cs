@@ -6,5 +6,10 @@ namespace Portifolio.Domain.Command.Commands.Request.Works.GetById
     public class GetByIdWorksRequest : IRequest<GetByIdWorksResponse>
     {
         public int Id { get; set; }
+
+        public GetByIdWorksRequest(int id)
+        {
+            Id = id;
+        }
     }
 }

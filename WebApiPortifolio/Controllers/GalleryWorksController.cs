@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Portifolio.Domain.Command.Commands.Request.GalleryWorks.Create;
+using Portifolio.Domain.Command.Commands.Request.GalleryWorks.Delete;
 using Portifolio.Domain.Command.Commands.Request.GalleryWorks.GetList;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -31,6 +32,14 @@ namespace WebApiPortifolio.Controllers
         public async Task<IActionResult> Post([FromRoute] int id, [FromForm] IEnumerable<IFormFile> files)
         {
             var response = await _mediator.Send(new CreateGalleryWorksRequest(id, files));
+
+            return Ok(response);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete([FromRoute] int id)
+        {
+            var response = await _mediator.Send(new DeleteGalleryWorksRequest(id));
 
             return Ok(response);
         }

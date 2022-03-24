@@ -6,6 +6,7 @@ using Portifolio.Domain.MinIO;
 using Portifolio.Utils.Configurations;
 using System;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 
@@ -41,9 +42,9 @@ namespace Portifolio.Utils.MinIO
             {
                 byte[] FileBytes = GetFileBytes(file);
 
-                await _MinIOClient.PutObjectAsync(_configuration.Buckets.gallery, file.FileName, new MemoryStream(FileBytes), file.Length, file.ContentType);
+                nomeArquivoUpload = String.Format("{0}.{1}", Guid.NewGuid(), file.FileName.Split('.').LastOrDefault());
 
-                nomeArquivoUpload = file.FileName;
+                await _MinIOClient.PutObjectAsync(_configuration.Buckets.gallery, nomeArquivoUpload, new MemoryStream(FileBytes), file.Length, file.ContentType);
             }
             catch (Exception e)
             {
@@ -53,9 +54,15 @@ namespace Portifolio.Utils.MinIO
             return nomeArquivoUpload;
         }
 
-        public bool DeleteFile()
+        public async Task<bool> DeleteFile(string name)
         {
-            throw new System.NotImplementedException();
+            RemoveObjectArgs args = new RemoveObjectArgs()
+                .WithBucket(_configuration.Buckets.gallery)
+                .WithObject(name);
+
+            await _MinIOClient.RemoveObjectAsync(args);
+
+            return true;
         }
 
         public async Task<string> GetFile(string name)

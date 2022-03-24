@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Commands\Request\GalleryWorks\Delete\" />
     <Folder Include="Commands\Response\GalleryWorks\Create\" />
     <Folder Include="Commands\Response\GalleryWorks\Delete\" />
     <Folder Include="Commands\Response\Works\Create\" />

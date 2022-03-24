@@ -37,9 +37,6 @@ namespace Portifolio.Infrastructure.Database.EntityFramework.Mappings.Works
 
             builder.HasMany(r => r.Fotos)
                 .WithOne(r => r.Work);
-
-            builder.HasOne(r=>r.img_thumbnail)
-                .WithOne(r=>r.Work).ii
         }
     }
 }
