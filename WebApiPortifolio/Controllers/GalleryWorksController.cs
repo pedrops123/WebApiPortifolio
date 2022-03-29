@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Portifolio.Domain.Command.Commands.Request.GalleryWorks.Create;
 using Portifolio.Domain.Command.Commands.Request.GalleryWorks.Delete;
 using Portifolio.Domain.Command.Commands.Request.GalleryWorks.GetList;
+using Portifolio.Domain.Command.Commands.Request.GalleryWorks.PatchComment;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -40,6 +41,15 @@ namespace WebApiPortifolio.Controllers
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
             var response = await _mediator.Send(new DeleteGalleryWorksRequest(id));
+
+            return Ok(response);
+        }
+
+        [HttpPatch("PatchComment/{id}")]
+        public async Task<IActionResult> PatchComment([FromBody] PatchGalleryWorksCommentRequest request , [FromRoute] int id)
+        {
+            request.Id = id;
+            var response = await _mediator.Send(request);
 
             return Ok(response);
         }

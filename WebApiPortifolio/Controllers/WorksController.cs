@@ -61,7 +61,7 @@ namespace WebApiPortifolio.Controllers
             return Ok(response);
         }
 
-        [HttpPatch("{id}")]
+        [HttpPatch("PatchThumnail/{id}")]
         public async Task<IActionResult> PatchThumbnail([FromRoute] int id, [FromBody] PatchThumbnailWorksRequest request)
         {
             request.Id = id;

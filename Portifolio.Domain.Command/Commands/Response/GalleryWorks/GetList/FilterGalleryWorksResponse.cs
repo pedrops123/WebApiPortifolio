@@ -9,6 +9,7 @@ namespace Portifolio.Domain.Command.Commands.Response.GalleryWorks.GetList
         public string PathFile { get; set; }
         public string UrlFile { get; set; }
         public int UserInsert { get; set; }
+        public string Comment { get; set; }
         public DateTime InsertDate { get; set; }
     }
 }

@@ -10,6 +10,9 @@ namespace Portifolio.Infrastructure.Database.EntityFramework.Mappings.GalleryWor
             builder.ToTable(nameof(Domain.Entities.GalleryWorks));
             builder.HasKey(r => r.Id);
 
+            builder.Property(r => r.Comment)
+                .HasColumnType("VARCHAR(500)");
+
             builder.Property(r => r.PathFile)
                 .HasColumnType("VARCHAR(500)");
 
