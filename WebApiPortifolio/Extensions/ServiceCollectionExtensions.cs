@@ -7,9 +7,11 @@ using Portifolio.Domain.Command.Commands.Request.Works.GetList;
 using Portifolio.Domain.Command.Profiles.Works;
 using Portifolio.Domain.Entities;
 using Portifolio.Domain.Generics;
+using Portifolio.Domain.ITextSharp;
 using Portifolio.Domain.MinIO;
 using Portifolio.Domain.Query.Configurations;
 using Portifolio.Infrastructure.Database.EntityFramework.Generics;
+using Portifolio.Utils.ITextSharpResumeUtils;
 using Portifolio.Utils.MinIO;
 using System.Linq;
 using WebApiPortifolio.Controllers;
@@ -43,7 +45,9 @@ namespace WebApiPortifolio.Extensions
 
         public static IServiceCollection AddGeneralServices(this IServiceCollection services)
         {
-            services.AddTransient<IMinIO, MinIOUtils>();
+            services
+                .AddTransient<ITextSharpUtils, ServicePDFResume>()
+                .AddTransient<IMinIO, MinIOUtils>();
 
             return services;
         }
