@@ -2,6 +2,6 @@
 {
     public interface ITextSharpUtils
     {
-        public bool CreateDocument();
+        public ResponseCreatePdf CreateDocument();
     }
 }

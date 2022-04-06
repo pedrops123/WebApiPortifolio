@@ -11,7 +11,7 @@ namespace WebApiPortifolio.Controllers
         private readonly IMediator _mediator;
         private readonly ITextSharpUtils _itextSharpUtils;
 
-        public ResumeController([FromServices] IMediator mediator, 
+        public ResumeController([FromServices] IMediator mediator,
             ITextSharpUtils itextSharpUtils)
         {
             _mediator = mediator;
@@ -23,8 +23,7 @@ namespace WebApiPortifolio.Controllers
         {
             var response = _itextSharpUtils.CreateDocument();
 
-            return Ok(response);
+            return File(response.FileBytes, response.ContentType, response.FileName);
         }
-
     }
 }

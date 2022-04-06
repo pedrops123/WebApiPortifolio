@@ -33,13 +33,15 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
             _directoryFile = Path.Combine(_assemblyPath.Substring(0, _assemblyPath.IndexOf("bin")), _configuration.TempFile);
         }
 
-        public bool CreateDocument()
+        public ResponseCreatePdf CreateDocument()
         {
-            bool response = false;
+            byte[] byteFile = new byte[0];
+
+            string pdfNameCreated = "";
 
             try
             {
-                string pdfNameCreated = String.Format("{0}_{1}_{2}_{3}.pdf",
+                pdfNameCreated = String.Format("{0}_{1}_{2}_{3}.pdf",
                     _configuration.PdfName,
                     DateTime.Now.Year,
                     DateTime.Now.Month.ToString().ToString().PadLeft(2, '0'),
@@ -55,9 +57,8 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
 
                     _document.Open();
 
-                    Paragraph paragraph = new Paragraph("TESTE 123", new Font(Font.NORMAL, 14));
+                    MontaCabecalho();
 
-                    _document.Add(paragraph);
 
                     _document.Close();
 
@@ -73,16 +74,28 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
             finally
             {
                 _stream.Close();
-
-                response = true;
+                byteFile = GetFileBytes();
             }
 
-            return response;
+            return new ResponseCreatePdf(pdfNameCreated, byteFile);
         }
 
         private void MontaCabecalho()
         {
+            PdfPTable TableHead = new PdfPTable(10);
+            PdfPCell HeadCell = new PdfPCell(new Phrase(_configuration.PdfName));
 
+            HeadCell.Colspan = 10;
+            
+
+            HeadCell.Border = 1;
+            HeadCell.BorderColor = BaseColor.BLACK;
+            
+            HeadCell.HorizontalAlignment = Element.ALIGN_CENTER;
+            HeadCell.VerticalAlignment = Element.ALIGN_CENTER;
+
+            TableHead.AddCell(HeadCell);
+            _document.Add(TableHead);
         }
 
         private void ConfigurePdf()
@@ -101,6 +114,27 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
             {
                 Directory.CreateDirectory(_directoryFile);
             }
+        }
+
+        private byte[] GetFileBytes()
+        {
+
+            var files = Directory.GetFiles(_directoryFile);
+
+            var fileBytes = System.IO.File.ReadAllBytes(files[0]);
+
+            foreach (string pathFiles in files)
+            {
+                if (File.Exists(pathFiles))
+                {
+                    GC.Collect(0, GCCollectionMode.Forced, false);
+                    File.Delete(pathFiles);
+                }
+            }
+
+            Directory.Delete(_directoryFile);
+
+            return fileBytes;
         }
     }
 }
