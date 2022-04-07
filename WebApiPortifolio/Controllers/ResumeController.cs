@@ -18,10 +18,13 @@ namespace WebApiPortifolio.Controllers
             _itextSharpUtils = itextSharpUtils;
         }
 
+        /// <summary>
+        /// Rota de criação do curriculum
+        /// </summary>
         [HttpGet]
         public async Task<IActionResult> CreateResumeAsync()
         {
-            var response = _itextSharpUtils.CreateDocument();
+            var response =  await _itextSharpUtils.CreateDocument();
 
             return File(response.FileBytes, response.ContentType, response.FileName);
         }

@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>C:\PortifolioWeb\WebApiPortifolio\WebApiPortifolio\WebApiPortifolio.xml</DocumentationFile>
+    <DocumentationFile>C:\Portifolio\WebApiPortifolio\WebApiPortifolio.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

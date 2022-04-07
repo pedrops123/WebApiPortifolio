@@ -7,6 +7,7 @@ using Portifolio.Utils.Configurations;
 using System;
 using System.IO;
 using System.Reflection;
+using System.Threading.Tasks;
 
 namespace Portifolio.Utils.ITextSharpResumeUtils
 {
@@ -33,7 +34,7 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
             _directoryFile = Path.Combine(_assemblyPath.Substring(0, _assemblyPath.IndexOf("bin")), _configuration.TempFile);
         }
 
-        public ResponseCreatePdf CreateDocument()
+        public async Task<ResponseCreatePdf> CreateDocument()
         {
             byte[] byteFile = new byte[0];
 
@@ -41,8 +42,8 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
 
             try
             {
-                pdfNameCreated = String.Format("{0}_{1}_{2}_{3}.pdf",
-                    _configuration.PdfName,
+                pdfNameCreated = String.Format("Curriculum {0} {1}_{2}_{3}.pdf",
+                    _configuration.OwnerName,
                     DateTime.Now.Year,
                     DateTime.Now.Month.ToString().ToString().PadLeft(2, '0'),
                     DateTime.Now.Day.ToString().ToString().PadLeft(2, '0'));
@@ -57,7 +58,7 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
 
                     _document.Open();
 
-                    MontaCabecalho();
+                    CreateHeader();
 
 
                     _document.Close();
@@ -77,20 +78,20 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
                 byteFile = GetFileBytes();
             }
 
-            return new ResponseCreatePdf(pdfNameCreated, byteFile);
+            var response = Task.FromResult(new ResponseCreatePdf(pdfNameCreated, byteFile));
+
+            return await response;
         }
 
-        private void MontaCabecalho()
+        private void CreateHeader()
         {
             PdfPTable TableHead = new PdfPTable(10);
-            PdfPCell HeadCell = new PdfPCell(new Phrase(_configuration.PdfName));
+
+            PdfPCell HeadCell = new PdfPCell(new Phrase(String.Format("Curriculum {0}", _configuration.OwnerName), FontITextSharpUtils.FontTitle()));
 
             HeadCell.Colspan = 10;
-            
-
-            HeadCell.Border = 1;
             HeadCell.BorderColor = BaseColor.BLACK;
-            
+            HeadCell.Padding = 5f;
             HeadCell.HorizontalAlignment = Element.ALIGN_CENTER;
             HeadCell.VerticalAlignment = Element.ALIGN_CENTER;
 

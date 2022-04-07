@@ -21,6 +21,11 @@ namespace WebApiPortifolio.Controllers
             _mediator = mediator;
         }
 
+        /// <summary>
+        /// Listagem de fotos do trabalho
+        /// </summary>
+        /// <param name="request">Parametro de filtro </param>
+        /// <returns>  </returns>
         [HttpGet]
         public async Task<IActionResult> GetList([FromQuery] FilterGalleryWorksRequest request)
         {
@@ -29,6 +34,12 @@ namespace WebApiPortifolio.Controllers
             return Ok(response);
         }
 
+        /// <summary>
+        /// Upload de imagens no trabalho 
+        /// </summary>
+        /// <param name="id">Id do trabalho a ser vinculado</param>
+        /// <param name="files">Arquivos</param>
+        /// <returns> void </returns>
         [HttpPost("{id}")]
         public async Task<IActionResult> Post([FromRoute] int id, [FromForm] IEnumerable<IFormFile> files)
         {
@@ -36,7 +47,11 @@ namespace WebApiPortifolio.Controllers
 
             return Ok(response);
         }
-
+        /// <summary>
+        /// Deleta imagem do trabalho
+        /// </summary>
+        /// <param name="id">Id da imagem</param>
+        /// <returns> void </returns>
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
@@ -44,7 +59,12 @@ namespace WebApiPortifolio.Controllers
 
             return Ok(response);
         }
-
+        /// <summary>
+        /// Atualiza descrição da imagem.
+        /// </summary>
+        /// <param name="request">Objeto de atualização</param>
+        /// <param name="id">Id do registro </param>
+        /// <returns> void </returns>
         [HttpPatch("PatchComment/{id}")]
         public async Task<IActionResult> PatchComment([FromBody] PatchGalleryWorksCommentRequest request , [FromRoute] int id)
         {

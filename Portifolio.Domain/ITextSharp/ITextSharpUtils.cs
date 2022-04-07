@@ -1,7 +1,9 @@
-﻿namespace Portifolio.Domain.ITextSharp
+﻿using System.Threading.Tasks;
+
+namespace Portifolio.Domain.ITextSharp
 {
     public interface ITextSharpUtils
     {
-        public ResponseCreatePdf CreateDocument();
+        Task<ResponseCreatePdf> CreateDocument();
     }
 }
