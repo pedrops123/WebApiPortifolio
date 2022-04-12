@@ -87,15 +87,28 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
         {
             PdfPTable TableHead = new PdfPTable(10);
 
-            PdfPCell HeadCell = new PdfPCell(new Phrase(String.Format("Curriculum {0}", _configuration.OwnerName), FontITextSharpUtils.FontTitle()));
-
+            PdfPCell HeadCell = new PdfPCell(new Paragraph(String.Format("{0}", _configuration.OwnerName), FontITextSharpUtils.FontTitle(25f)));
             HeadCell.Colspan = 10;
-            HeadCell.BorderColor = BaseColor.BLACK;
-            HeadCell.Padding = 5f;
-            HeadCell.HorizontalAlignment = Element.ALIGN_CENTER;
+            HeadCell.PaddingTop = 10f;
+            HeadCell.PaddingBottom = 10f;
             HeadCell.VerticalAlignment = Element.ALIGN_CENTER;
+            HeadCell.BorderWidthTop = 0f;
+            HeadCell.BorderWidthLeft = 0f;
+            HeadCell.BorderWidthRight = 0f;
+            HeadCell.BorderWidthBottom = 3f;
+            HeadCell.BorderColorBottom = FontITextSharpUtils.colorBaseTitle;
+
+            PdfPCell HeadDescriptionCell = new PdfPCell(new Paragraph("Brasileiro • Casado | {address} |{cellphone} | {email} | {gitHubLink} | {linkedinLink}", FontITextSharpUtils.FontNormal(10f)));
+            HeadDescriptionCell.Colspan = 10;
+            HeadDescriptionCell.PaddingTop = 10f;
+            HeadDescriptionCell.PaddingBottom = 10f;
+            HeadDescriptionCell.BorderWidth = 0f;
+            HeadDescriptionCell.VerticalAlignment = Element.ALIGN_CENTER;
+            HeadDescriptionCell.HorizontalAlignment = Element.ALIGN_CENTER;
 
             TableHead.AddCell(HeadCell);
+            TableHead.AddCell(HeadDescriptionCell);
+
             _document.Add(TableHead);
         }
 

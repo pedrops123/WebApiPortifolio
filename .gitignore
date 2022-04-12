@@ -398,4 +398,5 @@ FodyWeavers.xsd
 *.sln.iml
 
 # Project Xml Documentation 
-*.WebApiPortifolio.xml
+
+WebApiPortifolio/WebApiPortifolio.xml

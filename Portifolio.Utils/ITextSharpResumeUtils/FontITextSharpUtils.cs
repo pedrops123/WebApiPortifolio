@@ -1,11 +1,57 @@
 ﻿using iTextSharp.text;
+using iTextSharp.text.pdf;
+using System.IO;
+using System.Reflection;
+using System.Text;
 
 namespace Portifolio.Utils.ITextSharpResumeUtils
 {
     public static class FontITextSharpUtils
     {
-        private static readonly BaseColor _colorBaseTitle = new BaseColor(161, 189, 244);
+        private readonly static string _pathRoot = Assembly.GetAssembly(typeof(FontITextSharpUtils)).Location;
 
-        public static Font FontTitle() => new Font(Font.FontFamily.TIMES_ROMAN, 30f, 2, _colorBaseTitle);
+        private readonly static string _pathFont = Path.Combine(_pathRoot.Substring(0, _pathRoot.IndexOf("bin")), "Fonts");
+
+        public static readonly BaseColor colorBaseTitle = new BaseColor(57,165,183);
+
+        private static Encoding RegisterEncoding1252()
+        {
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+            var enc1252 = Encoding.GetEncoding(1252);
+
+            return enc1252;
+        }
+
+        public static iTextSharp.text.Font GetTahoma()
+        {
+            RegisterEncoding1252();
+
+            var fontName = "Tahoma";
+
+            if (!FontFactory.IsRegistered(fontName))
+            {
+                FontFactory.Register(Path.Combine(_pathFont, "RegularFont.ttf"), fontName);
+            }
+            return FontFactory.GetFont(fontName, BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+        }
+
+        public static iTextSharp.text.Font GetTahomaBold()
+        {
+            RegisterEncoding1252();
+
+            var fontName = "TahomaBold";
+
+            if (!FontFactory.IsRegistered(fontName))
+            {
+                FontFactory.Register(Path.Combine(_pathFont, "TAHOMAB0.TTF"), fontName);
+            }
+            return FontFactory.GetFont(fontName, BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+        }
+
+
+        public static Font FontTitle(float size) => new Font(GetTahomaBold().BaseFont, size, 2, colorBaseTitle);
+        public static Font FontTitle(float size, BaseColor color) => new Font(GetTahomaBold().BaseFont, 30f, 2, color);
+        public static Font FontNormal(float size) => new Font(GetTahoma().BaseFont, size, 2, BaseColor.BLACK);
+        public static Font FontNormal(float size, BaseColor color) => new Font(GetTahoma().BaseFont, size, 2, color);
     }
 }
