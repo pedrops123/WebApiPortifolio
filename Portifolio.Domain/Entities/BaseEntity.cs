@@ -2,7 +2,7 @@
 
 namespace Portifolio.Domain.Entities
 {
-    public class BaseEntity
+    public abstract class BaseEntity
     {
         public int Id { get; private set; }
 

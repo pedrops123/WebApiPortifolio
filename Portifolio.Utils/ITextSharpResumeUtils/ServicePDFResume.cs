@@ -58,8 +58,12 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
 
                     _document.Open();
 
-                    CreateHeader();
-
+                    SectionHeader();
+                    SectionObjective();
+                    SectionEducation();
+                    SectionExperience();
+                    SectionComplementaryInformation();
+                    SectionKnowleges();
 
                     _document.Close();
 
@@ -83,41 +87,85 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
             return await response;
         }
 
-        private void CreateHeader()
+        private void SectionHeader()
         {
             PdfPTable TableHead = new PdfPTable(10);
 
-            PdfPCell HeadCell = new PdfPCell(new Paragraph(String.Format("{0}", _configuration.OwnerName), FontITextSharpUtils.FontTitle(25f)));
-            HeadCell.Colspan = 10;
-            HeadCell.PaddingTop = 10f;
-            HeadCell.PaddingBottom = 10f;
-            HeadCell.VerticalAlignment = Element.ALIGN_CENTER;
-            HeadCell.BorderWidthTop = 0f;
-            HeadCell.BorderWidthLeft = 0f;
-            HeadCell.BorderWidthRight = 0f;
-            HeadCell.BorderWidthBottom = 3f;
-            HeadCell.BorderColorBottom = FontITextSharpUtils.colorBaseTitle;
+            PdfPCell headCell = new PdfPCell(new Paragraph(String.Format("{0}", _configuration.OwnerName), FontITextSharpUtils.FontTitle(25f)));
+            headCell.Colspan = 10;
+            headCell.PaddingTop = 10f;
+            headCell.PaddingBottom = 10f;
+            headCell.VerticalAlignment = Element.ALIGN_CENTER;
+            headCell.BorderWidthTop = 0f;
+            headCell.BorderWidthLeft = 0f;
+            headCell.BorderWidthRight = 0f;
+            headCell.BorderWidthBottom = 3f;
+            headCell.BorderColorBottom = FontITextSharpUtils.colorBaseTitle;
 
-            PdfPCell HeadDescriptionCell = new PdfPCell(new Paragraph("Brasileiro • Casado | {address} |{cellphone} | {email} | {gitHubLink} | {linkedinLink}", FontITextSharpUtils.FontNormal(10f)));
-            HeadDescriptionCell.Colspan = 10;
-            HeadDescriptionCell.PaddingTop = 10f;
-            HeadDescriptionCell.PaddingBottom = 10f;
-            HeadDescriptionCell.BorderWidth = 0f;
-            HeadDescriptionCell.VerticalAlignment = Element.ALIGN_CENTER;
-            HeadDescriptionCell.HorizontalAlignment = Element.ALIGN_CENTER;
+            PdfPCell headDescriptionCell = new PdfPCell(new Paragraph("Brasileiro • {martialStatus} | {address} |{cellphone} | {email} | {gitHubLink} | {linkedinLink}", FontITextSharpUtils.FontNormal(10f)));
+            headDescriptionCell.Colspan = 10;
+            headDescriptionCell.PaddingTop = 10f;
+            headDescriptionCell.PaddingBottom = 10f;
+            headDescriptionCell.BorderWidth = 0f;
+            headDescriptionCell.VerticalAlignment = Element.ALIGN_CENTER;
+            headDescriptionCell.HorizontalAlignment = Element.ALIGN_CENTER;
 
-            TableHead.AddCell(HeadCell);
-            TableHead.AddCell(HeadDescriptionCell);
+            TableHead.AddCell(headCell);
+            TableHead.AddCell(headDescriptionCell);
 
             _document.Add(TableHead);
+        }
+
+        private void SectionObjective()
+        {
+            CreateTitleDefaultSection("Objetivos");
+        }
+
+        private void SectionEducation()
+        {
+            CreateTitleDefaultSection("Educação");
+        }
+
+        private void SectionExperience()
+        {
+            CreateTitleDefaultSection("Experiência");
+        }
+
+        private void SectionComplementaryInformation()
+        {
+            CreateTitleDefaultSection("Informações Complementares");
+        }
+
+        private void SectionKnowleges()
+        {
+            CreateTitleDefaultSection("Conhecimentos");
+        }
+
+        private void CreateTitleDefaultSection(string descriptionTitle)
+        {
+            PdfPTable tableTitleSection = new PdfPTable(10);
+
+            PdfPCell titleCell = new PdfPCell(new Paragraph(descriptionTitle, FontITextSharpUtils.FontTitle(15f, FontITextSharpUtils.colorBaseDefaultSections)));
+            titleCell.Colspan = 10;
+            titleCell.VerticalAlignment = Element.ALIGN_CENTER;
+            titleCell.BorderWidthTop = 0f;
+            titleCell.BorderWidthLeft = 0f;
+            titleCell.BorderWidthRight = 0f;
+            titleCell.PaddingTop = 15f;
+            titleCell.PaddingBottom = 10f;
+            titleCell.BorderColorBottom = FontITextSharpUtils.colorBaseDefaultSections;
+
+            tableTitleSection.AddCell(titleCell);
+
+            _document.Add(tableTitleSection);
         }
 
         private void ConfigurePdf()
         {
             _document = new Document(PageSize.A4, 25, 25, 30, 30);
 
-            _document.AddAuthor("Pedro Vinicius Rodrigues Furlan");
-            _document.AddCreator("Curriculum Pedro");
+            _document.AddAuthor(_configuration.OwnerName);
+            _document.AddCreator($"Curriculum { _configuration.OwnerName }");
             _document.AddKeywords("PDF curriculum");
             _document.AddTitle("Curriculum customizado");
         }

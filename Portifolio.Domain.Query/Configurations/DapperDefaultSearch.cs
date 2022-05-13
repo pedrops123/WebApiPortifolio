@@ -10,7 +10,9 @@ using System.Threading.Tasks;
 
 namespace Portifolio.Domain.Query.Configurations
 {
-    public class DapperDefaultSearch<T,F> : IGenericQuery<T, F>
+    public class DapperDefaultSearch<T, F> : IGenericQuery<T, F>
+        where T : class
+        where F : class
     {
         private IConfigurationRoot _conf;
         protected string _connectionStrings
@@ -19,7 +21,7 @@ namespace Portifolio.Domain.Query.Configurations
         }
 
         public DapperDefaultSearch() => _conf = ConfigurationRootFactory.SetConfigurationRootBuilder();
-        
+
         public virtual async Task<T> GetById(int id)
         {
             using (SqlConnection connection = new SqlConnection(_connectionStrings))
@@ -39,6 +41,7 @@ namespace Portifolio.Domain.Query.Configurations
         public virtual async Task<List<T>> GetList(F filter)
         {
             List<KeyValuePair<string, string>> Params = new List<KeyValuePair<string, string>>();
+
             var ListProperties = typeof(F).GetProperties();
 
             foreach (PropertyInfo property in ListProperties)
@@ -56,14 +59,14 @@ namespace Portifolio.Domain.Query.Configurations
                             {
                                 Params.Add(new KeyValuePair<string, string>(property.Name, (string)value));
                             }
-                        break;
+                            break;
 
                         default:
-                            if((int) value != 0)
+                            if ((int)value != 0)
                             {
-                                Params.Add(new KeyValuePair<string, string>(property.Name,  value.ToString()));
+                                Params.Add(new KeyValuePair<string, string>(property.Name, value.ToString()));
                             }
-                        break;
+                            break;
                     }
                 }
             }
@@ -81,7 +84,7 @@ namespace Portifolio.Domain.Query.Configurations
                     {
                         case "string":
                             builder.OrWhere($"{ KeyValue.Key } = '{ KeyValue.Value }'");
-                        break;
+                            break;
                     }
                 }
 
