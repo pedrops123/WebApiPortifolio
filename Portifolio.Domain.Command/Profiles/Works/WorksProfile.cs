@@ -11,19 +11,14 @@ namespace Portifolio.Domain.Command.Profiles.Works
     {
         public WorksProfile()
         {
-            // Create Mapper Work
             CreateMap<CreateWorksRequest, Entities.Works>();
 
-            // Update mapper work
             CreateMap<UpdateWorksRequest, Entities.Works>();
 
-            // Get List Mapper work
             CreateMap<Entities.Works, FilterWorksResponse>();
 
-            // Get By Id mapper work
             CreateMap<Entities.Works, GetByIdWorksResponse>();
 
-            // Patch Thumbnail
             CreateMap<PatchThumbnailWorksRequest, Entities.Works>();
         }
     }

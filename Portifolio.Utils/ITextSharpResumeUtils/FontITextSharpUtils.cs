@@ -55,5 +55,7 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
         public static Font FontTitle(float size, BaseColor color) => new Font(GetTahomaBold().BaseFont, size, 2, color);
         public static Font FontNormal(float size) => new Font(GetTahoma().BaseFont, size, 2, BaseColor.BLACK);
         public static Font FontNormal(float size, BaseColor color) => new Font(GetTahoma().BaseFont, size, 2, color);
+
+
     }
 }

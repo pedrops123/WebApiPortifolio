@@ -9,8 +9,8 @@ namespace Portifolio.Domain.Command.Profiles.GalleryWorks
         public GalleryWorksProfile()
         {
             CreateMap<Entities.GalleryWorks, FilterGalleryWorksResponse>();
+
             CreateMap<PatchGalleryWorksCommentRequest, Entities.GalleryWorks>();
-            //CreateMap<CreateGalleryWorksRequest, List<Entities.GalleryWorks>>().ForMember(r, opt => opt.MapFrom(src=>src.));
         }
     }
 }

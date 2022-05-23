@@ -36,7 +36,8 @@ namespace Portifolio.Infrastructure.Database.EntityFramework.Mappings.Works
                 .HasColumnType("INT");
 
             builder.HasMany(r => r.Fotos)
-                .WithOne(r => r.Work);
+                .WithOne(r => r.Work)
+                .HasForeignKey(r=>r.IdProjeto);
         }
     }
 }

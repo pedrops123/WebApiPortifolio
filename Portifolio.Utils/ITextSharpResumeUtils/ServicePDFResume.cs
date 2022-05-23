@@ -1,11 +1,16 @@
 ﻿using iTextSharp.text;
 using iTextSharp.text.pdf;
 using Microsoft.Extensions.Configuration;
+using Portifolio.Domain.Entities;
 using Portifolio.Domain.Entities.ITextSharp;
+using Portifolio.Domain.Entities.PdfResume;
+using Portifolio.Domain.Enums;
 using Portifolio.Domain.ITextSharp;
 using Portifolio.Utils.Configurations;
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 
@@ -27,6 +32,14 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
 
         private FileStream _stream;
 
+        private string _defaultTemplate
+        {
+            get
+            {
+                return "Brasileiro • {martialStatus} | {address} | {cellphone} | {email} | {gitHubLink} | {linkedinLink}";
+            }
+        }
+
         public ServicePDFResume()
         {
             _conf = ConfigurationRootFactory.SetConfigurationRootBuilder();
@@ -37,6 +50,9 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
         public async Task<ResponseCreatePdf> CreateDocument()
         {
             byte[] byteFile = new byte[0];
+
+
+            var topics = GenerateMockResume.Generate();
 
             string pdfNameCreated = "";
 
@@ -58,12 +74,17 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
 
                     _document.Open();
 
-                    SectionHeader();
-                    SectionObjective();
-                    SectionEducation();
-                    SectionExperience();
-                    SectionComplementaryInformation();
-                    SectionKnowleges();
+                    SectionHeader(topics.InitialParameters);
+
+                    foreach (TopicResume topic in topics.Topics)
+                    {
+                        CreateTopicTitle(topic.Description);
+
+                        foreach (SubTopicResume subTopic in topic.SubTopics)
+                        {
+                            CreateSubTopicTitle(subTopic.Description, subTopic.ItemsSubTopic);
+                        }
+                    }
 
                     _document.Close();
 
@@ -87,7 +108,7 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
             return await response;
         }
 
-        private void SectionHeader()
+        private void SectionHeader(ICollection<GeneralParameters> parameters)
         {
             PdfPTable TableHead = new PdfPTable(10);
 
@@ -102,7 +123,7 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
             headCell.BorderWidthBottom = 3f;
             headCell.BorderColorBottom = FontITextSharpUtils.colorBaseTitle;
 
-            PdfPCell headDescriptionCell = new PdfPCell(new Paragraph("Brasileiro • {martialStatus} | {address} |{cellphone} | {email} | {gitHubLink} | {linkedinLink}", FontITextSharpUtils.FontNormal(10f)));
+            PdfPCell headDescriptionCell = new PdfPCell(new Paragraph(PreparePersonalInformations(_defaultTemplate, parameters), FontITextSharpUtils.FontNormal(8f)));
             headDescriptionCell.Colspan = 10;
             headDescriptionCell.PaddingTop = 10f;
             headDescriptionCell.PaddingBottom = 10f;
@@ -116,36 +137,46 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
             _document.Add(TableHead);
         }
 
-        private void SectionObjective()
+        private string PreparePersonalInformations(string template, ICollection<GeneralParameters> parameters)
         {
-            CreateTitleDefaultSection("Objetivos");
+            if (template.ToLower().Contains("{martialstatus}"))
+            {
+                template = template.Replace("{martialStatus}", parameters.Where(r => r.Key == (ResumeParameters.MartialStatus).ToString()).First().Value);
+            }
+
+            if (template.ToLower().Contains("{address}"))
+            {
+                template = template.Replace("{address}", parameters.Where(r => r.Key == (ResumeParameters.Address).ToString()).First().Value);
+            }
+
+            if (template.ToLower().Contains("{cellphone}"))
+            {
+                template = template.Replace("{cellphone}", parameters.Where(r => r.Key == (ResumeParameters.CellPhone).ToString()).First().Value);
+            }
+
+            if (template.ToLower().Contains("{email}"))
+            {
+                template = template.Replace("{email}", parameters.Where(r => r.Key == (ResumeParameters.Email).ToString()).First().Value);
+            }
+
+            if (template.ToLower().Contains("{githublink}"))
+            {
+                template = template.Replace("{gitHubLink}", parameters.Where(r => r.Key == (ResumeParameters.GitHubLink).ToString()).First().Value);
+            }
+
+            if (template.ToLower().Contains("{linkedinlink}"))
+            {
+                template = template.Replace("{linkedinLink}", parameters.Where(r => r.Key == (ResumeParameters.LinkedinLink).ToString()).First().Value);
+            }
+
+            return template;
         }
 
-        private void SectionEducation()
-        {
-            CreateTitleDefaultSection("Educação");
-        }
-
-        private void SectionExperience()
-        {
-            CreateTitleDefaultSection("Experiência");
-        }
-
-        private void SectionComplementaryInformation()
-        {
-            CreateTitleDefaultSection("Informações Complementares");
-        }
-
-        private void SectionKnowleges()
-        {
-            CreateTitleDefaultSection("Conhecimentos");
-        }
-
-        private void CreateTitleDefaultSection(string descriptionTitle)
+        private void CreateTopicTitle(string descriptionTopicTitle)
         {
             PdfPTable tableTitleSection = new PdfPTable(10);
 
-            PdfPCell titleCell = new PdfPCell(new Paragraph(descriptionTitle, FontITextSharpUtils.FontTitle(15f, FontITextSharpUtils.colorBaseDefaultSections)));
+            PdfPCell titleCell = new PdfPCell(new Paragraph(descriptionTopicTitle, FontITextSharpUtils.FontTitle(15f, FontITextSharpUtils.colorBaseDefaultSections)));
             titleCell.Colspan = 10;
             titleCell.VerticalAlignment = Element.ALIGN_CENTER;
             titleCell.BorderWidthTop = 0f;
@@ -158,6 +189,48 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
             tableTitleSection.AddCell(titleCell);
 
             _document.Add(tableTitleSection);
+        }
+
+        private void CreateSubTopicTitle(string descriptionSubTopic, List<ItemsSubTopicResume> listItems)
+        {
+            PdfPTable tableSubTopic = new PdfPTable(10);
+
+            List unorderedListPrincipal = new List(List.UNORDERED, 10f);
+            unorderedListPrincipal.SetListSymbol("\u2022");
+
+            ListItem listItemPrincipal = new ListItem(new Paragraph(descriptionSubTopic, FontITextSharpUtils.FontNormal(10f, BaseColor.BLACK)));
+
+            unorderedListPrincipal.Add(listItemPrincipal);
+
+            PdfPCell subTopicCell = new PdfPCell();
+            subTopicCell.Colspan = 10;
+            subTopicCell.Border = 0;
+            subTopicCell.AddElement(unorderedListPrincipal);
+
+            tableSubTopic.AddCell(subTopicCell);
+
+            if (listItems.Count != 0)
+            {
+                foreach (ItemsSubTopicResume item in listItems)
+                {
+                    List unorderedListItem = new List(List.UNORDERED, 10f);
+                    unorderedListItem.IndentationLeft = 20f;
+                    unorderedListItem.SetListSymbol("◦");
+
+                    ListItem listItemsub = new ListItem(new Paragraph(item.Description, FontITextSharpUtils.FontNormal(10f, BaseColor.BLACK)));
+
+                    unorderedListItem.Add(listItemsub);
+
+                    PdfPCell ItemsubTopicCell = new PdfPCell();
+                    ItemsubTopicCell.Colspan = 10;
+                    ItemsubTopicCell.Border = 0;
+                    ItemsubTopicCell.AddElement(unorderedListItem);
+                    tableSubTopic.AddCell(ItemsubTopicCell);
+                }
+
+            }
+
+            _document.Add(tableSubTopic);
         }
 
         private void ConfigurePdf()
