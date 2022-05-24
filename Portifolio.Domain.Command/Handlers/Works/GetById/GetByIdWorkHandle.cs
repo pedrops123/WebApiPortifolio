@@ -21,7 +21,6 @@ namespace Portifolio.Domain.Command.Handlers.Works.GetById
         private readonly IGenericQuery<Entities.GalleryWorks, FilterGalleryWorksRequest> _dapperGalleryWorks;
         private readonly IGenericQuery<Entities.Works, FilterWorksRequest> _dapper;
 
-
         public GetByIdWorkHandle(
             IMapper mapper,
             IMinIO minIOService,

@@ -4,7 +4,7 @@ using Portifolio.Domain.Command.Commands.Request.GalleryWorks.Create;
 
 namespace Portifolio.Domain.Command.Handlers.GalleryWorks.Create
 {
-    public sealed class CreateGalleryWorksValidator : AbstractValidator<CreateGalleryWorksRequest>
+    public class CreateGalleryWorksValidator : AbstractValidator<CreateGalleryWorksRequest>
     {
         public CreateGalleryWorksValidator()
         {

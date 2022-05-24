@@ -15,7 +15,6 @@ namespace Portifolio.Domain.Command.Handlers.Works.Delete
         private readonly IGenericRepository<Entities.GalleryWorks> _galleryRepository;
         private readonly IMinIO _minIOService;
 
-        private IMapper _mapper;
         public DeleteWorksHandle(
             IMapper mapper,
             IMinIO minIOService,
@@ -24,7 +23,6 @@ namespace Portifolio.Domain.Command.Handlers.Works.Delete
         {
             _galleryRepository = galleryRepository;
             _repository = repository;
-            _mapper = mapper;
             _minIOService = minIOService;
         }
 

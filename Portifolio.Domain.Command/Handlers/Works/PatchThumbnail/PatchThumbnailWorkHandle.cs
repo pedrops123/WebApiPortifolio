@@ -2,7 +2,6 @@
 using MediatR;
 using Portifolio.Domain.Command.Commands.Request.Works.PatchThumbnail;
 using Portifolio.Domain.Generics;
-using Portifolio.Utils.CustomExceptions;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -14,7 +13,6 @@ namespace Portifolio.Domain.Command.Handlers.Works.PatchThumbnail
         private readonly IMapper _mapper;
         private readonly IGenericRepository<Entities.Works> _repository;
         private readonly IGenericRepository<Entities.GalleryWorks> _repositoryGallery;
-        private readonly PatchThumbnailWorkValidator _validator;
 
         public PatchThumbnailWorkHandle(
             IMapper mapper,
@@ -24,18 +22,10 @@ namespace Portifolio.Domain.Command.Handlers.Works.PatchThumbnail
             _mapper = mapper;
             _repositoryGallery = repositoryGallery;
             _repository = repository;
-            _validator = new PatchThumbnailWorkValidator();
         }
 
         public async Task<Unit> Handle(PatchThumbnailWorksRequest request, CancellationToken cancellationToken)
         {
-            var validator = _validator.Validate(request);
-
-            if (!validator.IsValid)
-            {
-                throw new ValidatorException(validator.Errors);
-            }
-
             var responseGallery = await _repositoryGallery.GetEntityById(request.img_thumbnail_id);
 
             if (responseGallery == null)

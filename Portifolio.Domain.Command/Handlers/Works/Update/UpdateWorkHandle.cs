@@ -10,7 +10,7 @@ namespace Portifolio.Domain.Command.Handlers.Works.Update
     public class UpdateWorkHandle : IRequestHandler<UpdateWorksRequest, Unit>
     {
         private readonly IGenericRepository<Entities.Works> _repository;
-        private IMapper _mapper;
+        private readonly IMapper _mapper;
 
         public UpdateWorkHandle(
             IMapper mapper,

@@ -14,10 +14,11 @@ namespace Portifolio.Domain.Command.Handlers.Works.GetList
 {
     public sealed class GetListWorkHandle : IRequestHandler<FilterWorksRequest, IEnumerable<FilterWorksResponse>>
     {
-        private IMapper _mapper;
+        private readonly IMapper _mapper;
         private readonly IMinIO _minIOService;
         private readonly IGenericQuery<Entities.Works, FilterWorksRequest> _dapper;
         private readonly IGenericQuery<Entities.GalleryWorks, FilterGalleryWorksRequest> _dapperGalleryWorks;
+
         public GetListWorkHandle(
               IMapper mapper,
               IMinIO minIOService,

@@ -30,6 +30,8 @@ namespace WebApiPortifolio
             services.AddQueryServices();
             services.AddInfrastructureServices();
             services.AddGeneralServices();
+            services.ConfigureFluentValidation();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebApiPortifolio", Version = "v1" });
