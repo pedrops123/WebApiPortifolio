@@ -2,13 +2,9 @@
 using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
-using Portifolio.Domain.Command.Commands.Request.GalleryWorks.GetList;
 using Portifolio.Domain.Command.Commands.Request.Works.Create;
-using Portifolio.Domain.Command.Commands.Request.Works.GetList;
-using Portifolio.Domain.Command.Handlers.GalleryWorks.Create;
 using Portifolio.Domain.Command.Handlers.Works.Create;
 using Portifolio.Domain.Command.Profiles.Works;
-using Portifolio.Domain.Entities;
 using Portifolio.Domain.Generics;
 using Portifolio.Domain.ITextSharp;
 using Portifolio.Domain.MinIO;
@@ -54,33 +50,28 @@ namespace WebApiPortifolio.Extensions
 
             return services;
         }
-
+   
         public static IServiceCollection AddQueryServices(this IServiceCollection services)
         {
             services
-                  .AddTransient<IGenericQuery<GalleryWorks, FilterGalleryWorksRequest>, DapperDefaultSearch<GalleryWorks, FilterGalleryWorksRequest>>()
-                  .AddTransient<IGenericQuery<Works, FilterWorksRequest>, DapperDefaultSearch<Works, FilterWorksRequest>>();
-
+                 .AddTransient(typeof(IGenericQuery<,>), typeof(DapperDefaultSearch<,>));
+                
             return services;
         }
 
         public static IServiceCollection AddInfrastructureServices(this IServiceCollection services)
         {
             services
-                .AddTransient<IGenericRepository<Works>, RepositoryGenerics<Works>>()
-                .AddTransient<IGenericRepository<GalleryWorks>, RepositoryGenerics<GalleryWorks>>();
+                .AddTransient(typeof(IGenericRepository<>), typeof(RepositoryGenerics<>));
 
             return services;
         }
 
         public static IServiceCollection ConfigureFluentValidation(this IServiceCollection services)
         {
-            var teste = typeof(CreateWorkValidator).Assembly;
-
             services.AddFluentValidation(r =>
             {
                 r.RegisterValidatorsFromAssembly(typeof(CreateWorkValidator).Assembly);
-                r.RegisterValidatorsFromAssembly(typeof(CreateGalleryWorksValidator).Assembly);
             });
 
             return services;

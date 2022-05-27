@@ -3,11 +3,13 @@ using Portifolio.Domain.Command.Commands.Request.Works.Create;
 
 namespace Portifolio.Domain.Command.Handlers.Works.Create
 {
-    public class CreateWorkValidator :AbstractValidator<CreateWorksRequest>
+    public sealed class CreateWorkValidator : AbstractValidator<CreateWorksRequest>
     {
         public CreateWorkValidator()
         {
-            RuleFor(r => r.texto_projeto).NotEmpty().WithMessage("Texto do projeto não pode ser Vazio !");
+            RuleFor(r => r.descritivo_capa).NotEmpty();
+            RuleFor(r => r.nome_projeto).NotEmpty();
+            RuleFor(r => r.texto_projeto).NotEmpty();
         }
     }
 }

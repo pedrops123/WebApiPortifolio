@@ -34,6 +34,7 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
             {
                 FontFactory.Register(Path.Combine(_pathFont, "RegularFont.ttf"), fontName);
             }
+
             return FontFactory.GetFont(fontName, BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
         }
 
@@ -47,6 +48,7 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
             {
                 FontFactory.Register(Path.Combine(_pathFont, "TAHOMAB0.TTF"), fontName);
             }
+
             return FontFactory.GetFont(fontName, BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
         }
 

@@ -36,7 +36,7 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
         {
             get
             {
-                return "Brasileiro • {martialStatus} | {address} | {cellphone} | {email} | {gitHubLink} | {linkedinLink}";
+                return "Brasileiro • {martialStatus} | {address} | {cellphone} | {email} | {gitHubLink} |{linkedinLink}";
             }
         }
 
@@ -50,7 +50,6 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
         public async Task<ResponseCreatePdf> CreateDocument()
         {
             byte[] byteFile = new byte[0];
-
 
             var topics = GenerateMockResume.Generate();
 
@@ -76,13 +75,13 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
 
                     SectionHeader(topics.InitialParameters);
 
-                    foreach (TopicResume topic in topics.Topics)
+                    foreach (TopicResume topic in topics.Topics.OrderBy(r => r.Order))
                     {
                         CreateTopicTitle(topic.Description);
 
-                        foreach (SubTopicResume subTopic in topic.SubTopics)
+                        foreach (SubTopicResume subTopic in topic.SubTopics.OrderBy(r => r.Order))
                         {
-                            CreateSubTopicTitle(subTopic.Description, subTopic.ItemsSubTopic);
+                            CreateSubTopicTitle(subTopic.Description, subTopic.ItemsSubTopic, subTopic.IsBold);
                         }
                     }
 
@@ -100,6 +99,7 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
             finally
             {
                 _stream.Close();
+
                 byteFile = GetFileBytes();
             }
 
@@ -123,13 +123,13 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
             headCell.BorderWidthBottom = 3f;
             headCell.BorderColorBottom = FontITextSharpUtils.colorBaseTitle;
 
-            PdfPCell headDescriptionCell = new PdfPCell(new Paragraph(PreparePersonalInformations(_defaultTemplate, parameters), FontITextSharpUtils.FontNormal(8f)));
+            PdfPCell headDescriptionCell = new PdfPCell(new Paragraph(PreparePersonalInformations(_defaultTemplate, parameters), FontITextSharpUtils.FontNormal(10f)));
             headDescriptionCell.Colspan = 10;
             headDescriptionCell.PaddingTop = 10f;
             headDescriptionCell.PaddingBottom = 10f;
             headDescriptionCell.BorderWidth = 0f;
-            headDescriptionCell.VerticalAlignment = Element.ALIGN_CENTER;
-            headDescriptionCell.HorizontalAlignment = Element.ALIGN_CENTER;
+            //headDescriptionCell.VerticalAlignment = Element.ALIGN_CENTER;
+            //headDescriptionCell.HorizontalAlignment = Element.ALIGN_CENTER;
 
             TableHead.AddCell(headCell);
             TableHead.AddCell(headDescriptionCell);
@@ -191,33 +191,34 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
             _document.Add(tableTitleSection);
         }
 
-        private void CreateSubTopicTitle(string descriptionSubTopic, List<ItemsSubTopicResume> listItems)
+        private void CreateSubTopicTitle(string descriptionSubTopic, List<ItemsSubTopicResume> listItems, bool isBold)
         {
             PdfPTable tableSubTopic = new PdfPTable(10);
 
             List unorderedListPrincipal = new List(List.UNORDERED, 10f);
             unorderedListPrincipal.SetListSymbol("\u2022");
 
-            ListItem listItemPrincipal = new ListItem(new Paragraph(descriptionSubTopic, FontITextSharpUtils.FontNormal(10f, BaseColor.BLACK)));
+            ListItem listItemPrincipal = new ListItem(new Paragraph(descriptionSubTopic, isBold ? FontITextSharpUtils.FontTitle(10f, BaseColor.BLACK) : FontITextSharpUtils.FontNormal(10f, BaseColor.BLACK)));
 
             unorderedListPrincipal.Add(listItemPrincipal);
 
             PdfPCell subTopicCell = new PdfPCell();
             subTopicCell.Colspan = 10;
             subTopicCell.Border = 0;
+            subTopicCell.PaddingTop = 10f;
             subTopicCell.AddElement(unorderedListPrincipal);
 
             tableSubTopic.AddCell(subTopicCell);
 
             if (listItems.Count != 0)
             {
-                foreach (ItemsSubTopicResume item in listItems)
+                foreach (ItemsSubTopicResume item in listItems.OrderBy(r => r.Order))
                 {
                     List unorderedListItem = new List(List.UNORDERED, 10f);
                     unorderedListItem.IndentationLeft = 20f;
                     unorderedListItem.SetListSymbol("◦");
 
-                    ListItem listItemsub = new ListItem(new Paragraph(item.Description, FontITextSharpUtils.FontNormal(10f, BaseColor.BLACK)));
+                    ListItem listItemsub = new ListItem(new Paragraph(item.Description, FontITextSharpUtils.FontNormal(8f, BaseColor.BLACK)));
 
                     unorderedListItem.Add(listItemsub);
 
