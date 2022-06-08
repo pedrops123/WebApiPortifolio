@@ -1,5 +1,4 @@
 ﻿using iTextSharp.text;
-using iTextSharp.text.html;
 using iTextSharp.text.pdf;
 using Microsoft.Extensions.Configuration;
 using Portifolio.Domain.Entities;
@@ -48,8 +47,6 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
             _directoryFile = Path.Combine(_assemblyPath.Substring(0, _assemblyPath.IndexOf("bin")), _configuration.TempFile);
         }
 
-
-
         public async Task<ResponseCreatePdf> CreateDocument()
         {
             byte[] byteFile = new byte[0];
@@ -76,10 +73,7 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
 
                     _document.Open();
 
-                    //PdfContentByte contentByte = new PdfContentByte(_writer);
-
-                    //PictureBackdrop(80f, 80f, contentByte, _writer);
-
+                    ConfigureGradient();
 
                     SectionHeader(topics.InitialParameters);
 
@@ -190,12 +184,12 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
 
         private void ConfigurePdf()
         {
-            _document = new Document(PageSize.A4 , 25, 25, 30, 30);
+            _document = new Document(PageSize.A4, 2, 25, 30, 30);
 
             _document.AddAuthor(_configuration.OwnerName);
             _document.AddCreator($"Curriculum { _configuration.OwnerName }");
-            _document.AddKeywords("PDF curriculum");    
-            _document.AddTitle("Curriculum customizado");   
+            _document.AddKeywords("PDF curriculum");
+            _document.AddTitle("Curriculum customizado");
         }
 
         private void CreateDirectory()
@@ -225,6 +219,22 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
             Directory.Delete(_directoryFile);
 
             return fileBytes;
+        }
+
+        private void ConfigureGradient()
+        {
+            Rectangle pageSize = new Rectangle(PageSize.A4);
+
+            PdfShading shading = PdfShading.SimpleAxial(_writer, 100f, 50f, 50f, 50f, FontITextSharpUtils.colorBaseTitle, BaseColor.WHITE);
+
+            PdfShadingPattern pattern = new PdfShadingPattern(shading);
+
+            PdfContentByte canvas = _writer.DirectContent;
+
+            canvas.SetShadingFill(pattern);
+
+            canvas.Rectangle(0, 0, pageSize.Width, pageSize.Height);
+            canvas.Fill();
         }
 
         #endregion
@@ -403,18 +413,6 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
             }
 
             _document.Add(tableSpaceLines);
-        }
-
-        private void setBackGroundColor()
-        {
-            //Create a shading object. The (x,y)'s appear to be document-level instead of cell-level so they need to be played with
-            PdfShading shading = PdfShading.SimpleAxial(_writer, 0, 700, 300, 700, BaseColor.BLUE, BaseColor.RED);
-
-            //Create a pattern from our shading object
-            PdfShadingPattern pattern = new PdfShadingPattern(shading);
-
-            //Create a color from our patter
-            ShadingColor color = new ShadingColor(pattern);
         }
 
         #endregion
