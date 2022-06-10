@@ -87,7 +87,11 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
                         }
                     }
 
-                    KnowlegesSection();
+                    KnowlegesSection(
+                        topics.ListOfTopicsTechnologies,
+                        topics.ListOfKnowlegesTechnologies,
+                        topics.ListOfTopicsFrameworks,
+                        topics.ListOfKnowlegesFrameworks);
 
                     _document.Close();
 
@@ -115,19 +119,34 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
 
         #region TopicsResume
 
-        private void CreateTopicTitle(string descriptionTopicTitle)
+        private void CreateTopicTitle(string descriptionTopicTitle, bool center = false, bool bottomLine = true)
         {
             PdfPTable tableTitleSection = new PdfPTable(10);
 
             PdfPCell titleCell = new PdfPCell(new Paragraph(descriptionTopicTitle, FontITextSharpUtils.FontTitle(15f, FontITextSharpUtils.colorBaseDefaultSections)));
             titleCell.Colspan = 10;
             titleCell.VerticalAlignment = Element.ALIGN_CENTER;
+
+            if (center)
+            {
+                titleCell.HorizontalAlignment = Element.ALIGN_CENTER;
+            }
+
             titleCell.BorderWidthTop = 0f;
             titleCell.BorderWidthLeft = 0f;
             titleCell.BorderWidthRight = 0f;
             titleCell.PaddingTop = 15f;
-            titleCell.PaddingBottom = 10f;
-            titleCell.BorderColorBottom = FontITextSharpUtils.colorBaseDefaultSections;
+
+            if (bottomLine)
+            {
+                titleCell.PaddingBottom = 10f;
+                titleCell.BorderColorBottom = FontITextSharpUtils.colorBaseDefaultSections;
+            }
+            else
+            {
+                titleCell.PaddingBottom = 0f;
+                titleCell.BorderColorBottom = BaseColor.WHITE;
+            }
 
             tableTitleSection.AddCell(titleCell);
 
@@ -225,7 +244,7 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
         {
             Rectangle pageSize = new Rectangle(PageSize.A4);
 
-            PdfShading shading = PdfShading.SimpleAxial(_writer, 100f, 50f, 50f, 50f, FontITextSharpUtils.colorBaseTitle, BaseColor.WHITE);
+            PdfShading shading = PdfShading.SimpleAxial(_writer, pageSize.Width, 28f, pageSize.Height, 90f, BaseColor.WHITE, FontITextSharpUtils.colorBaseTitle);
 
             PdfShadingPattern pattern = new PdfShadingPattern(shading);
 
@@ -269,7 +288,11 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
             _document.Add(TableHead);
         }
 
-        private void KnowlegesSection()
+        private void KnowlegesSection(
+            IEnumerable<string> listOfTopicsTechnologies,
+            IEnumerable<string[]> listOfKnowlegesTechnologies,
+            IEnumerable<string> listOfTopicsFrameworks,
+            IEnumerable<string[]> listOfKnowlegesFrameworks)
         {
             _document.NewPage();
 
@@ -277,38 +300,26 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
 
             CreateSpaceLines(4);
 
-            IEnumerable<string> listOfTopics = new List<string>() { "FRONT END", "BACK END", "BANCO DE DADOS", "MOBILE", "API'S" };
+            /* TABELA TECNOLOGIAS */
 
-            IEnumerable<string[]> listOfKnowleges = new List<string[]>()
+            PdfPTable knowlegesTableTechnologies = new PdfPTable(new float[] { 2, 2, 2, 2, 2 });
+
+            foreach (string topics in listOfTopicsTechnologies)
             {
-                new string[]{ "HTML 5" , "C# / ASP.NET" , "Microsoft SQL", "Android (Kotlin)" , "RestFull" },
-                new string[]{ "CSS 3" , ".NET CORE", "Mongo DB", "Flutter (Iniciante)" , "SOAP" },
-                new string[]{ "Bootstrap 4" , "Java" , "Fire Base", "" , "" },
-                new string[]{ "Java Script" , "Python" , "MySql", "" , "" },
-                new string[]{ "Type Script" , "Visual Basic" , "", "" , "" },
-                new string[]{ "CSS Grid Layout" , "PHP" , "", "" , "" },
-                new string[]{ "CSS Flex Box" , "Docker" , "", "" , "" },
-                new string[]{ "" , "Node JS", "", "" , "" },
-            };
-
-            PdfPTable knowlegesTable = new PdfPTable(new float[] { 2, 2, 2, 2, 2 });
-
-            foreach (string topics in listOfTopics)
-            {
-                knowlegesTable.AddCell(CreateCellTitleTableKnowleges(topics));
+                knowlegesTableTechnologies.AddCell(CreateCellTitleTableKnowleges(topics));
             }
 
-            PdfPCell blankCell = new PdfPCell(new Paragraph(" "));
+            PdfPCell blankCellTechnologies = new PdfPCell(new Paragraph(" "));
 
-            blankCell.Border = 0;
+            blankCellTechnologies.Border = 0;
 
-            knowlegesTable.AddCell(blankCell);
-            knowlegesTable.AddCell(blankCell);
-            knowlegesTable.AddCell(blankCell);
-            knowlegesTable.AddCell(blankCell);
-            knowlegesTable.AddCell(blankCell);
+            knowlegesTableTechnologies.AddCell(blankCellTechnologies);
+            knowlegesTableTechnologies.AddCell(blankCellTechnologies);
+            knowlegesTableTechnologies.AddCell(blankCellTechnologies);
+            knowlegesTableTechnologies.AddCell(blankCellTechnologies);
+            knowlegesTableTechnologies.AddCell(blankCellTechnologies);
 
-            foreach (string[] record in listOfKnowleges)
+            foreach (string[] record in listOfKnowlegesTechnologies)
             {
                 PdfPCell FrontItemCell = CreateCellDescriptionTableKnowleges(record[0]);
 
@@ -320,18 +331,70 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
 
                 PdfPCell APISItemCell = CreateCellDescriptionTableKnowleges(record[4]);
 
-                knowlegesTable.AddCell(FrontItemCell);
+                knowlegesTableTechnologies.AddCell(FrontItemCell);
 
-                knowlegesTable.AddCell(BackItemCell);
+                knowlegesTableTechnologies.AddCell(BackItemCell);
 
-                knowlegesTable.AddCell(BDItemCell);
+                knowlegesTableTechnologies.AddCell(BDItemCell);
 
-                knowlegesTable.AddCell(MobileItemCell);
+                knowlegesTableTechnologies.AddCell(MobileItemCell);
 
-                knowlegesTable.AddCell(APISItemCell);
+                knowlegesTableTechnologies.AddCell(APISItemCell);
             }
 
-            _document.Add(knowlegesTable);
+            _document.Add(knowlegesTableTechnologies);
+
+            /* TABELA FRAMEWORKS  */
+
+            CreateTopicTitle("Frameworks", true, false);
+
+            CreateSpaceLines(10);
+
+            PdfPTable knowlegesTableFrameworks = new PdfPTable(new float[] { 2, 2, 2, 2, 2 });
+
+            knowlegesTableFrameworks.AddCell(CreateCellTitleTableKnowleges(""));
+
+            foreach (string topics in listOfTopicsFrameworks)
+            {
+                knowlegesTableFrameworks.AddCell(CreateCellTitleTableKnowleges(topics));
+            }
+
+            knowlegesTableFrameworks.AddCell(CreateCellTitleTableKnowleges(""));
+
+            PdfPCell blankCellFrameworks = new PdfPCell(new Paragraph(" "));
+
+            blankCellFrameworks.Border = 0;
+
+            knowlegesTableFrameworks.AddCell(blankCellFrameworks);
+            knowlegesTableFrameworks.AddCell(blankCellFrameworks);
+            knowlegesTableFrameworks.AddCell(blankCellFrameworks);
+            knowlegesTableFrameworks.AddCell(blankCellFrameworks);
+            knowlegesTableFrameworks.AddCell(blankCellFrameworks);
+
+            foreach (string[] record in listOfKnowlegesFrameworks)
+            {
+                PdfPCell emptyItemCellfirst = CreateCellDescriptionTableKnowleges("");
+
+                PdfPCell netItemCell = CreateCellDescriptionTableKnowleges(record[0]);
+
+                PdfPCell frontItemCell = CreateCellDescriptionTableKnowleges(record[1]);
+
+                PdfPCell nodetemCell = CreateCellDescriptionTableKnowleges(record[2]);
+
+                PdfPCell emptyItemCellLast = CreateCellDescriptionTableKnowleges("");
+
+                knowlegesTableFrameworks.AddCell(emptyItemCellfirst);
+
+                knowlegesTableFrameworks.AddCell(netItemCell);
+
+                knowlegesTableFrameworks.AddCell(frontItemCell);
+
+                knowlegesTableFrameworks.AddCell(nodetemCell);
+
+                knowlegesTableFrameworks.AddCell(emptyItemCellLast);
+            }
+
+            _document.Add(knowlegesTableFrameworks);
         }
 
         private string PreparePersonalInformations(string template, ICollection<GeneralParameters> parameters)

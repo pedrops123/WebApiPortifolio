@@ -16,7 +16,36 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
 
             var topics = PopulateTopicsResume();
 
-            return new ResumeViewModel(parameters, topics);
+            IEnumerable<string> listOfTopicsTechnologies = new List<string>() { "FRONT END", "BACK END", "BANCO DE DADOS", "MOBILE", "API'S" };
+
+            IEnumerable<string[]> listOfKnowlegesTechnologies = new List<string[]>()
+            {
+                new string[]{ "HTML 5" , "C# / ASP.NET" , "Microsoft SQL", "Android (Kotlin)" , "RestFull" },
+                new string[]{ "CSS 3" , ".NET CORE", "Mongo DB", "Flutter (Iniciante)" , "SOAP" },
+                new string[]{ "Bootstrap 4" , "Java" , "Fire Base", "" , "" },
+                new string[]{ "Java Script" , "Python" , "MySql", "" , "" },
+                new string[]{ "Type Script" , "Visual Basic" , "", "" , "" },
+                new string[]{ "CSS Grid Layout" , "PHP" , "", "" , "" },
+                new string[]{ "CSS Flex Box" , "Docker" , "", "" , "" },
+                new string[]{ "" , "Node JS", "", "" , "" },
+            };
+
+            IEnumerable<string> listOfTopicsFrameworks = new List<string>() { "C#/.NET", "FRONT END", "NODE JS" };
+
+            IEnumerable<string[]> listOfKnowlegesFrameworks = new List<string[]>()
+            {
+                new string[]{ "IText Sharp" , "JQuery" , "Express"},
+                new string[]{ "SharpZipLib" , "Angular" , ""},
+                new string[]{ "Dapper" , "Vue.js" , ""},
+                new string[]{ "Entity Framework" , "" , ""},
+                new string[]{ "XPagedList" , "" , ""},
+                new string[]{ "Selenium" , "" , ""},
+                new string[]{ "Fluent Validation" , "" , ""},
+                new string[]{ "Auto Mapper" , "" , ""},
+                new string[]{ "Mediator (MediatR)" , "" , ""}
+            };
+
+            return new ResumeViewModel(parameters, topics, listOfTopicsTechnologies, listOfKnowlegesTechnologies, listOfTopicsFrameworks, listOfKnowlegesFrameworks);
         }
 
         private static List<TopicResume> PopulateTopicsResume()

@@ -10,7 +10,7 @@ namespace Portifolio.Domain.Generics
         Task Update(T objeto);
         Task<T> GetEntityById(int id);
         Task<List<T>> List();
-        Task AddRange(List<T> ListObject);
-        Task RemoveRange(List<T> ListObject);
+        Task AddRange(List<T> listObject);
+        Task RemoveRange(List<T> listObject);
     }
 }
