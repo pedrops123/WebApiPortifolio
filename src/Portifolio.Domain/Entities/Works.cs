@@ -25,5 +25,8 @@ namespace Portifolio.Domain.Entities
             descritivo_capa = descritivoCapa;
             texto_projeto = textoProjeto;
         }
+
+        private Works()
+        { }
     }
 }
