@@ -396,3 +396,10 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+# Project Xml Documentation 
+
+src/Portifolio.WebApi/Portifolio.WebApi.xml
+
+# Migrations
+Portifolio.Infrastructure.Database/Migrations

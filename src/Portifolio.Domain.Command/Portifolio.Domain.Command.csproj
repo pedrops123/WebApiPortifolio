@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Commands\Response\GalleryWorks\Create\" />
+    <Folder Include="Commands\Response\GalleryWorks\Delete\" />
+    <Folder Include="Commands\Response\Works\Create\" />
+    <Folder Include="Commands\Response\Works\Delete\" />
+    <Folder Include="Commands\Response\Works\Update\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="11.0.0" />
+    <PackageReference Include="FluentValidation" Version="10.3.6"/>
+    <PackageReference Include="MediatR" Version="10.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Portifolio.Domain.Query\Portifolio.Domain.Query.csproj" />
+    <ProjectReference Include="..\Portifolio.Domain\Portifolio.Domain.csproj" />
+    <ProjectReference Include="..\Portifolio.Infrastructure.Database\Portifolio.Infrastructure.Database.csproj" />
+    <ProjectReference Include="..\Portifolio.Utils\Portifolio.Utils.csproj" />
+  </ItemGroup>
+
+</Project>
