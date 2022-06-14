@@ -23,6 +23,7 @@ namespace Portifolio.WebApi.Extensions
         {
             services.AddMediatR(typeof(CreateWorksRequest), typeof(WorksController));
 
+
             return services;
         }
 
