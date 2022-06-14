@@ -130,7 +130,6 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
 
             subTopicThird.Add(st6);
 
-
             SubTopicResume st7 = new SubTopicResume(4, "ESTAGIÁRIO/ANALISTA JR | GRUPO GPS | OUTUBRO DE 2016 - JULHO 2019", 6, true);
 
             st7.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 1, "Levantamento e análise de requisitos junto ao cliente."));
@@ -142,7 +141,6 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
 
             subTopicThird.Add(st7);
 
-
             SubTopicResume st8 = new SubTopicResume(4, "ESTAGIÁRIO | PGOPEN| FEVEREIRO DE 2016 – ABRIL 2016", 7, true);
 
             st8.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 1, "Manutenção de computadores."));
@@ -153,55 +151,31 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
 
             subTopicThird.Add(st8);
 
-
             TopicResume thirdTopic = new TopicResume("Experiência", 3, subTopicThird);
 
             topics.Add(thirdTopic);
 
             List<SubTopicResume> subTopicsFourth = new List<SubTopicResume>();
 
-            SubTopicResume ComplmentaryInformationsTechnicalCourse = new SubTopicResume(1, "Curso Técnico de Informática - People - 2015", 1, false);
-            subTopicsFourth.Add(ComplmentaryInformationsTechnicalCourse);
+            SubTopicResume complmentaryInformationsTechnicalCourse = new SubTopicResume(1, "Curso Técnico de Informática - People - 2015", 1, false);
+            subTopicsFourth.Add(complmentaryInformationsTechnicalCourse);
 
-            SubTopicResume ComplmentaryInformationsPosTechnicalCourse = new SubTopicResume(1, "Curso pós-técnico desenvolvedor multiplataforma (web & mobile) – Senai informática - 2016", 2, false);
-            subTopicsFourth.Add(ComplmentaryInformationsPosTechnicalCourse);
+            SubTopicResume complmentaryInformationsPosTechnicalCourse = new SubTopicResume(1, "Curso pós-técnico desenvolvedor multiplataforma (web & mobile) – Senai informática - 2016", 2, false);
+            subTopicsFourth.Add(complmentaryInformationsPosTechnicalCourse);
 
-            SubTopicResume ComplmentaryInformationsEnglishCourse = new SubTopicResume(1, "Inglês: Nível intermediário I - CNA - 2012", 3, false);
-            subTopicsFourth.Add(ComplmentaryInformationsEnglishCourse);
+            SubTopicResume complmentaryInformationsEnglishCourse = new SubTopicResume(1, "Inglês: Nível intermediário I - CNA - 2012", 3, false);
+            subTopicsFourth.Add(complmentaryInformationsEnglishCourse);
 
-            TopicResume FourthTopic = new TopicResume("Informações Complementares", 4, subTopicsFourth);
+            TopicResume fourthTopic = new TopicResume("Informações Complementares", 4, subTopicsFourth);
 
-            topics.Add(FourthTopic);
-
-
-
-            //for (int quantity = 1; quantity <= number; quantity++)
-            //{
-            //    List<SubTopicResume> subTopics = new List<SubTopicResume>();
-
-            //    for (int quantitySub = 1; quantitySub <= 5; quantitySub++)
-            //    {
-            //        SubTopicResume subTopic = new SubTopicResume(1, $"Sub Topico numero {quantity}" , true);
-
-            //        for (int quantitySubItem = 1; quantitySubItem <= 6; quantitySubItem++)
-            //        {
-            //            ItemsSubTopicResume item = new ItemsSubTopicResume(1, $"item sub topic numero {quantitySubItem}");
-
-            //            subTopic.ItemsSubTopic.Add(item);
-            //        }
-            //        subTopics.Add(subTopic);
-            //    }
-
-            //    TopicResume topic = new TopicResume($"Topico numero {quantity}", subTopics);
-
-            //    topics.Add(topic);
-            //}
+            topics.Add(fourthTopic);
 
             return topics;
         }
 
         private static List<GeneralParameters> PopulateGeneralParameters(List<GeneralParameters> parameters)
         {
+            parameters.Add(new GeneralParameters((ResumeParameters.CompleteName).ToString(), "Pedro Vinicius Rodrigues Furlan"));
             parameters.Add(new GeneralParameters((ResumeParameters.MartialStatus).ToString(), "Casado"));
             parameters.Add(new GeneralParameters((ResumeParameters.Address).ToString(), "Rua José Celestino Saad, nº 245, Jd Isis, Cotia/SP"));
             parameters.Add(new GeneralParameters((ResumeParameters.CellPhone).ToString(), "(11) 99708-3252"));

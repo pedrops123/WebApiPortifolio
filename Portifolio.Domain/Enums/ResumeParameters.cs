@@ -7,6 +7,7 @@
         CellPhone = 3,
         Email = 4,
         GitHubLink = 5,
-        LinkedinLink = 6
+        LinkedinLink = 6,
+        CompleteName = 7
     }
 }

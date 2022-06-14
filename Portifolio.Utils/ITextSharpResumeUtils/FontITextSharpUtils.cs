@@ -12,7 +12,7 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
 
         private readonly static string _pathFont = Path.Combine(_pathRoot.Substring(0, _pathRoot.IndexOf("bin")), "Fonts");
 
-        public static readonly BaseColor colorBaseTitle = new BaseColor(57,165,183);
+        public static readonly BaseColor colorBaseTitle = new BaseColor(57, 165, 183);
 
         public static readonly BaseColor colorBaseDefaultSections = BaseColor.BLACK;
 
@@ -53,8 +53,8 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
         }
 
 
-        public static Font FontTitle(float size) => new Font(GetTahomaBold().BaseFont, size, 2, colorBaseTitle);
-        public static Font FontTitle(float size, BaseColor color) => new Font(GetTahomaBold().BaseFont, size, 2, color);
+        public static Font FontTitle(float size) => new Font(GetTahomaBold().BaseFont, size, Font.NORMAL, colorBaseTitle);
+        public static Font FontTitle(float size, BaseColor color, int fontStyle) => new Font(GetTahomaBold().BaseFont, size, fontStyle, color);
         public static Font FontNormal(float size) => new Font(GetTahoma().BaseFont, size, 2, BaseColor.BLACK);
         public static Font FontNormal(float size, BaseColor color) => new Font(GetTahoma().BaseFont, size, 2, color);
     }

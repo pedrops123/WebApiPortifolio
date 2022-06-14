@@ -19,7 +19,7 @@ namespace WebApiPortifolio.Controllers
         }
 
         /// <summary>
-        /// Rota de criação do curriculum
+        /// Rota de Criação do curriculum
         /// </summary>
         [HttpGet]
         public async Task<IActionResult> CreateResumeAsync()

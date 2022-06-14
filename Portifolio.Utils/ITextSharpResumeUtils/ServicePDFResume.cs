@@ -51,14 +51,16 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
         {
             byte[] byteFile = new byte[0];
 
-            var topics = GenerateMockResume.Generate();
+            var topics = await Task.FromResult(GenerateMockResume.Generate());
+
+            string completeName = topics.InitialParameters.Where(r => r.Key == (ResumeParameters.CompleteName).ToString()).First().Value;
 
             string pdfNameCreated = "";
 
             try
             {
                 pdfNameCreated = String.Format("Curriculum {0} {1}_{2}_{3}.pdf",
-                    _configuration.OwnerName,
+                    completeName,
                     DateTime.Now.Year,
                     DateTime.Now.Month.ToString().ToString().PadLeft(2, '0'),
                     DateTime.Now.Day.ToString().ToString().PadLeft(2, '0'));
@@ -75,7 +77,7 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
 
                     ConfigureGradient();
 
-                    SectionHeader(topics.InitialParameters);
+                    SectionHeader(topics.InitialParameters, completeName);
 
                     foreach (TopicResume topic in topics.Topics.OrderBy(r => r.Order))
                     {
@@ -98,11 +100,11 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
                     _writer.Close();
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 _stream.Close();
 
-                throw e;
+                throw;
             }
             finally
             {
@@ -111,9 +113,7 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
                 byteFile = GetFileBytes();
             }
 
-            var response = Task.FromResult(new ResponseCreatePdf(pdfNameCreated, byteFile));
-
-            return await response;
+            return new ResponseCreatePdf(pdfNameCreated, byteFile);
         }
 
 
@@ -123,7 +123,7 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
         {
             PdfPTable tableTitleSection = new PdfPTable(10);
 
-            PdfPCell titleCell = new PdfPCell(new Paragraph(descriptionTopicTitle, FontITextSharpUtils.FontTitle(15f, FontITextSharpUtils.colorBaseDefaultSections)));
+            PdfPCell titleCell = new PdfPCell(new Paragraph(descriptionTopicTitle, FontITextSharpUtils.FontTitle(15f, FontITextSharpUtils.colorBaseDefaultSections, Font.NORMAL)));
             titleCell.Colspan = 10;
             titleCell.VerticalAlignment = Element.ALIGN_CENTER;
 
@@ -160,7 +160,7 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
             List unorderedListPrincipal = new List(List.UNORDERED, 10f);
             unorderedListPrincipal.SetListSymbol("\u2022");
 
-            ListItem listItemPrincipal = new ListItem(new Paragraph(descriptionSubTopic, isBold ? FontITextSharpUtils.FontTitle(10f, BaseColor.BLACK) : FontITextSharpUtils.FontNormal(10f, BaseColor.BLACK)));
+            ListItem listItemPrincipal = new ListItem(new Paragraph(descriptionSubTopic, isBold ? FontITextSharpUtils.FontTitle(10f, BaseColor.BLACK, Font.NORMAL) : FontITextSharpUtils.FontNormal(10f, BaseColor.BLACK)));
 
             unorderedListPrincipal.Add(listItemPrincipal);
 
@@ -184,11 +184,11 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
 
                     unorderedListItem.Add(listItemsub);
 
-                    PdfPCell ItemsubTopicCell = new PdfPCell();
-                    ItemsubTopicCell.Colspan = 10;
-                    ItemsubTopicCell.Border = 0;
-                    ItemsubTopicCell.AddElement(unorderedListItem);
-                    tableSubTopic.AddCell(ItemsubTopicCell);
+                    PdfPCell itemSubTopicCell = new PdfPCell();
+                    itemSubTopicCell.Colspan = 10;
+                    itemSubTopicCell.Border = 0;
+                    itemSubTopicCell.AddElement(unorderedListItem);
+                    tableSubTopic.AddCell(itemSubTopicCell);
                 }
 
             }
@@ -206,7 +206,7 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
             _document = new Document(PageSize.A4, 2, 25, 30, 30);
 
             _document.AddAuthor(_configuration.OwnerName);
-            _document.AddCreator($"Curriculum { _configuration.OwnerName }");
+            _document.AddCreator(_configuration.OwnerName);
             _document.AddKeywords("PDF curriculum");
             _document.AddTitle("Curriculum customizado");
         }
@@ -261,11 +261,11 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
 
         #region SectionsResume
 
-        private void SectionHeader(ICollection<GeneralParameters> parameters)
+        private void SectionHeader(ICollection<GeneralParameters> parameters, string completeName)
         {
-            PdfPTable TableHead = new PdfPTable(10);
+            PdfPTable tableHead = new PdfPTable(10);
 
-            PdfPCell headCell = new PdfPCell(new Paragraph(String.Format("{0}", _configuration.OwnerName), FontITextSharpUtils.FontTitle(25f)));
+            PdfPCell headCell = new PdfPCell(new Paragraph(String.Format("{0}", completeName), FontITextSharpUtils.FontTitle(25f)));
             headCell.Colspan = 10;
             headCell.PaddingTop = 10f;
             headCell.PaddingBottom = 10f;
@@ -282,10 +282,10 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
             headDescriptionCell.PaddingBottom = 10f;
             headDescriptionCell.BorderWidth = 0f;
 
-            TableHead.AddCell(headCell);
-            TableHead.AddCell(headDescriptionCell);
+            tableHead.AddCell(headCell);
+            tableHead.AddCell(headDescriptionCell);
 
-            _document.Add(TableHead);
+            _document.Add(tableHead);
         }
 
         private void KnowlegesSection(
@@ -321,25 +321,25 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
 
             foreach (string[] record in listOfKnowlegesTechnologies)
             {
-                PdfPCell FrontItemCell = CreateCellDescriptionTableKnowleges(record[0]);
+                PdfPCell frontItemCell = CreateCellDescriptionTableKnowleges(record[0]);
 
-                PdfPCell BackItemCell = CreateCellDescriptionTableKnowleges(record[1]);
+                PdfPCell backItemCell = CreateCellDescriptionTableKnowleges(record[1]);
 
-                PdfPCell BDItemCell = CreateCellDescriptionTableKnowleges(record[2]);
+                PdfPCell bdItemCell = CreateCellDescriptionTableKnowleges(record[2]);
 
-                PdfPCell MobileItemCell = CreateCellDescriptionTableKnowleges(record[3]);
+                PdfPCell mobileItemCell = CreateCellDescriptionTableKnowleges(record[3]);
 
-                PdfPCell APISItemCell = CreateCellDescriptionTableKnowleges(record[4]);
+                PdfPCell apisItemCell = CreateCellDescriptionTableKnowleges(record[4]);
 
-                knowlegesTableTechnologies.AddCell(FrontItemCell);
+                knowlegesTableTechnologies.AddCell(frontItemCell);
 
-                knowlegesTableTechnologies.AddCell(BackItemCell);
+                knowlegesTableTechnologies.AddCell(backItemCell);
 
-                knowlegesTableTechnologies.AddCell(BDItemCell);
+                knowlegesTableTechnologies.AddCell(bdItemCell);
 
-                knowlegesTableTechnologies.AddCell(MobileItemCell);
+                knowlegesTableTechnologies.AddCell(mobileItemCell);
 
-                knowlegesTableTechnologies.AddCell(APISItemCell);
+                knowlegesTableTechnologies.AddCell(apisItemCell);
             }
 
             _document.Add(knowlegesTableTechnologies);
@@ -352,13 +352,12 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
 
             PdfPTable knowlegesTableFrameworks = new PdfPTable(new float[] { 2, 2, 2, 2, 2 });
 
-            knowlegesTableFrameworks.AddCell(CreateCellTitleTableKnowleges(""));
-
             foreach (string topics in listOfTopicsFrameworks)
             {
                 knowlegesTableFrameworks.AddCell(CreateCellTitleTableKnowleges(topics));
             }
 
+            knowlegesTableFrameworks.AddCell(CreateCellTitleTableKnowleges(""));
             knowlegesTableFrameworks.AddCell(CreateCellTitleTableKnowleges(""));
 
             PdfPCell blankCellFrameworks = new PdfPCell(new Paragraph(" "));
@@ -373,13 +372,13 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
 
             foreach (string[] record in listOfKnowlegesFrameworks)
             {
-                PdfPCell emptyItemCellfirst = CreateCellDescriptionTableKnowleges("");
+                PdfPCell emptyItemCellfirst = CreateCellDescriptionTableKnowleges(record[0]);
 
-                PdfPCell netItemCell = CreateCellDescriptionTableKnowleges(record[0]);
+                PdfPCell netItemCell = CreateCellDescriptionTableKnowleges(record[1]);
 
-                PdfPCell frontItemCell = CreateCellDescriptionTableKnowleges(record[1]);
+                PdfPCell frontItemCell = CreateCellDescriptionTableKnowleges(record[2]);
 
-                PdfPCell nodetemCell = CreateCellDescriptionTableKnowleges(record[2]);
+                PdfPCell nodetemCell = CreateCellDescriptionTableKnowleges("");
 
                 PdfPCell emptyItemCellLast = CreateCellDescriptionTableKnowleges("");
 
@@ -441,7 +440,7 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
         {
             float sizeFontTitles = 9f;
 
-            PdfPCell titleTableCell = new PdfPCell(new Paragraph(description, FontITextSharpUtils.FontTitle(sizeFontTitles, BaseColor.BLACK)));
+            PdfPCell titleTableCell = new PdfPCell(new Paragraph(description, FontITextSharpUtils.FontTitle(sizeFontTitles, BaseColor.BLACK, Font.NORMAL)));
             titleTableCell.PaddingTop = 2f;
             titleTableCell.PaddingBottom = 2f;
             titleTableCell.Border = 0;
@@ -455,12 +454,12 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
         {
             float sizeFontItem = 8f;
 
-            PdfPCell ItemTableCell = new PdfPCell(new Paragraph(description, FontITextSharpUtils.FontNormal(sizeFontItem, BaseColor.BLACK)));
-            ItemTableCell.Border = 0;
-            ItemTableCell.VerticalAlignment = Element.ALIGN_CENTER;
-            ItemTableCell.HorizontalAlignment = Element.ALIGN_CENTER;
+            PdfPCell itemTableCell = new PdfPCell(new Paragraph(description, FontITextSharpUtils.FontNormal(sizeFontItem, BaseColor.BLACK)));
+            itemTableCell.Border = 0;
+            itemTableCell.VerticalAlignment = Element.ALIGN_CENTER;
+            itemTableCell.HorizontalAlignment = Element.ALIGN_CENTER;
 
-            return ItemTableCell;
+            return itemTableCell;
         }
 
         private void CreateSpaceLines(int numberOfTimes)
