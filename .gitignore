@@ -399,7 +399,7 @@ FodyWeavers.xsd
 
 # Project Xml Documentation 
 
-src/WebApiPortifolio/WebApiPortifolio.xml
+src/Portifolio.WebApi/Portifolio.WebApi.xml
 
 # Migrations
 Portifolio.Infrastructure.Database/Migrations

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31911.196
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApiPortifolio", "WebApiPortifolio\WebApiPortifolio.csproj", "{B71AA312-9E4F-407B-AC51-72BE90C43D4C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Portifolio.WebApi", "Portifolio.WebApi\Portifolio.WebApi.csproj", "{B71AA312-9E4F-407B-AC51-72BE90C43D4C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Portifolio.Domain", "Portifolio.Domain\Portifolio.Domain.csproj", "{0899412E-47DE-4E20-B0BB-F7DCE5BEAEA2}"
 EndProject
