@@ -8,13 +8,13 @@ namespace Portifolio.Domain.Command.Commands.Response.Works.GetById
     {
         public int Id { get; set; }
 
-        public string nome_projeto { get; set; }
+        public string ProjectName { get; set; }
 
-        public int? img_thumbnail_id { get; set; }
+        public int? ImgThumbnailId { get; set; }
 
-        public string descritivo_capa { get; set; }
+        public string DescriptionCover { get; set; }
 
-        public string texto_projeto { get; set; }
+        public string ProjectText { get; set; }
 
         public int UserInsert { get; set; }
 
@@ -24,7 +24,7 @@ namespace Portifolio.Domain.Command.Commands.Response.Works.GetById
 
         public DateTime? UpdateDate { get; set; }
 
-        public virtual List<FilterGalleryWorksResponse> Fotos { get; set; }
+        public virtual List<FilterGalleryWorksResponse> Photos { get; set; }
 
         public FilterGalleryWorksResponse img_thumbnail { get; set; }
 

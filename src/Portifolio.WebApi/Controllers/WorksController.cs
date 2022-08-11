@@ -12,7 +12,7 @@ namespace Portifolio.WebApi.Controllers
 {
     [Route("api/v1/Works")]
     [ApiController]
-    public class WorksController : ControllerBase
+    public sealed class WorksController : ControllerBase
     {
         private readonly IMediator _mediator;
 
@@ -20,6 +20,7 @@ namespace Portifolio.WebApi.Controllers
         {
             _mediator = mediator;
         }
+
         /// <summary>
         /// Cadastro do trabalho
         /// </summary>
@@ -32,6 +33,7 @@ namespace Portifolio.WebApi.Controllers
 
             return Ok(response);
         }
+
         /// <summary>
         /// Listagem dos trabalhos
         /// </summary>
@@ -44,6 +46,7 @@ namespace Portifolio.WebApi.Controllers
 
             return Ok(response);
         }
+
         /// <summary>
         /// Coleta trabalho por Id do registro
         /// </summary>
@@ -56,20 +59,22 @@ namespace Portifolio.WebApi.Controllers
 
             return Ok(response);
         }
+
         /// <summary>
         /// Atualização do trabalho.
         /// </summary>
         /// <param name="Id">Id do registro</param>
         /// <param name="request">Parametros de atualização</param>
         /// <returns></returns>
-        [HttpPut("{Id}")]
-        public async Task<IActionResult> Put([FromRoute] int Id, [FromBody] UpdateWorksRequest request)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put([FromRoute] int id, [FromBody] UpdateWorksRequest request)
         {
-            request.Id = Id;
+            request.Id = id;
             var response = await _mediator.Send(request);
 
             return Ok(response);
         }
+
         /// <summary>
         /// Deleta trabalho
         /// </summary>
@@ -82,6 +87,7 @@ namespace Portifolio.WebApi.Controllers
 
             return Ok(response);
         }
+
         /// <summary>
         /// Atualiza imagem inicial do trabalho a ser mostrado.
         /// </summary>

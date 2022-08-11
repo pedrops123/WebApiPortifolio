@@ -4,26 +4,26 @@ namespace Portifolio.Domain.Entities
 {
     public class Works : BaseEntity
     {
-        public string nome_projeto { get; private set; }
+        public string ProjectName { get; private set; }
 
-        public int? img_thumbnail_id { get; private set; }
+        public int? ImgThumbnailId { get; private set; }
 
-        public string descritivo_capa { get; private set; }
+        public string DescriptionCover { get; private set; }
 
-        public string texto_projeto { get; private set; }
+        public string ProjectText { get; private set; }
 
-        public virtual IEnumerable<GalleryWorks> Fotos { get; private set; }
+        public virtual IEnumerable<GalleryWorks> Photos { get; private set; }
 
         public Works(
-            string nomeProjeto,
+            string projectName,
             int? imgThumbnailId,
-            string descritivoCapa,
-            string textoProjeto)
+            string descriptionCover,
+            string projectText)
         {
-            nome_projeto = nomeProjeto;
-            img_thumbnail_id = imgThumbnailId;
-            descritivo_capa = descritivoCapa;
-            texto_projeto = textoProjeto;
+            ProjectName = projectName;
+            ImgThumbnailId = imgThumbnailId;
+            DescriptionCover = descriptionCover;
+            ProjectText = projectText;
         }
 
         private Works()

@@ -17,7 +17,7 @@ namespace Portifolio.Infrastructure.Database.EntityFramework
             var builder = new DbContextOptionsBuilder<AppDbContext>();
             var connectionStrings = configuration.GetConnectionString("DefaultConnection");
             builder.UseSqlServer(connectionStrings);
-            
+
             return new AppDbContext(builder.Options);
         }
     }

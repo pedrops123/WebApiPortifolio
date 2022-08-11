@@ -1,11 +1,8 @@
-﻿using System.Linq;
-using AutoMapper;
+﻿using AutoMapper;
 using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Portifolio.Domain.Command.Commands.Request.Works.Create;
-using Portifolio.Domain.Command.Handlers.Works.Create;
-using Portifolio.Domain.Command.Profiles.Works;
 using Portifolio.Domain.Generics;
 using Portifolio.Domain.ITextSharp;
 using Portifolio.Domain.MinIO;
@@ -14,6 +11,9 @@ using Portifolio.Infrastructure.Database.EntityFramework.Generics;
 using Portifolio.Utils.ITextSharpResumeUtils;
 using Portifolio.Utils.MinIO;
 using Portifolio.WebApi.Controllers;
+using System.Linq;
+using Portifolio.Domain.Command.Handlers.Work.Create;
+using Portifolio.Domain.Command.Profiles.Work;
 
 namespace Portifolio.WebApi.Extensions
 {
@@ -51,12 +51,12 @@ namespace Portifolio.WebApi.Extensions
 
             return services;
         }
-   
+
         public static IServiceCollection AddQueryServices(this IServiceCollection services)
         {
             services
                  .AddTransient(typeof(IGenericQuery<,>), typeof(DapperDefaultSearch<,>));
-                
+
             return services;
         }
 

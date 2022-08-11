@@ -2,7 +2,7 @@
 
 namespace Portifolio.Domain.Entities.PdfResume
 {
-    public  class TopicResume : BaseEntity
+    public class TopicResume : BaseEntity
     {
         public string Description { get; private set; }
         public int Order { get; private set; }

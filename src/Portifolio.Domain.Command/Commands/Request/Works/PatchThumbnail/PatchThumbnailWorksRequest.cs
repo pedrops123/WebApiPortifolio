@@ -8,6 +8,6 @@ namespace Portifolio.Domain.Command.Commands.Request.Works.PatchThumbnail
         [JsonIgnore]
         public int Id { get; set; }
 
-        public int img_thumbnail_id { get; set; }
+        public int ImgThumbnailId { get; set; }
     }
 }

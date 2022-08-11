@@ -20,9 +20,9 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
     {
         private readonly string _directoryFile;
 
-        private string _assemblyPath = Assembly.GetAssembly(typeof(ServicePDFResume)).Location;
+        private readonly string _assemblyPath = Assembly.GetAssembly(typeof(ServicePDFResume)).Location;
 
-        private IConfigurationRoot _conf;
+        private readonly IConfigurationRoot _conf;
 
         private PdfConfigurations _configuration;
 

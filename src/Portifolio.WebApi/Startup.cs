@@ -10,7 +10,7 @@ using System.Reflection;
 
 namespace Portifolio.WebApi
 {
-    public class Startup
+    public sealed class Startup
     {
         public Startup(IConfiguration configuration)
         {
@@ -23,7 +23,7 @@ namespace Portifolio.WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             var location = Assembly.GetAssembly(typeof(Startup)).Location;
-            var pathXml = Path.Combine(location.Substring(0,location.IndexOf("bin")), string.Format("{0}.xml", typeof(Startup).GetTypeInfo().Assembly.GetName().Name));
+            var pathXml = Path.Combine(location.Substring(0, location.IndexOf("bin")), string.Format("{0}.xml", typeof(Startup).GetTypeInfo().Assembly.GetName().Name));
             services.AddControllers();
             services.AddMediator();
             services.ConfigureAutoMapper();

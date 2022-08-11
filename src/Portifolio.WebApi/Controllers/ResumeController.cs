@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Portifolio.Domain.ITextSharp;
 using System.Threading.Tasks;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 namespace Portifolio.WebApi.Controllers
 {
     [Route("api/v1/Resume")]
-    public class ResumeController : ControllerBase
+    public sealed class ResumeController : ControllerBase
     {
         private readonly IMediator _mediator;
         private readonly ITextSharpUtils _itextSharpUtils;
@@ -22,6 +23,7 @@ namespace Portifolio.WebApi.Controllers
         /// Rota de Criação do Curriculum
         /// </summary>
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(FileContentResult))]
         public async Task<IActionResult> CreateResumeAsync()
         {
             var response = await _itextSharpUtils.CreateDocument();

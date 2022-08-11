@@ -7,14 +7,14 @@ namespace Portifolio.Domain.Command.Commands.Request.GalleryWorks.GetList
     public sealed class FilterGalleryWorksRequest : IRequest<IEnumerable<FilterGalleryWorksResponse>>
     {
 
-        public int IdProjeto { get; set; }
+        public int ProjectId { get; set; }
 
         public FilterGalleryWorksRequest()
         { }
 
-        public FilterGalleryWorksRequest(int idProjeto)
+        public FilterGalleryWorksRequest(int projectId)
         {
-            IdProjeto = idProjeto;
+            ProjectId = projectId;
         }
     }
 }
