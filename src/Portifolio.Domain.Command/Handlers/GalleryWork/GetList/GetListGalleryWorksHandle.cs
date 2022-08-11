@@ -1,12 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using MediatR;
 using Portifolio.Domain.Command.Commands.Request.GalleryWorks.GetList;
 using Portifolio.Domain.Command.Commands.Response.GalleryWorks.GetList;
 using Portifolio.Domain.Entities;
 using Portifolio.Domain.Generics;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Portifolio.Domain.Command.Handlers.GalleryWork.GetList
 {

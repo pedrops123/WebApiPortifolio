@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Portifolio.Domain.Command.Commands.Request.Works.Create;
 using Portifolio.Domain.Command.Commands.Request.Works.Delete;
@@ -6,6 +7,8 @@ using Portifolio.Domain.Command.Commands.Request.Works.GetById;
 using Portifolio.Domain.Command.Commands.Request.Works.GetList;
 using Portifolio.Domain.Command.Commands.Request.Works.PatchThumbnail;
 using Portifolio.Domain.Command.Commands.Request.Works.Update;
+using Portifolio.Domain.Command.Commands.Response.Works.GetById;
+using Portifolio.Domain.Command.Commands.Response.Works.GetList;
 using System.Threading.Tasks;
 
 namespace Portifolio.WebApi.Controllers
@@ -27,6 +30,8 @@ namespace Portifolio.WebApi.Controllers
         /// <param name="request">Parametro cadastro de trabalho</param>
         /// <returns></returns>
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Post([FromBody] CreateWorksRequest request)
         {
             var response = await _mediator.Send(request);
@@ -40,6 +45,7 @@ namespace Portifolio.WebApi.Controllers
         /// <param name="request">Filtro de listagem</param>
         /// <returns></returns>
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(FilterWorksResponse))]
         public async Task<IActionResult> GetList([FromQuery] FilterWorksRequest request)
         {
             var response = await _mediator.Send(request);
@@ -53,6 +59,7 @@ namespace Portifolio.WebApi.Controllers
         /// <param name="id">Id do registro</param>
         /// <returns></returns>
         [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(GetByIdWorksResponse))]
         public async Task<IActionResult> GetById([FromRoute] int id)
         {
             var response = await _mediator.Send(new GetByIdWorksRequest(id));
@@ -67,6 +74,8 @@ namespace Portifolio.WebApi.Controllers
         /// <param name="request">Parametros de atualização</param>
         /// <returns></returns>
         [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Put([FromRoute] int id, [FromBody] UpdateWorksRequest request)
         {
             request.Id = id;
@@ -81,6 +90,7 @@ namespace Portifolio.WebApi.Controllers
         /// <param name="id">Id do registro</param>
         /// <returns></returns>
         [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
             var response = await _mediator.Send(new DeleteWorksRequest(id));
@@ -95,6 +105,7 @@ namespace Portifolio.WebApi.Controllers
         /// <param name="request">Id da imagem vinculado</param>
         /// <returns></returns>
         [HttpPatch("PatchThumnail/{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> PatchThumbnail([FromRoute] int id, [FromBody] PatchThumbnailWorksRequest request)
         {
             request.Id = id;
