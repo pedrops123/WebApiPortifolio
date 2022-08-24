@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="AutoFixture" Version="4.17.0" />
+    <PackageReference Include="AutoMapper" Version="11.0.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.4" />
     <PackageReference Include="Moq" Version="4.18.2" />
     <PackageReference Include="xunit" Version="2.4.1" />
@@ -19,6 +20,17 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Commands\Work\Delete\" />
+    <Folder Include="Commands\Work\GetById\" />
+    <Folder Include="Commands\Work\GetList\" />
+    <Folder Include="Commands\Work\PatchThumbnail\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Portifolio.Domain.Command\Portifolio.Domain.Command.csproj" />
   </ItemGroup>
 
 </Project>
