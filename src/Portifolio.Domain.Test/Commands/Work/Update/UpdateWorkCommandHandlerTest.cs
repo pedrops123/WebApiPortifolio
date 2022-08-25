@@ -39,6 +39,5 @@ namespace Portifolio.Domain.Test.Commands.Work.Update
 
             repository.Verify(r => r.Update(It.IsAny<Works>()), Times.Once);
         }
-
     }
 }

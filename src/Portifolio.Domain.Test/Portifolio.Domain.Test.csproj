@@ -23,13 +23,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Commands\Work\Delete\" />
-    <Folder Include="Commands\Work\GetById\" />
-    <Folder Include="Commands\Work\GetList\" />
-    <Folder Include="Commands\Work\PatchThumbnail\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Portifolio.Domain.Command\Portifolio.Domain.Command.csproj" />
   </ItemGroup>
 
