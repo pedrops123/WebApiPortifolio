@@ -23,7 +23,7 @@ namespace Portifolio.WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             var location = Assembly.GetAssembly(typeof(Startup)).Location;
-            var pathXml = Path.Combine(location.Substring(0, location.IndexOf("bin")), string.Format("{0}.xml", typeof(Startup).GetTypeInfo().Assembly.GetName().Name));
+            // var pathXml = Path.Combine(location.Substring(0, location.IndexOf("bin")), string.Format("{0}.xml", typeof(Startup).GetTypeInfo().Assembly.GetName().Name));
             services.AddControllers();
             services.AddMediator();
             services.ConfigureAutoMapper();
@@ -35,14 +35,14 @@ namespace Portifolio.WebApi
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Portifolio.WebApi", Version = "v1" });
-                c.IncludeXmlComments(pathXml);
+                // c.IncludeXmlComments(pathXml);
             });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
+            if (env.IsDevelopment() || env.IsProduction())
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
