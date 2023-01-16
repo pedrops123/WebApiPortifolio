@@ -5,7 +5,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Portifolio.WebApi.Extensions;
-using System.IO;
 using System.Reflection;
 
 namespace Portifolio.WebApi

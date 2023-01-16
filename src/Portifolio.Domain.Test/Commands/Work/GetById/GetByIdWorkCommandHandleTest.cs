@@ -1,5 +1,4 @@
-﻿using System;
-using AutoFixture;
+﻿using AutoFixture;
 using AutoMapper;
 using Moq;
 using Portifolio.Domain.Command.Commands.Request.GalleryWorks.GetList;
@@ -10,6 +9,7 @@ using Portifolio.Domain.Entities;
 using Portifolio.Domain.Generics;
 using Portifolio.Domain.MinIO;
 using Portifolio.Domain.Test.Mocks.Work;
+using System;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -27,23 +27,20 @@ namespace Portifolio.Domain.Test.Commands.Work.GetById
         [Fact]
         public async Task Handle_ValidData_ReturnsValidObject()
         {
-            int id = 1;
-
             var fixture = new Fixture();
             var expected = fixture.Create<Works>();
-            var minIOService = new Mock<IMinIO>();
+            var minIoService = new Mock<IMinIO>();
 
-            var parameters = fixture.Build<GetByIdWorksRequest>()
-                .With(r => r.Id, id).Create();
+            var parameters = fixture.Build<GetByIdWorksRequest>().Create();
 
             var galleryWorksRepository = new Mock<IGenericQuery<GalleryWorks, FilterGalleryWorksRequest>>();
 
             var worksRepository = new GenericWorksQueryRepositoryMock()
-                .SetupSuccessGetById(id, expected).Instance;
+                .SetupSuccessGetById(parameters.Id, expected).Instance;
 
             var handle = new GetByIdWorkHandle(
                 _mapper,
-                minIOService.Object,
+                minIoService.Object,
                 galleryWorksRepository.Object,
                 worksRepository.Object);
 
@@ -52,27 +49,22 @@ namespace Portifolio.Domain.Test.Commands.Work.GetById
             Assert.NotNull(response);
         }
 
-
-
         [Fact]
         public async Task Handle_InvalidData_ReturnsNullObject()
         {
-            int id = 1;
-
             var fixture = new Fixture();
-            var minIOService = new Mock<IMinIO>();
+            var minIoService = new Mock<IMinIO>();
 
-            var parameters = fixture.Build<GetByIdWorksRequest>()
-                .With(r => r.Id, id).Create();
+            var parameters = fixture.Build<GetByIdWorksRequest>().Create();
 
             var galleryWorksRepository = new Mock<IGenericQuery<GalleryWorks, FilterGalleryWorksRequest>>();
 
             var worksRepository = new GenericWorksQueryRepositoryMock()
-                .SetupSuccessGetById(id, null).Instance;
+                .SetupSuccessGetById(parameters.Id, null).Instance;
 
             var handle = new GetByIdWorkHandle(
                 _mapper,
-                minIOService.Object,
+                minIoService.Object,
                 galleryWorksRepository.Object,
                 worksRepository.Object);
 

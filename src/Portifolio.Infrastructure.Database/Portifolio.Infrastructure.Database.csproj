@@ -22,4 +22,8 @@
     <ProjectReference Include="..\Portifolio.Domain\Portifolio.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="EntityFramework\Repositories\" />
+  </ItemGroup>
+
 </Project>

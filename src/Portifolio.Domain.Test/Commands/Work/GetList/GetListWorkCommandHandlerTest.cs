@@ -28,7 +28,7 @@ namespace Portifolio.Domain.Test.Commands.Work.GetList
         public async Task Handle_ValidData_ReturnsListValue()
         {
             var fixture = new Fixture();
-            var minIOService = new Mock<IMinIO>();
+            var minIoService = new Mock<IMinIO>();
 
             var parameters = fixture.Create<FilterWorksRequest>();
             var expected = fixture.CreateMany<Works>();
@@ -40,7 +40,7 @@ namespace Portifolio.Domain.Test.Commands.Work.GetList
 
             var handle = new GetListWorkHandle(
                 _mapper,
-                minIOService.Object,
+                minIoService.Object,
                 dapperGalleryWorksRepository.Object,
                 dapperWorksRepository.Object
                 );

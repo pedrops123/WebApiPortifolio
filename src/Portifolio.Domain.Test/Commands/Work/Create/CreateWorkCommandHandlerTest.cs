@@ -37,7 +37,7 @@ namespace Portifolio.Domain.Test.Commands.Work.Create
             Assert.Equal(Unit.Value, response);
 
 
-            repository.Verify(r=>r.Add(It.IsAny<Works>()),Times.Once);
+            repository.Verify(r => r.Add(It.IsAny<Works>()), Times.Once);
         }
     }
 }

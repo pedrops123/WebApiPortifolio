@@ -29,9 +29,9 @@ namespace Portifolio.Domain.Test.Commands.Work.Delete
         {
             var fixture = new Fixture();
 
-            int id = 1;
+            var request = fixture.Build<DeleteWorksRequest>().Create();
 
-            var minIOService = new Mock<IMinIO>();
+            var minIoService = new Mock<IMinIO>();
 
             var expectedGalleryWorks = fixture.CreateMany<GalleryWorks>();
 
@@ -41,14 +41,11 @@ namespace Portifolio.Domain.Test.Commands.Work.Delete
             var expectedWork = fixture.Create<Works>();
 
             var worksRepository = new GenericWorksRepositoryMock()
-                .SetupSuccessGetById(id, expectedWork).Instance;
-
-            var request = fixture.Build<DeleteWorksRequest>()
-                .With(r => r.Id, id).Create();
+                .SetupSuccessGetById(request.Id, expectedWork).Instance;
 
             var handle = new DeleteWorksHandle(
                 _mapper,
-                minIOService.Object,
+                minIoService.Object,
                 galleryWorksRepository.Object,
                 worksRepository.Object
                 );
