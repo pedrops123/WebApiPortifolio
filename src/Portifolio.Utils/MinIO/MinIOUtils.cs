@@ -14,11 +14,11 @@ namespace Portifolio.Utils.MinIO
 {
     public class MinIOUtils : IMinIO
     {
-        private IConfigurationRoot _conf;
+        private readonly IConfigurationRoot _conf;
 
-        private MinIOConfigurations _configuration;
+        private readonly MinIOConfigurations _configuration;
 
-        private MinioClient _MinIOClient;
+        private readonly MinioClient _MinIOClient;
 
         private FileStream stream;
 
@@ -32,7 +32,7 @@ namespace Portifolio.Utils.MinIO
             _configuration = _conf.GetSection("MinIO").Get<MinIOConfigurations>();
             _MinIOClient = ConfigureMinIO();
             CreateBucket();
-            DirectoryFile = Path.Combine(AssemblyPath.Substring(0, AssemblyPath.IndexOf("bin")), _configuration.TempFile);
+            DirectoryFile = Path.Combine(AssemblyPath.Substring(0, AssemblyPath.IndexOf(Assembly.GetAssembly(typeof(MinIOUtils)).ManifestModule.Name)), _configuration.TempFile);
         }
 
         public async Task<string> UploadFiles(IFormFile file)
@@ -46,7 +46,7 @@ namespace Portifolio.Utils.MinIO
 
                 await _MinIOClient.PutObjectAsync(_configuration.Buckets.gallery, nomeArquivoUpload, new MemoryStream(FileBytes), file.Length, file.ContentType);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 throw;
             }
@@ -109,22 +109,18 @@ namespace Portifolio.Utils.MinIO
 
         private byte[] GetFileBytes(IFormFile file)
         {
-
             if (!Directory.Exists(DirectoryFile))
-            {
-                Directory.CreateDirectory(DirectoryFile);
-            }
-
+                    Directory.CreateDirectory(DirectoryFile);
+            
             using (stream = new FileStream(Path.Combine(DirectoryFile, file.FileName), FileMode.CreateNew, FileAccess.ReadWrite, FileShare.Delete))
             {
                 file.CopyTo(stream);
                 stream.Close();
             }
 
-
             var files = Directory.GetFiles(DirectoryFile);
 
-            var fileBytes = System.IO.File.ReadAllBytes(files[0]);
+            var fileBytes = File.ReadAllBytes(files[0]);
 
             foreach (string pathFiles in files)
             {

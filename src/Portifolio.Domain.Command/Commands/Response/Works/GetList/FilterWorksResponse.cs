@@ -23,11 +23,7 @@ namespace Portifolio.Domain.Command.Commands.Response.Works.GetList
 
         public DateTime? UpdateDate { get; set; }
 
-        public FilterGalleryWorksResponse img_thumbnail { get; set; }
+        public FilterGalleryWorksResponse img_thumbnail { get; set; } = null;
 
-        public FilterWorksResponse()
-        {
-            this.img_thumbnail = new FilterGalleryWorksResponse();
-        }
     }
 }

@@ -19,4 +19,19 @@
     <ProjectReference Include="..\Portifolio.Domain.Command\Portifolio.Domain.Command.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Fonts\RegularFont.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Fonts\TAHOMAB0.TTF">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Fonts\TAHOMABD.TTF">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Fonts\TAHOMA_0.TTF">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
