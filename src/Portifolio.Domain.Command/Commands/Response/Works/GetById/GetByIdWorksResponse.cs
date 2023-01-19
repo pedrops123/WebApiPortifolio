@@ -26,8 +26,6 @@ namespace Portifolio.Domain.Command.Commands.Response.Works.GetById
 
         public virtual List<FilterGalleryWorksResponse> Photos { get; set; }
 
-        public FilterGalleryWorksResponse img_thumbnail { get; set; }
-
-        public GetByIdWorksResponse() => this.img_thumbnail = new FilterGalleryWorksResponse();
+        public FilterGalleryWorksResponse img_thumbnail { get; set; } = null;
     }
 }

@@ -2,6 +2,7 @@
 using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.OpenApi.Models;
 using Portifolio.Domain.Command.Commands.Request.Works.Create;
 using Portifolio.Domain.Command.Handlers.Work.Create;
 using Portifolio.Domain.Command.Profiles.Work;
@@ -13,7 +14,9 @@ using Portifolio.Infrastructure.Database.EntityFramework.Generics;
 using Portifolio.Utils.ITextSharpResumeUtils;
 using Portifolio.Utils.MinIO;
 using Portifolio.WebApi.Controllers;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 
 namespace Portifolio.WebApi.Extensions
 {
@@ -22,7 +25,6 @@ namespace Portifolio.WebApi.Extensions
         public static IServiceCollection AddMediator(this IServiceCollection services)
         {
             services.AddMediatR(typeof(CreateWorksRequest), typeof(WorksController));
-
 
             return services;
         }
@@ -73,6 +75,20 @@ namespace Portifolio.WebApi.Extensions
             services.AddFluentValidation(r =>
             {
                 r.RegisterValidatorsFromAssembly(typeof(CreateWorkValidator).Assembly);
+            });
+
+            return services;
+        }
+
+        public static IServiceCollection ConfigureSwagger(this IServiceCollection services)
+        {
+            var location = Assembly.GetAssembly(typeof(Startup)).Location;
+            var pathXml = Path.Combine(location.Substring(0, location.IndexOf(Assembly.GetAssembly(typeof(Startup)).ManifestModule.Name)), string.Format("{0}.xml", typeof(Startup).GetTypeInfo().Assembly.GetName().Name));
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Portifolio.WebApi", Version = "v1" });
+                c.IncludeXmlComments(pathXml);
             });
 
             return services;

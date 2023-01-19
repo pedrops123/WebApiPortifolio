@@ -17,7 +17,7 @@ namespace Portifolio.Domain.Command.Handlers.GalleryWork.GetList
 
         public GetListGalleryWorksHandle(
             IMapper mapper,
-            IGenericQuery<Entities.GalleryWorks, FilterGalleryWorksRequest> dapper)
+            IGenericQuery<GalleryWorks, FilterGalleryWorksRequest> dapper)
         {
             _dapper = dapper;
             _mapper = mapper;

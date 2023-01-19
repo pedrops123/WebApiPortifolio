@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using Portifolio.Domain.Command.Commands.Request.GalleryWorks.Create;
 using Portifolio.Domain.Entities;
@@ -14,18 +15,22 @@ namespace Portifolio.Domain.Command.Handlers.GalleryWork.Create
     public sealed class CreateGalleryWorksHandle : IRequestHandler<CreateGalleryWorksRequest, Unit>
     {
         private readonly IMinIO _minIOService;
+        private readonly IMapper _mapper;
         private readonly IGenericRepository<Works> _worksRepository;
         private readonly IGenericRepository<GalleryWorks> _repository;
 
         public CreateGalleryWorksHandle(
             IGenericRepository<Works> worksRepository,
             IGenericRepository<GalleryWorks> repository,
-            IMinIO minIOService)
+            IMinIO minIOService,
+            IMapper mapper
+            )
         {
 
             _worksRepository = worksRepository;
             _repository = repository;
             _minIOService = minIOService;
+            _mapper = mapper;
         }
 
         public async Task<Unit> Handle(CreateGalleryWorksRequest request, CancellationToken cancellationToken)
@@ -42,22 +47,11 @@ namespace Portifolio.Domain.Command.Handlers.GalleryWork.Create
                 request.ListFiles.Add(await _minIOService.UploadFiles(file));
             }
 
-            var registers = CreateListRegisters(request);
+            var registers = _mapper.Map<CreateGalleryWorksRequest, List<GalleryWorks>>(request);
 
             await _repository.AddRange(registers);
 
             return Unit.Value;
         }
-
-        private List<GalleryWorks> CreateListRegisters(CreateGalleryWorksRequest request)
-        {
-            List<GalleryWorks> listGallery = new List<GalleryWorks>();
-
-            request.ListFiles.ForEach(r => listGallery.Add(new GalleryWorks(
-                request.ProjectId, r)));
-
-            return listGallery;
-        }
-
     }
 }

@@ -9,7 +9,7 @@ namespace Portifolio.Domain.Command.Commands.Request.GalleryWorks.Create
     {
         public int ProjectId { get; private set; }
 
-        public IEnumerable<IFormFile> Files { get; private set; }
+        public IFormFileCollection Files { get; private set; }
 
         [JsonIgnore]
         public List<string> ListFiles { get; set; } = new List<string>();
@@ -17,7 +17,7 @@ namespace Portifolio.Domain.Command.Commands.Request.GalleryWorks.Create
         [JsonConstructor]
         public CreateGalleryWorksRequest(
             int projectId,
-            IEnumerable<IFormFile> files)
+            IFormFileCollection files)
         {
             ProjectId = projectId;
             Files = files;

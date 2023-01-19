@@ -10,7 +10,7 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
     {
         private readonly static string _pathRoot = Assembly.GetAssembly(typeof(FontITextSharpUtils)).Location;
 
-        private readonly static string _pathFont = Path.Combine(_pathRoot.Substring(0, _pathRoot.IndexOf("bin")), "Fonts");
+        private readonly static string _pathFont = Path.Combine(_pathRoot.Substring(0, _pathRoot.IndexOf(Assembly.GetAssembly(typeof(ServicePDFResume)).ManifestModule.Name)), "Fonts");
 
         public static readonly BaseColor colorBaseTitle = new BaseColor(57, 165, 183);
 

@@ -6,7 +6,6 @@ using Portifolio.Domain.Command.Commands.Request.GalleryWorks.Delete;
 using Portifolio.Domain.Command.Commands.Request.GalleryWorks.GetList;
 using Portifolio.Domain.Command.Commands.Request.GalleryWorks.PatchComment;
 using Portifolio.Domain.Command.Commands.Response.GalleryWorks.GetList;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Portifolio.WebApi.Controllers
@@ -45,7 +44,7 @@ namespace Portifolio.WebApi.Controllers
         [HttpPost("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Post([FromRoute] int id, [FromForm] IEnumerable<IFormFile> files)
+        public async Task<IActionResult> Post([FromRoute] int id, [FromForm] IFormFileCollection files)
         {
             var response = await _mediator.Send(new CreateGalleryWorksRequest(id, files));
 

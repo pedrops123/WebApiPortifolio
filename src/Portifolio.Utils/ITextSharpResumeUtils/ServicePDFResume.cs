@@ -44,7 +44,7 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
         {
             _conf = ConfigurationRootFactory.SetConfigurationRootBuilder();
             _configuration = _conf.GetSection("PdfConfig").Get<PdfConfigurations>();
-            _directoryFile = Path.Combine(_assemblyPath.Substring(0, _assemblyPath.IndexOf("bin")), _configuration.TempFile);
+            _directoryFile = Path.Combine(_assemblyPath.Substring(0, _assemblyPath.IndexOf(Assembly.GetAssembly(typeof(ServicePDFResume)).ManifestModule.Name)), _configuration.TempFile);
         }
 
         public async Task<ResponseCreatePdf> CreateDocument()
