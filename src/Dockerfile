@@ -1,5 +1,8 @@
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS BUILD
 
+ENV PATH $PATH:/root/.dotnet/tools
+RUN dotnet tool install -g dotnet-ef --version 6.0.1
+
 WORKDIR /src
 
 COPY *.sln ./
@@ -19,6 +22,10 @@ RUN dotnet restore
 COPY . .
 
 RUN dotnet build
+
+WORKDIR /src/Portifolio.Infrastructure.Database
+
+RUN dotnet ef database update -v -s ../Portifolio.WebApi
 
 WORKDIR /src/Portifolio.WebApi
 
