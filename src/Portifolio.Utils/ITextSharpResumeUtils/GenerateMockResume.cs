@@ -58,15 +58,20 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
 
             TopicResume firstTopic = new TopicResume("Objetivo", 1, subTopicFirst);
 
-            topics.Add(firstTopic);
+            topics.Add(firstTopic);            
 
-            SubTopicResume st1 = new SubTopicResume(2, "GRADUAÇÃO | FACULDADE IMPACTA DE TECNOLOGIA | FEV DE 2017 - DEZ 2018", 1, true);
+            SubTopicResume stpos = new SubTopicResume(2, "MBA | FACULDADE IMPACTA DE TECNOLOGIA | MAIO DE 2024 - CURSANDO", 1, true);
 
-            st1.ItemsSubTopic.Add(new ItemsSubTopicResume(1, 1, "Curso Análise e Desenvolvimento de Sistemas"));
+            stpos.ItemsSubTopic.Add(new ItemsSubTopicResume(1, 1, "Arquitetura de Soluções"));
+
+            SubTopicResume stgrad = new SubTopicResume(2, "GRADUAÇÃO | FACULDADE IMPACTA DE TECNOLOGIA | FEV DE 2017 - DEZ 2018", 1, true);
+
+            stgrad.ItemsSubTopic.Add(new ItemsSubTopicResume(1, 1, "Curso Análise e Desenvolvimento de Sistemas"));
 
             List<SubTopicResume> subTopicSecond = new List<SubTopicResume>();
 
-            subTopicSecond.Add(st1);
+            subTopicSecond.Add(stpos);
+            subTopicSecond.Add(stgrad);
 
             TopicResume secondTopic = new TopicResume("Educação", 2, subTopicSecond);
 
@@ -74,7 +79,19 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
 
             List<SubTopicResume> subTopicThird = new List<SubTopicResume>();
 
-            SubTopicResume st2 = new SubTopicResume(4, "DESENVOLVEDOR PLENO | GLOBALSYS | NOVEMBRO 2021 - ATUALMENTE", 1, true);
+            SubTopicResume stUnica = new SubTopicResume(4, "DESENVOLVEDOR PLENO | TECNOLOGIA ÚNICA | MAIO 2023 - ATUALMENTE", 1, true);
+
+            stUnica.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 1, "Criação de fluxos e manutenção do sistema conforme solicitação de US (User Story)."));
+            stUnica.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 2, "Correções de bugs gerais."));
+            stUnica.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 3, "Desenvolvimento de rotas em API’s e validações Backend."));
+            stUnica.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 4, "Criação de query / Views / procedures"));
+            stUnica.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 5, "Montagem de layout e desenvolvimento Front End."));
+            stUnica.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 6, "Documentação do sistema desenvolvido."));
+            stUnica.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 7, "Análise de regra de negócio."));
+
+            subTopicThird.Add(stUnica);
+
+            SubTopicResume st2 = new SubTopicResume(4, "DESENVOLVEDOR PLENO | GLOBALSYS | NOVEMBRO 2021 - JUNHO 2023", 1, true);
 
             st2.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 1, "Criação de API’s REST conforme solicitação de US (User Story)."));
             st2.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 2, "Estudo de boas práticas (Clean Code) para ser aplicado no desenvolvimento do sistema."));
@@ -94,7 +111,7 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
             st3.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 2, "Atendimento ao Cliente"));
             st3.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 3, "Análise de erros referente ao portal Ticket."));
             st3.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 4, "Análise dos Códigos fontes."));
-            st3.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 5, "Criação de procedures para geração de relatórios manuais."));
+            st3.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 5, "Criação de procedures para geração de relatórios manuais. \n \n"));
 
             subTopicThird.Add(st3);
 
@@ -105,7 +122,7 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
             st4.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 3, "Desenvolvimento de novas funcionalidades para o sistema."));
             st4.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 4, "Criação de WebApi’s RestFull."));
             st4.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 5, "Análise de regras e adaptação das mesmas ao sistema."));
-            st4.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 6, "Desenvolvimento de rotas em API’s e validações backend. \n \n \n \n \n \n \n \n"));
+            st4.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 6, "Desenvolvimento de rotas em API’s e validações backend.  \n \n"));
 
             subTopicThird.Add(st4);
 
@@ -177,7 +194,7 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
         {
             parameters.Add(new GeneralParameters((ResumeParameters.CompleteName).ToString(), "Pedro Vinicius Rodrigues Furlan"));
             parameters.Add(new GeneralParameters((ResumeParameters.MartialStatus).ToString(), "Casado"));
-            parameters.Add(new GeneralParameters((ResumeParameters.Address).ToString(), "Rua José Celestino Saad, nº 245, Jd Isis, Cotia/SP"));
+            parameters.Add(new GeneralParameters((ResumeParameters.Address).ToString(), "Rua Nápoles, Jardim colibri Nº 415, Cotia/SP"));
             parameters.Add(new GeneralParameters((ResumeParameters.CellPhone).ToString(), "(11) 99708-3252"));
             parameters.Add(new GeneralParameters((ResumeParameters.Email).ToString(), "pedro.furlan1304@hotmail.com"));
             parameters.Add(new GeneralParameters((ResumeParameters.GitHubLink).ToString(), "https://github.com/pedrops123/pedrops123"));
