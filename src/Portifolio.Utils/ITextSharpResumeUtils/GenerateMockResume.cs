@@ -54,19 +54,21 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
 
             List<SubTopicResume> subTopicFirst = new List<SubTopicResume>();
 
-            subTopicFirst.Add(new SubTopicResume(1, "Desenvolvedor Web | Mobile", 1, false));
+            subTopicFirst.Add(new SubTopicResume(1, "Desenvolvedor Web", 1, false));
+
+            subTopicFirst.Add(new SubTopicResume(1, "Arquiteto de Soluções", 2, false));
 
             TopicResume firstTopic = new TopicResume("Objetivo", 1, subTopicFirst);
 
             topics.Add(firstTopic);            
 
-            SubTopicResume stpos = new SubTopicResume(2, "MBA | FACULDADE IMPACTA DE TECNOLOGIA | MAIO DE 2024 - CURSANDO", 1, true);
+            SubTopicResume stpos = new SubTopicResume(2, "MBA | FACULDADE IMPACTA DE TECNOLOGIA | ABRIL DE 2024 - DEZEMBRO 2025", 1, true);
 
             stpos.ItemsSubTopic.Add(new ItemsSubTopicResume(1, 1, "Arquitetura de Soluções"));
 
             SubTopicResume stgrad = new SubTopicResume(2, "GRADUAÇÃO | FACULDADE IMPACTA DE TECNOLOGIA | FEV DE 2017 - DEZ 2018", 1, true);
 
-            stgrad.ItemsSubTopic.Add(new ItemsSubTopicResume(1, 1, "Curso Análise e Desenvolvimento de Sistemas"));
+            stgrad.ItemsSubTopic.Add(new ItemsSubTopicResume(1, 1, "Análise e Desenvolvimento de Sistemas"));
 
             List<SubTopicResume> subTopicSecond = new List<SubTopicResume>();
 
@@ -79,17 +81,33 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
 
             List<SubTopicResume> subTopicThird = new List<SubTopicResume>();
 
-            SubTopicResume stUnica = new SubTopicResume(4, "DESENVOLVEDOR PLENO | TECNOLOGIA ÚNICA | MAIO 2023 - ATUALMENTE", 1, true);
+            SubTopicResume stUnicaProteo = new SubTopicResume(4, "DESENVOLVEDOR PLENO | TECNOLOGIA ÚNICA | JANEIRO 2025 - MARÇO 2026 (Projeto : Proteo - Tecnologia para Seguros)", 1, true);
 
-            stUnica.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 1, "Criação de fluxos e manutenção do sistema conforme solicitação de US (User Story)."));
-            stUnica.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 2, "Correções de bugs gerais."));
-            stUnica.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 3, "Desenvolvimento de rotas em API’s e validações Backend."));
-            stUnica.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 4, "Criação de query / Views / procedures"));
-            stUnica.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 5, "Montagem de layout e desenvolvimento Front End."));
-            stUnica.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 6, "Documentação do sistema desenvolvido."));
-            stUnica.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 7, "Análise de regra de negócio."));
+            stUnicaProteo.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 1, "Criação de API’s REST conforme solicitação de US (User Story)."));
+            stUnicaProteo.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 1, "Estudo de boas práticas (Clean Code) para ser aplicado no desenvolvimento do sistema."));
+            stUnicaProteo.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 1, "Análise de regra de negócio."));
+            stUnicaProteo.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 1, "Integrações com sistemas externos para o fluxo da regra."));
+            stUnicaProteo.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 1, "Documentação do sistema desenvolvido."));
+            stUnicaProteo.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 1, "Interação com equipe front end para adaptar o código desenvolvido."));
+            stUnicaProteo.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 1, "Criação de pontos de entrada no projeto BFF (Back End for Front End)."));
+            stUnicaProteo.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 1, "Correções de Bugs gerais."));
+            stUnicaProteo.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 1, "Desenvolvimento de rotas em API’s e validações Backend."));
+            stUnicaProteo.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 1, "Criação de query / Views / procedures \n \n \n \n \n \n \n \n \n \n \n"));
 
-            subTopicThird.Add(stUnica);
+            subTopicThird.Add(stUnicaProteo);
+
+
+            SubTopicResume stUnicaParceria = new SubTopicResume(4, "DESENVOLVEDOR PLENO | TECNOLOGIA ÚNICA | MAIO 2023 - JANEIRO 2025    (Projeto : Parceria Premiada)", 1, true);
+
+            stUnicaParceria.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 1, "Criação de fluxos e manutenção do sistema conforme solicitação de US (User Story)."));
+            stUnicaParceria.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 2, "Correções de bugs gerais."));
+            stUnicaParceria.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 3, "Desenvolvimento de rotas em API’s e validações Backend."));
+            stUnicaParceria.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 4, "Criação de query / Views / procedures"));
+            stUnicaParceria.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 5, "Montagem de layout e desenvolvimento Front End."));
+            stUnicaParceria.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 6, "Documentação do sistema desenvolvido."));
+            stUnicaParceria.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 7, "Análise de regra de negócio."));
+
+            subTopicThird.Add(stUnicaParceria);
 
             SubTopicResume st2 = new SubTopicResume(4, "DESENVOLVEDOR PLENO | GLOBALSYS | NOVEMBRO 2021 - JUNHO 2023", 1, true);
 
@@ -122,7 +140,7 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
             st4.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 3, "Desenvolvimento de novas funcionalidades para o sistema."));
             st4.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 4, "Criação de WebApi’s RestFull."));
             st4.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 5, "Análise de regras e adaptação das mesmas ao sistema."));
-            st4.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 6, "Desenvolvimento de rotas em API’s e validações backend.  \n \n"));
+            st4.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 6, "Desenvolvimento de rotas em API’s e validações backend."));
 
             subTopicThird.Add(st4);
 
@@ -133,7 +151,7 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
             st5.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 3, "Desenvolvimento e manutenção de API’S REST .NET CORE."));
             st5.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 4, "Criação de tabelas necessárias ao sistema."));
             st5.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 5, "Documentação das atividades desenvolvidas."));
-            st5.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 6, "Correção de bugs tanto API quanto Front End e estudo de boas práticas a serem incluídas no sistema."));
+            st5.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 6, "Correção de bugs tanto API quanto Front End e estudo de boas práticas a serem incluídas no sistema. \n \n \n \n \n "));
 
             subTopicThird.Add(st5);
 
@@ -143,7 +161,7 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
             st6.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 2, "Montagem do escopo de todo o sistema a ser desenvolvido."));
             st6.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 3, "Correção de bugs, inclusão de novas funcionalidades, estudo de novas tecnologias e inclusão das mesmas no sistema."));
             st6.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 4, "Criação de Tabelas e montagem de procedures."));
-            st6.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 5, "Manutenção de Api’s RestFull e SOAP."));
+            st6.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 5, "Manutenção de Api’s RestFull e SOAP. "));
 
             subTopicThird.Add(st6);
 
@@ -180,7 +198,7 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
             SubTopicResume complmentaryInformationsPosTechnicalCourse = new SubTopicResume(1, "Curso pós-técnico desenvolvedor multiplataforma (web & mobile) – Senai informática - 2016", 2, false);
             subTopicsFourth.Add(complmentaryInformationsPosTechnicalCourse);
 
-            SubTopicResume complmentaryInformationsEnglishCourse = new SubTopicResume(1, "Inglês: Nível intermediário I - CNA - 2012", 3, false);
+            SubTopicResume complmentaryInformationsEnglishCourse = new SubTopicResume(1, "Inglês: Nível intermediário I - CNA - 2012 \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n", 3, false);
             subTopicsFourth.Add(complmentaryInformationsEnglishCourse);
 
             TopicResume fourthTopic = new TopicResume("Informações Complementares", 4, subTopicsFourth);

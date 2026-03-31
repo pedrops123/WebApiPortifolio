@@ -36,7 +36,7 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
         {
             get
             {
-                return "Brasileiro • {martialStatus} | {address} | {cellphone} | {email} | {gitHubLink} |{linkedinLink}";
+                return "Brasileiro • {martialStatus} • {address} •  {cellphone} \n \n  {email} • {gitHubLink} • \n {linkedinLink}";
             }
         }
 
@@ -100,7 +100,7 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
                     _writer.Close();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 _stream.Close();
 
@@ -263,29 +263,48 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
 
         private void SectionHeader(ICollection<GeneralParameters> parameters, string completeName)
         {
-            PdfPTable tableHead = new PdfPTable(10);
+            PdfPTable tableHeadTitle = new PdfPTable(10);
+            float paddingRight = 50f;
 
-            PdfPCell headCell = new PdfPCell(new Paragraph(String.Format("{0}", completeName), FontITextSharpUtils.FontTitle(25f)));
-            headCell.Colspan = 10;
-            headCell.PaddingTop = 10f;
-            headCell.PaddingBottom = 10f;
+            PdfPCell headCell = new PdfPCell(new Paragraph(String.Format("{0}", completeName), FontITextSharpUtils.FontTitle(22f)));
+            headCell.Colspan = 8;
+            headCell.PaddingTop = 50f;
+            headCell.BorderWidth = 0f;
+            //headCell.Border = Rectangle.BOX;
+            //headCell.PaddingBottom = 10f;
             headCell.VerticalAlignment = Element.ALIGN_CENTER;
-            headCell.BorderWidthTop = 0f;
-            headCell.BorderWidthLeft = 0f;
-            headCell.BorderWidthRight = 0f;
-            headCell.BorderWidthBottom = 3f;
-            headCell.BorderColorBottom = FontITextSharpUtils.colorBaseTitle;
+          
+            var personalInformation = new Paragraph(PreparePersonalInformations(_defaultTemplate, parameters), FontITextSharpUtils.FontNormal(10f));
 
-            PdfPCell headDescriptionCell = new PdfPCell(new Paragraph(PreparePersonalInformations(_defaultTemplate, parameters), FontITextSharpUtils.FontNormal(10f)));
+            personalInformation.Leading = 20f;
+
+            PdfPCell headDescriptionCell = new PdfPCell(personalInformation);
+            headDescriptionCell.PaddingLeft = paddingRight;
             headDescriptionCell.Colspan = 10;
             headDescriptionCell.PaddingTop = 10f;
             headDescriptionCell.PaddingBottom = 10f;
             headDescriptionCell.BorderWidth = 0f;
 
-            tableHead.AddCell(headCell);
-            tableHead.AddCell(headDescriptionCell);
+            Image img = Image.GetInstance("../Portifolio.WebApi/Images/Me.jpg");
 
-            _document.Add(tableHead);
+            PdfPCell cellImage = new PdfPCell(img, true); 
+            //cellImage.FixedHeight = 120f;
+            //cellImage.Border = Rectangle.BOX;
+            cellImage.PaddingRight = 25f;
+            cellImage.Colspan = 2;
+            //cellImage.HorizontalAlignment = Element.ALIGN_CENTER;
+            //cellImage.VerticalAlignment = Element.ALIGN_MIDDLE;
+            cellImage.Border = 0;
+
+            tableHeadTitle.AddCell(cellImage);
+            tableHeadTitle.AddCell(headCell);
+
+            PdfPTable tableHeadPersonalInfo = new PdfPTable(10);
+
+            tableHeadPersonalInfo.AddCell(headDescriptionCell);
+
+            _document.Add(tableHeadTitle);
+            _document.Add(tableHeadPersonalInfo);
         }
 
         private void KnowlegesSection(
@@ -294,7 +313,7 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
             IEnumerable<string> listOfTopicsFrameworks,
             IEnumerable<string[]> listOfKnowlegesFrameworks)
         {
-            _document.NewPage();
+            //_document.NewPage();
 
             CreateTopicTitle("Conhecimentos");
 
