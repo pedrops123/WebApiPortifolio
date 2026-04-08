@@ -286,14 +286,12 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
             headDescriptionCell.BorderWidth = 0f;
 
             Image img = Image.GetInstance("../Portifolio.WebApi/Images/Me.jpg");
+            img.Alignment = Element.ALIGN_LEFT;
+            img.ScalePercent(15f); 
 
-            PdfPCell cellImage = new PdfPCell(img, true); 
-            //cellImage.FixedHeight = 120f;
-            //cellImage.Border = Rectangle.BOX;
-            cellImage.PaddingRight = 25f;
+            PdfPCell cellImage = new PdfPCell(img);
+            cellImage.PaddingRight = 80f;
             cellImage.Colspan = 2;
-            //cellImage.HorizontalAlignment = Element.ALIGN_CENTER;
-            //cellImage.VerticalAlignment = Element.ALIGN_MIDDLE;
             cellImage.Border = 0;
 
             tableHeadTitle.AddCell(cellImage);

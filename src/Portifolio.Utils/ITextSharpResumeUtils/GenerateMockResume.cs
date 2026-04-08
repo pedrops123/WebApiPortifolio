@@ -60,7 +60,7 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
 
             TopicResume firstTopic = new TopicResume("Objetivo", 1, subTopicFirst);
 
-            topics.Add(firstTopic);            
+            topics.Add(firstTopic);
 
             SubTopicResume stpos = new SubTopicResume(2, "MBA | FACULDADE IMPACTA DE TECNOLOGIA | ABRIL DE 2024 - DEZEMBRO 2025", 1, true);
 
@@ -83,96 +83,79 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
 
             SubTopicResume stUnicaProteo = new SubTopicResume(4, "DESENVOLVEDOR PLENO | TECNOLOGIA ÚNICA | JANEIRO 2025 - MARÇO 2026 (Projeto : Proteo - Tecnologia para Seguros)", 1, true);
 
-            stUnicaProteo.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 1, "Criação de API’s REST conforme solicitação de US (User Story)."));
-            stUnicaProteo.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 1, "Estudo de boas práticas (Clean Code) para ser aplicado no desenvolvimento do sistema."));
-            stUnicaProteo.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 1, "Análise de regra de negócio."));
-            stUnicaProteo.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 1, "Integrações com sistemas externos para o fluxo da regra."));
-            stUnicaProteo.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 1, "Documentação do sistema desenvolvido."));
-            stUnicaProteo.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 1, "Interação com equipe front end para adaptar o código desenvolvido."));
-            stUnicaProteo.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 1, "Criação de pontos de entrada no projeto BFF (Back End for Front End)."));
-            stUnicaProteo.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 1, "Correções de Bugs gerais."));
-            stUnicaProteo.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 1, "Desenvolvimento de rotas em API’s e validações Backend."));
-            stUnicaProteo.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 1, "Criação de query / Views / procedures \n \n \n \n \n \n \n \n \n \n \n"));
+            stUnicaProteo.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 1, "Desenvolvimento de Web APIs: Criação de APIs modulares em .NET/C# voltadas para o setor de seguros, seguindo o padrão BFF (Backend for Frontend) para integração de fluxos."));
+            stUnicaProteo.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 1, "Integração InsureMO: Implementação de regras de negócio e fluxos sistêmicos integrados à plataforma InsureMO, visando agilidade no processamento de seguros."));
+            stUnicaProteo.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 1, "Arquitetura de Dados: Atuação em modelo database-per-service com SQL Server, sendo responsável pela criação de tabelas, scripts, Stored Procedures e versionamento de banco de dados por API."));
+            stUnicaProteo.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 1, "Lógica de Orquestração: Utilização de Step Functions no desenvolvimento de rotinas e processos assíncronos dentro da aplicação."));
+            stUnicaProteo.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 1, "Consumo de Persistência: Implementação de acesso a dados de alta performance utilizando o micro-ORM PetaPoco."));
+            stUnicaProteo.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 1, "Ciclo de Entrega: Utilização de esteiras de CI/CD no Azure Pipelines para publicação e deploy das aplicações."));
 
             subTopicThird.Add(stUnicaProteo);
 
+            SubTopicResume stUnicaParceria = new SubTopicResume(4, "DESENVOLVEDOR PLENO .NET | TECNOLOGIA ÚNICA | MAIO 2023 - JANEIRO 2025   (Projeto : Parceria Premiada)", 1, true);
 
-            SubTopicResume stUnicaParceria = new SubTopicResume(4, "DESENVOLVEDOR PLENO | TECNOLOGIA ÚNICA | MAIO 2023 - JANEIRO 2025    (Projeto : Parceria Premiada)", 1, true);
-
-            stUnicaParceria.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 1, "Criação de fluxos e manutenção do sistema conforme solicitação de US (User Story)."));
-            stUnicaParceria.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 2, "Correções de bugs gerais."));
-            stUnicaParceria.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 3, "Desenvolvimento de rotas em API’s e validações Backend."));
-            stUnicaParceria.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 4, "Criação de query / Views / procedures"));
-            stUnicaParceria.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 5, "Montagem de layout e desenvolvimento Front End."));
-            stUnicaParceria.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 6, "Documentação do sistema desenvolvido."));
-            stUnicaParceria.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 7, "Análise de regra de negócio."));
+            stUnicaParceria.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 1, "Revitalização de Sistema Legado: Liderança técnica na reativação e modernização de um sistema monolítico (Parceria Premiada) voltado para incentivos e bonificações no setor de agronegócio."));
+            stUnicaParceria.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 2, "Refatoração e Regras de Negócio: Revisão integral de fluxos e módulos funcionais, atualizando regras de negócio obsoletas para garantir a conformidade com as operações atuais da empresa."));
+            stUnicaParceria.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 3, "Desenvolvimento Full Stack: Manutenção e criação de novos fluxos utilizando .NET/C# com o micro-ORM PetaPoco no backend, e Razor com JavaScript para interfaces dinâmicas."));
+            stUnicaParceria.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 4, "Persistência de Dados: Modelagem de tabelas e desenvolvimento de Stored Procedures em SQL Server, otimizando a manipulação e o consumo de dados do sistema."));
+            stUnicaParceria.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 5, "Gestão de Código Compartilhado: Atuação em ambiente de monolito compartilhado, gerenciando a coexistência de múltiplos projetos e campanhas dentro da mesma estrutura de código."));
 
             subTopicThird.Add(stUnicaParceria);
 
-            SubTopicResume st2 = new SubTopicResume(4, "DESENVOLVEDOR PLENO | GLOBALSYS | NOVEMBRO 2021 - JUNHO 2023", 1, true);
+            SubTopicResume st2 = new SubTopicResume(4, "DESENVOLVEDOR PLENO .NET | GLOBALSYS | NOVEMBRO 2021 - JUNHO 2023", 1, true);
 
-            st2.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 1, "Criação de API’s REST conforme solicitação de US (User Story)."));
-            st2.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 2, "Estudo de boas práticas (Clean Code) para ser aplicado no desenvolvimento do sistema."));
-            st2.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 3, "Análise de regra de negócio."));
-            st2.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 4, "Documentação do sistema desenvolvido."));
-            st2.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 5, "Interação com equipe front end para adaptar o código desenvolvido."));
-            st2.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 6, "Criação de pontos de entrada no projeto BFF (Back End for Front End)."));
-            st2.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 7, "Utilização de Mensageria para envio de e-mails / notificações / Producer-Consumer(RabbitMQ)."));
-            st2.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 8, "Correções de Bugs gerais."));
-            st2.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 9, "Desenvolvimento de rotas em API’s e validações Backend."));
+            st2.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 1, "Arquitetura de Microserviços e BFF: Desenvolvimento de sistemas para terceirização de frotas e seguros baseados em APIs RESTful modulares, utilizando o padrão BFF (Backend for Frontend) para orquestração de chamadas."));
+            st2.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 2, "Padrões de Projeto e Performance: Implementação de CQRS para separação de leitura e escrita, otimizando a performance com Entity Framework na camada de persistência e Dapper para consultas de alta velocidade."));
+            st2.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 3, "Mensageria e Eventos: Arquitetura orientada a eventos utilizando RabbitMQ (modelo Producer-Consumer) para garantir o processamento assíncrono e o desacoplamento dos módulos."));
+            st2.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 4, "Qualidade e Validação: Utilização de Fluent Validation para consistência de dados e Migrations para evolução estruturada do banco de dados."));
+            st2.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 4, "DevOps e Documentação: Configuração de esteiras de CI/CD via Azure Pipelines e documentação técnica de Web Services através do Swagger."));
+            st2.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 4, "Processamento de Dados (ETL): Desenvolvimento de um projeto especializado em ETL para automação e carga de dados em larga escala para clientes externos."));
+
 
             subTopicThird.Add(st2);
 
-            SubTopicResume st3 = new SubTopicResume(4, "DESENVOLVEDOR PLENO | EDENRED | ABRIL 2021 - NOVEMBRO 2021", 2, true);
+            SubTopicResume st3 = new SubTopicResume(4, "ANALISTA DE SUPORTE / DESENVOLVEDOR PLENO | EDENRED  (Ticket Log / Benefícios) | ABRIL 2021 - NOVEMBRO 2021", 2, true);
 
-            st3.ItemsSubTopic.Add(new ItemsSubTopicResume(4, 1, "Atendimento de Chamados."));
-            st3.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 2, "Atendimento ao Cliente"));
-            st3.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 3, "Análise de erros referente ao portal Ticket."));
-            st3.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 4, "Análise dos Códigos fontes."));
-            st3.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 5, "Criação de procedures para geração de relatórios manuais. \n \n"));
+            st3.ItemsSubTopic.Add(new ItemsSubTopicResume(4, 1, "Sustentação de Sistemas: Responsável pela manutenção corretiva e suporte ao código-fonte legado do sistema de benefícios, garantindo a estabilidade da operação."));
+            st3.ItemsSubTopic.Add(new ItemsSubTopicResume(4, 2, "Resolução de Incidentes: Análise e correção de bugs críticos reportados pelos clientes, atuando diretamente na investigação de causa raiz no código."));
+            st3.ItemsSubTopic.Add(new ItemsSubTopicResume(4, 3, "Gestão de Regras de Negócio: Execução de processos operacionais sensíveis, como a liberação e o bloqueio de benefícios, seguindo rigorosos critérios de segurança."));
+            st3.ItemsSubTopic.Add(new ItemsSubTopicResume(4, 4, "Documentação Técnica: Mapeamento e documentação de fluxos de sistema, Stored Procedures e regras de negócio para preservação do conhecimento técnico da plataforma."));
+
 
             subTopicThird.Add(st3);
 
-            SubTopicResume st4 = new SubTopicResume(4, "DESENVOLVEDOR PLENO | LIBERTY SEGUROS | JANEIRO 2021 – MARÇO 2021", 3, true);
+            SubTopicResume st4 = new SubTopicResume(4, "DESENVOLVEDOR PLENO FULL STACK| LIBERTY SEGUROS | JANEIRO 2021 – MARÇO 2021", 3, true);
 
-            st4.ItemsSubTopic.Add(new ItemsSubTopicResume(4, 1, "Desenvolvimento de arquitetura Front-End Angular."));
-            st4.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 2, "Criação de layout responsivo de acordo com protótipo."));
-            st4.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 3, "Desenvolvimento de novas funcionalidades para o sistema."));
-            st4.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 4, "Criação de WebApi’s RestFull."));
-            st4.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 5, "Análise de regras e adaptação das mesmas ao sistema."));
-            st4.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 6, "Desenvolvimento de rotas em API’s e validações backend."));
+            st4.ItemsSubTopic.Add(new ItemsSubTopicResume(4, 1, "Desenvolvimento Front-end: Atuação no desenvolvimento e manutenção de interfaces para o portal de cotação de seguros, utilizando Angular para criar uma experiência de usuário fluida e responsiva."));
+            st4.ItemsSubTopic.Add(new ItemsSubTopicResume(4, 2, "Transição para Full Stack: Devido à rápida adaptação técnica, passei a auxiliar no desenvolvimento do Back-end, colaborando na integração de APIs e lógica de negócio do sistema de cotações."));
+            st4.ItemsSubTopic.Add(new ItemsSubTopicResume(4, 3, "Setor de Seguros: Experiência com regras de negócio complexas voltadas para cálculos de prêmios e propostas de seguros."));
 
             subTopicThird.Add(st4);
 
-            SubTopicResume st5 = new SubTopicResume(4, "DESENVOLVEDOR PLENO | ELGIN S.A| SETEMBRO 2020 – DEZEMBRO 2020", 4, true);
+            SubTopicResume st5 = new SubTopicResume(4, "DESENVOLVEDOR PLENO .NET | ELGIN S.A| SETEMBRO 2020 – DEZEMBRO 2020", 4, true);
 
-            st5.ItemsSubTopic.Add(new ItemsSubTopicResume(4, 1, "Levantamento de requisitos ao sistema."));
-            st5.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 2, "Montagem de layout e desenvolvimento Front End Angular."));
-            st5.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 3, "Desenvolvimento e manutenção de API’S REST .NET CORE."));
-            st5.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 4, "Criação de tabelas necessárias ao sistema."));
-            st5.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 5, "Documentação das atividades desenvolvidas."));
-            st5.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 6, "Correção de bugs tanto API quanto Front End e estudo de boas práticas a serem incluídas no sistema. \n \n \n \n \n "));
+            st5.ItemsSubTopic.Add(new ItemsSubTopicResume(4, 1, "Desenvolvimento Web: Atuação no front-end e back-end do portal de atendimento da empresa, utilizando Angular para interfaces dinâmicas e .NET para a lógica de negócio."));
+            st5.ItemsSubTopic.Add(new ItemsSubTopicResume(4, 2, "Web Services: Desenvolvimento e manutenção de Web Services (APIs), garantindo a integração eficiente entre o portal e os sistemas internos."));
+            st5.ItemsSubTopic.Add(new ItemsSubTopicResume(4, 3, "Sustentação de Sistemas: Apoio técnico na evolução de funcionalidades e correção de bugs no ecossistema de atendimento ao cliente."));
 
             subTopicThird.Add(st5);
 
-            SubTopicResume st6 = new SubTopicResume(4, "DESENVOLVEDOR JR | TRAME & AUDIO PADRÃO | AGOSTO DE 2019 – SETEMBRO 2020", 5, true);
+            SubTopicResume st6 = new SubTopicResume(4, "DESENVOLVEDOR JR .NET | TRAME & AUDIO PADRÃO | AGOSTO DE 2019 – SETEMBRO 2020", 5, true);
 
-            st6.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 1, "Levantamento e análise de requisitos junto ao cliente interno."));
-            st6.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 2, "Montagem do escopo de todo o sistema a ser desenvolvido."));
-            st6.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 3, "Correção de bugs, inclusão de novas funcionalidades, estudo de novas tecnologias e inclusão das mesmas no sistema."));
-            st6.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 4, "Criação de Tabelas e montagem de procedures."));
-            st6.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 5, "Manutenção de Api’s RestFull e SOAP. "));
+            st6.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 1, "Internalização de Software: Responsável pela transição técnica de um sistema de Saúde e Segurança Ocupacional (SST) antes gerido por consultoria externa para o ambiente interno da empresa."));
+            st6.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 2, "Infraestrutura e Deploy: Configuração completa do ambiente de hospedagem, incluindo o gerenciamento de servidores IIS e estruturação do fluxo de versionamento de código."));
+            st6.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 3, "Manutenção e Evolução: Desenvolvimento de novas funcionalidades e aplicação de manutenções preventivas em arquitetura monolítica, garantindo a estabilidade da plataforma."));
+            st6.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 4, "Documentação Técnica: Elaboração de diagramas UML e documentação de código para facilitar a manutenção futura e a escalabilidade do sistema."));
+
 
             subTopicThird.Add(st6);
 
-            SubTopicResume st7 = new SubTopicResume(4, "ESTAGIÁRIO/ANALISTA JR | GRUPO GPS | OUTUBRO DE 2016 - JULHO 2019", 6, true);
+            SubTopicResume st7 = new SubTopicResume(4, "Estagiário em .NET / Desenvolvedor Web e Mobile | GRUPO GPS | OUTUBRO DE 2016 - JULHO 2019", 6, true);
 
-            st7.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 1, "Levantamento e análise de requisitos junto ao cliente."));
-            st7.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 2, "Montagem do escopo de todo o sistema a ser desenvolvido."));
-            st7.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 3, "Desenvolver o sistema."));
-            st7.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 4, "Manutenção de Api’s RestFull e SOAP"));
-            st7.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 5, "Criação de Tabelas e montagem de procedures."));
-            st7.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 6, "Desenvolvimento de aplicações mobile."));
+            st7.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 1, "Desenvolvimento de Sistema de Telefonia: Responsável pelo ciclo completo de um projeto monolítico para o portal interno da companhia, desde a modelagem UML e definição da arquitetura base até a implementação final."));
+            st7.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 2, "Gestão de Requisitos: Atuação direta com o cliente para a criação e validação de módulos funcionais, garantindo que o software atendesse às necessidades do negócio."));
+            st7.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 3, "Documentação e Implantação: Elaboração de documentação técnica de desenvolvimento e execução do processo de implantação (deploy) do sistema."));
+            st7.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 4, "Desenvolvimento Mobile/Web: Transição para a célula de mobilidade após um ano, atuando no desenvolvimento de soluções voltadas para o segmento de prestação de serviços (limpeza), com foco na otimização de processos operacionais."));
 
             subTopicThird.Add(st7);
 
@@ -198,7 +181,7 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
             SubTopicResume complmentaryInformationsPosTechnicalCourse = new SubTopicResume(1, "Curso pós-técnico desenvolvedor multiplataforma (web & mobile) – Senai informática - 2016", 2, false);
             subTopicsFourth.Add(complmentaryInformationsPosTechnicalCourse);
 
-            SubTopicResume complmentaryInformationsEnglishCourse = new SubTopicResume(1, "Inglês: Nível intermediário I - CNA - 2012 \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n", 3, false);
+            SubTopicResume complmentaryInformationsEnglishCourse = new SubTopicResume(1, "Inglês: Nível intermediário I - CNA - 2012", 3, false);
             subTopicsFourth.Add(complmentaryInformationsEnglishCourse);
 
             TopicResume fourthTopic = new TopicResume("Informações Complementares", 4, subTopicsFourth);
