@@ -145,7 +145,7 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
             st6.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 1, "Internalização de Software: Responsável pela transição técnica de um sistema de Saúde e Segurança Ocupacional (SST) antes gerido por consultoria externa para o ambiente interno da empresa."));
             st6.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 2, "Infraestrutura e Deploy: Configuração completa do ambiente de hospedagem, incluindo o gerenciamento de servidores IIS e estruturação do fluxo de versionamento de código."));
             st6.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 3, "Manutenção e Evolução: Desenvolvimento de novas funcionalidades e aplicação de manutenções preventivas em arquitetura monolítica, garantindo a estabilidade da plataforma."));
-            st6.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 4, "Documentação Técnica: Elaboração de diagramas UML e documentação de código para facilitar a manutenção futura e a escalabilidade do sistema."));
+            st6.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 4, "Documentação Técnica: Elaboração de diagramas UML e documentação de código para facilitar a manutenção futura e a escalabilidade do sistema. \n \n"));
 
 
             subTopicThird.Add(st6);
