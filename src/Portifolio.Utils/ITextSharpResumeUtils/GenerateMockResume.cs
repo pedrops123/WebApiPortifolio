@@ -81,7 +81,7 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
 
             List<SubTopicResume> subTopicThird = new List<SubTopicResume>();
 
-            SubTopicResume stUnicaProteo = new SubTopicResume(4, "DESENVOLVEDOR PLENO | TECNOLOGIA ÚNICA | JANEIRO 2025 - MARÇO 2026 (Projeto : Proteo - Tecnologia para Seguros)", 1, true);
+            SubTopicResume stUnicaProteo = new SubTopicResume(4, "DESENVOLVEDOR PLENO .NET | TECNOLOGIA ÚNICA | JANEIRO 2025 - MARÇO 2026 (Projeto : Proteo - Tecnologia para Seguros)", 1, true);
 
             stUnicaProteo.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 1, "Desenvolvimento de Web APIs: Criação de APIs modulares em .NET/C# voltadas para o setor de seguros, seguindo o padrão BFF (Backend for Frontend) para integração de fluxos."));
             stUnicaProteo.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 1, "Integração InsureMO: Implementação de regras de negócio e fluxos sistêmicos integrados à plataforma InsureMO, visando agilidade no processamento de seguros."));
@@ -124,7 +124,7 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
 
             subTopicThird.Add(st3);
 
-            SubTopicResume st4 = new SubTopicResume(4, "DESENVOLVEDOR PLENO FULL STACK| LIBERTY SEGUROS | JANEIRO 2021 – MARÇO 2021", 3, true);
+            SubTopicResume st4 = new SubTopicResume(4, "DESENVOLVEDOR PLENO FULL STACK | LIBERTY SEGUROS | JANEIRO 2021 – MARÇO 2021", 3, true);
 
             st4.ItemsSubTopic.Add(new ItemsSubTopicResume(4, 1, "Desenvolvimento Front-end: Atuação no desenvolvimento e manutenção de interfaces para o portal de cotação de seguros, utilizando Angular para criar uma experiência de usuário fluida e responsiva."));
             st4.ItemsSubTopic.Add(new ItemsSubTopicResume(4, 2, "Transição para Full Stack: Devido à rápida adaptação técnica, passei a auxiliar no desenvolvimento do Back-end, colaborando na integração de APIs e lógica de negócio do sistema de cotações."));
