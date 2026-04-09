@@ -16,18 +16,18 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
 
             var topics = PopulateTopicsResume();
 
-            IEnumerable<string> listOfTopicsTechnologies = new List<string>() { "FRONT END", "BACK END", "BANCO DE DADOS", "MOBILE", "API'S" };
+            IEnumerable<string> listOfTopicsTechnologies = new List<string>() { "FRONT END", "BACK END", "BANCO DE DADOS", "MOBILE", "API'S" , "Design de Soluções (Solution Design)" };
 
             IEnumerable<string[]> listOfKnowlegesTechnologies = new List<string[]>()
             {
-                new string[]{ "HTML 5" , "C# / ASP.NET" , "Microsoft SQL", "Android (Kotlin)" , "RestFull" },
-                new string[]{ "CSS 3" , ".NET CORE", "Mongo DB", "Flutter (Iniciante)" , "SOAP" },
-                new string[]{ "Bootstrap 4" , "Java" , "Fire Base", "" , "" },
-                new string[]{ "Java Script" , "Python" , "MySql", "" , "" },
-                new string[]{ "Type Script" , "Visual Basic" , "", "" , "" },
-                new string[]{ "CSS Grid Layout" , "PHP" , "", "" , "" },
-                new string[]{ "CSS Flex Box" , "Docker" , "", "" , "" },
-                new string[]{ "" , "Node JS", "", "" , "" },
+                new string[]{ "HTML 5" , "C# / ASP.NET" , "Microsoft SQL", "Android (Kotlin)" , "RestFull" ,"Lucid Chart" },
+                new string[]{ "CSS 3" , ".NET CORE", "Mongo DB", "Flutter (Iniciante)" , "SOAP" , "Draw.io" },
+                new string[]{ "Bootstrap 4" , "Java" , "Fire Base", "" , "" ,""},
+                new string[]{ "Java Script" , "Python" , "MySql", "" , "", ""},
+                new string[]{ "Type Script" , "Visual Basic" , "", "" , "","" },
+                new string[]{ "CSS Grid Layout" , "PHP" , "", "" , "" , "" },
+                new string[]{ "CSS Flex Box" , "Docker" , "", "" , "" , "" },
+                new string[]{ "" , "Node JS", "", "" , ""  ,""},
             };
 
             IEnumerable<string> listOfTopicsFrameworks = new List<string>() { "C#/.NET", "FRONT END", "NODE JS" };
@@ -108,7 +108,7 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
             st2.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 2, "Padrões de Projeto e Performance: Implementação de CQRS para separação de leitura e escrita, otimizando a performance com Entity Framework na camada de persistência e Dapper para consultas de alta velocidade."));
             st2.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 3, "Mensageria e Eventos: Arquitetura orientada a eventos utilizando RabbitMQ (modelo Producer-Consumer) para garantir o processamento assíncrono e o desacoplamento dos módulos."));
             st2.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 4, "Qualidade e Validação: Utilização de Fluent Validation para consistência de dados e Migrations para evolução estruturada do banco de dados."));
-            st2.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 4, "DevOps e Documentação: Configuração de esteiras de CI/CD via Azure Pipelines e documentação técnica de Web Services através do Swagger."));
+            st2.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 4, "DevOps e Documentação: Integração de esteiras de CI/CD via Azure Pipelines e documentação técnica de Web Services através do Swagger."));
             st2.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 4, "Processamento de Dados (ETL): Desenvolvimento de um projeto especializado em ETL para automação e carga de dados em larga escala para clientes externos."));
 
 
@@ -143,7 +143,7 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
             SubTopicResume st6 = new SubTopicResume(4, "DESENVOLVEDOR JR .NET | TRAME & AUDIO PADRÃO | AGOSTO DE 2019 – SETEMBRO 2020", 5, true);
 
             st6.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 1, "Internalização de Software: Responsável pela transição técnica de um sistema de Saúde e Segurança Ocupacional (SST) antes gerido por consultoria externa para o ambiente interno da empresa."));
-            st6.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 2, "Infraestrutura e Deploy: Configuração completa do ambiente de hospedagem, incluindo o gerenciamento de servidores IIS e estruturação do fluxo de versionamento de código."));
+            st6.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 2, "Infraestrutura e Deploy: Publicação e manutenção da aplicação em ambiente de hospedagem IIS, incluindo o gerenciamento de servidores e estruturação do fluxo de versionamento de código."));
             st6.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 3, "Manutenção e Evolução: Desenvolvimento de novas funcionalidades e aplicação de manutenções preventivas em arquitetura monolítica, garantindo a estabilidade da plataforma."));
             st6.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 4, "Documentação Técnica: Elaboração de diagramas UML e documentação de código para facilitar a manutenção futura e a escalabilidade do sistema. \n \n"));
 
@@ -165,7 +165,7 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
             st8.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 2, "Gerenciamento de projetos de desenvolvimento."));
             st8.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 3, "Ajuste de códigos Java."));
             st8.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 4, "Suporte aos desenvolvedores"));
-            st8.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 5, "Desenvolvimento de manuais para usuário e ajudas gerais no setor de TI. \n \n \n"));
+            st8.ItemsSubTopic.Add(new ItemsSubTopicResume(3, 5, "Desenvolvimento de manuais para usuário e ajudas gerais no setor de TI. \n \n"));
 
             subTopicThird.Add(st8);
 

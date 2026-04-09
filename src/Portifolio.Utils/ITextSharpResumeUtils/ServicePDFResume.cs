@@ -318,7 +318,7 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
 
             /* TABELA TECNOLOGIAS */
 
-            PdfPTable knowlegesTableTechnologies = new PdfPTable(new float[] { 2, 2, 2, 2, 2 });
+            PdfPTable knowlegesTableTechnologies = new PdfPTable(new float[] { 2, 2, 2, 2, 2, 3 });
 
             foreach (string topics in listOfTopicsTechnologies)
             {
@@ -329,6 +329,7 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
 
             blankCellTechnologies.Border = 0;
 
+            knowlegesTableTechnologies.AddCell(blankCellTechnologies);
             knowlegesTableTechnologies.AddCell(blankCellTechnologies);
             knowlegesTableTechnologies.AddCell(blankCellTechnologies);
             knowlegesTableTechnologies.AddCell(blankCellTechnologies);
@@ -347,6 +348,8 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
 
                 PdfPCell apisItemCell = CreateCellDescriptionTableKnowleges(record[4]);
 
+                PdfPCell designItemCell = CreateCellDescriptionTableKnowleges(record[5]);
+
                 knowlegesTableTechnologies.AddCell(frontItemCell);
 
                 knowlegesTableTechnologies.AddCell(backItemCell);
@@ -356,6 +359,8 @@ namespace Portifolio.Utils.ITextSharpResumeUtils
                 knowlegesTableTechnologies.AddCell(mobileItemCell);
 
                 knowlegesTableTechnologies.AddCell(apisItemCell);
+
+                knowlegesTableTechnologies.AddCell(designItemCell);
             }
 
             _document.Add(knowlegesTableTechnologies);
